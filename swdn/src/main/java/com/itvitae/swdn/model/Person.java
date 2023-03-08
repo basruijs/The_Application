@@ -18,4 +18,7 @@ public class Person {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    @OneToOne
+    private User user;
+
 }

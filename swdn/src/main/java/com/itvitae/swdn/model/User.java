@@ -1,9 +1,6 @@
 package com.itvitae.swdn.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +16,10 @@ public class User {
     private String email;
     private String password;
     private String roles;
+
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private User user;
 
     public User(String email, String password, String roles) {
         this.email = email;
