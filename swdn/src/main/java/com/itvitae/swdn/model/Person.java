@@ -1,9 +1,6 @@
 package com.itvitae.swdn.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,5 +14,8 @@ public class Person {
     private String name;
     private String address;
     private String city;
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
 }

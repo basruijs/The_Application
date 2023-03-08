@@ -1,6 +1,7 @@
 package com.itvitae.swdn.service;
 
 import com.itvitae.swdn.dto.PersonGetDto;
+import com.itvitae.swdn.dto.PersonPostDto;
 import com.itvitae.swdn.mapper.PersonMapper;
 import com.itvitae.swdn.model.Person;
 import com.itvitae.swdn.repository.PersonRepository;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -18,6 +21,13 @@ public class PersonService {
     @Autowired
     PersonMapper personMapper;
 
+    //CREATE
+    public void addPerson(PersonPostDto personDto) {
+        Person newPerson = personMapper.toEntity(personDto);
+        personRepository.save(newPerson);
+    }
+
+    //READ
     public PersonGetDto getPersonById(long id) {
         Optional<Person> foundPerson = personRepository.findById(id);
         if (!foundPerson.isPresent()) {
@@ -25,4 +35,13 @@ public class PersonService {
         }
         return personMapper.toDto(foundPerson.get());
     }
+
+    public Iterable<PersonGetDto> getAllPeople() {
+        return StreamSupport
+                .stream(personRepository.findAll().spliterator(), false)
+                .map(person -> personMapper.toDto(person))
+                .collect(Collectors.toList());
+    }
+
+
 }
