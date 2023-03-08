@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -24,5 +26,12 @@ public class PersonService {
             throw new IllegalArgumentException("No such person exists");
         }
         return personMapper.toDto(foundPerson.get());
+    }
+
+    public Iterable<PersonGetDto> getAllPeople() {
+        return StreamSupport
+                .stream(personRepository.findAll().spliterator(), false)
+                .map(person -> personMapper.toDto(person))
+                .collect(Collectors.toList());
     }
 }

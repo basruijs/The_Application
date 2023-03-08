@@ -16,4 +16,9 @@ public class PersonController {
     public PersonGetDto getPersonById(@PathVariable(value = "id") long id) {
         return personService.getPersonById(id);
     }
+
+    @GetMapping("/all")
+    public Iterable<PersonGetDto> getAllPeople() {
+        return personService.getAllPeople();
+    }
 }
