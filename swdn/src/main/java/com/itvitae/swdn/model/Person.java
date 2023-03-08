@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -21,4 +24,9 @@ public class Person {
     @OneToOne
     private User user;
 
+    @OneToMany(mappedBy = "feedbackAsker")
+    private List<Invitation> sentInvitations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "feedbackGiver")
+    private List<Invitation> receivedInvitations = new ArrayList<>();
 }
