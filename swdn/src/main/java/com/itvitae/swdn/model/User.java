@@ -19,7 +19,7 @@ public class User {
 
     @OneToOne
     @JoinColumn(name = "person_id")
-    private User user;
+    private Person person;
 
     public User(String email, String password, String roles) {
         this.email = email;
