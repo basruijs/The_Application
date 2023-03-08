@@ -41,4 +41,18 @@ public class Person {
 
     @OneToMany(mappedBy = "trainee")
     private List<Skill> skills = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "coach_id")
+    private Person coach;
+
+    @OneToMany(mappedBy = "coach")
+    private List<Person> trainees = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Person manager;
+
+    @OneToMany(mappedBy = "manager")
+    private List<Person> subordinates = new ArrayList<>();
 }
