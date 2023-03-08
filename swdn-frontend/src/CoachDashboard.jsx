@@ -9,7 +9,7 @@ function CoachDashboard() {
 
 
     function printAllPeople(){
-        console.log(data)
+        console.log(getAllPeople)
     }
   
     return (
