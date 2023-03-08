@@ -38,4 +38,7 @@ public class Person {
 
     @OneToOne(mappedBy = "requester")
     private ChangeRequest changeRequest;
+
+    @OneToMany(mappedBy = "trainee")
+    private List<Skill> skills = new ArrayList<>();
 }
