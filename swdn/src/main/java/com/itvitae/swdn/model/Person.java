@@ -21,7 +21,7 @@ public class Person {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToOne
+    @OneToOne(mappedBy = "person")
     private User user;
 
     @OneToMany(mappedBy = "feedbackAsker")
@@ -35,4 +35,7 @@ public class Person {
 
     @OneToMany(mappedBy = "evaluator")
     private List<Evaluation> evaluatorEvaluations = new ArrayList<>();
+
+    @OneToOne(mappedBy = "requester")
+    private ChangeRequest changeRequest;
 }
