@@ -1,9 +1,12 @@
 package com.itvitae.swdn.service;
 
+
 import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.dto.RoleDto;
 import com.itvitae.swdn.mapper.PersonMapper;
+
 import com.itvitae.swdn.mapper.RoleMapper;
+import com.itvitae.swdn.model.Person;
 import com.itvitae.swdn.model.Role;
 import com.itvitae.swdn.repository.RoleRepository;
 import jakarta.transaction.Transactional;
@@ -20,16 +23,25 @@ public class RoleService {
     RoleRepository roleRepository;
     @Autowired
     RoleMapper roleMapper;
+
     @Autowired
     PersonMapper personMapper;
 
+
+    public void addPersonToRole(Person person) {
+        Role role = person.getRole();
+        role.getPeople().add(person);
+        roleRepository.save(role);
+    }
+
+
     //READ
-    public RoleDto getRoleById(long id) {
+    public Role getRoleById(long id) {
         Optional<Role> foundRole = roleRepository.findById(id);
         if (!foundRole.isPresent()) {
             throw new IllegalArgumentException("No such role");
         }
-        return roleMapper.toDto(foundRole.get());
+        return foundRole.get();
     }
 
     public Iterable<PersonGetDto> getAllTrainees() {
