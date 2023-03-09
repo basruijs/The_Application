@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import NavBar from "./NavBar";
 import Person from "/src/Person.jsx"
 
 export default function CoachDashboard() {
@@ -22,14 +23,10 @@ export default function CoachDashboard() {
                 console.log(e.message)
             })
     }, [])
-
-    // getAllPeople()
     return (
         <div>
-            {/* <button onClick={}>Click for all people</button> */}
-            {console.log(people)}
-            {console.log("hij doet de return")}
-
+            <NavBar/>
+            <div className="peopleList">
             {
                 people.map((person, index) => (
                             <Person
@@ -39,6 +36,7 @@ export default function CoachDashboard() {
                             />
                 ))
             }
+            </div>
         </div>
     )
 }
