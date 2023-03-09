@@ -1,7 +1,9 @@
 package com.itvitae.swdn.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -55,4 +59,9 @@ public class Person {
 
     @OneToMany(mappedBy = "manager")
     private List<Person> subordinates = new ArrayList<>();
+
+    public Person(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

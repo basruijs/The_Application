@@ -1,62 +1,87 @@
 * {
-  margin:0px;
+    margin: 0px;
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
 }
 
-.navBar{
-  height: 7vh;
-  background-color: black;
-  border-color: #253C78;
-  border-style: solid;
-  border-width: 2px;
+.navBar {
+    height: 7vh;
+    background-color: black;
+    border-color: #253c78;
+    border-style: solid;
+    border-width: 2px;
 }
 
-.peopleList {
-  margin:0px;
-  padding:0px;
-  color: white;
-  border-color: #253C78;
-  border-style: solid;
-  border-width: 2px;
-  width: 20vw;
-  height: 90vh;
-  background-color: black;
+.listWrapper {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    border-color: #253c78;
+    border-style: solid;
+    border-width: 2px;
+    width: 15vw;
+    height: 90vh;
+    background-color: #2b59c3;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
-.person {
-  margin:3px;
-  color: white;
-  border-color: #253C78;
-  border-style: solid;
-  border-width: 2px;
-  width: 90%;
-  background-color: black;
+.list {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    border-color: #253c78;
+    border-style: solid;
+    border-width: 2px;
+    width: 15vw;
+    height: 90vh;
+    background-color: black;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.listItem {
+    margin: 3px;
+    color: white;
+    border-color: #253c78;
+    border-style: solid;
+    border-width: 2px;
+    width: 90%;
+    background-color: black;
+}
+
+.selected {
+    border-color: #00a5cf;
+    background-color: #253c78;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+    a:hover {
+        color: #747bff;
+    }
+    button {
+        background-color: #f9f9f9;
+    }
 }
