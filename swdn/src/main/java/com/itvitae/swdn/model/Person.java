@@ -1,5 +1,7 @@
 package com.itvitae.swdn.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -43,6 +45,8 @@ public class Person {
     @OneToOne(mappedBy = "requester")
     private ChangeRequest changeRequest;
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "trainee")
     private List<Skill> skills = new ArrayList<>();
 
