@@ -3,6 +3,7 @@ package com.itvitae.swdn.controller;
 
 import com.itvitae.swdn.dto.SkillGetDto;
 import com.itvitae.swdn.dto.SkillPostDto;
+import com.itvitae.swdn.dto.SkillPutDto;
 import com.itvitae.swdn.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class SkillController {
     @GetMapping("/{traineeid}/all")
     public Iterable<SkillGetDto> getSkillByPerson(@PathVariable(value = "traineeid") long traineeid) {
         return skillService.getSkillByPerson(traineeid);
+    }
+
+    @PutMapping("/{id}")
+    public void updateSkill(@PathVariable(value = "id") long id, @RequestBody SkillPutDto skill){
+        skillService.updateSkill(id, skill);
     }
 }

@@ -2,6 +2,7 @@ package com.itvitae.swdn.service;
 
 import com.itvitae.swdn.dto.SkillGetDto;
 import com.itvitae.swdn.dto.SkillPostDto;
+import com.itvitae.swdn.dto.SkillPutDto;
 import com.itvitae.swdn.mapper.SkillMapper;
 import com.itvitae.swdn.model.Person;
 import com.itvitae.swdn.model.Skill;
@@ -57,5 +58,27 @@ public class SkillService {
         person.getSkills().add(newSkill);
         newSkill.setTrainee(person);
         skillRepository.save(newSkill);
+    }
+
+    public void updateSkill(long id, SkillPutDto skill) {
+        if (!skillRepository.existsById(id)) {
+            //do nothing
+        } else {
+            Skill oldSkill = skillRepository.findById(id).get();
+            if (skill.getName() != null) {
+                oldSkill.setName(skill.getName());
+            }
+            if (skill.getHardSkill() != null) {
+                oldSkill.setName(skill.getName());
+            }
+            if (skill.getCompleted() != null) {
+                oldSkill.setName(skill.getName());
+            }
+            if (skill.getReport() != null) {
+                oldSkill.setName(skill.getName());
+            }
+
+            skillRepository.save(oldSkill);
+        }
     }
 }
