@@ -26,13 +26,7 @@ function SkillOverview(props) {
                             : 'No certificate'}
                     </span>
                 </div>
-                <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Earum, maiores quisquam aliquid minus incidunt architecto,
-                    nobis nihil consequatur praesentium vitae pariatur in,
-                    officia provident similique asperiores beatae reprehenderit
-                    unde consectetur?
-                </p>
+                <p>{props.skill.report}</p>
             </div>
         );
     } else {
