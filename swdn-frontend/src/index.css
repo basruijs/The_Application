@@ -1,5 +1,6 @@
 * {
     margin: 0px;
+    box-sizing: border-box;
 }
 
 :root {
@@ -21,18 +22,23 @@
 .navBar {
     height: 7vh;
     background-color: black;
+}
+
+.bordered {
     border-color: #253c78;
     border-style: solid;
     border-width: 2px;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: row;
 }
 
 .listWrapper {
     margin: 0px;
     padding: 0px;
     color: white;
-    border-color: #253c78;
-    border-style: solid;
-    border-width: 2px;
     width: 15vw;
     height: 90vh;
     background-color: #2b59c3;
@@ -46,9 +52,6 @@
     margin: 0px;
     padding: 0px;
     color: white;
-    border-color: #253c78;
-    border-style: solid;
-    border-width: 2px;
     width: 15vw;
     height: 90vh;
     background-color: black;
@@ -61,16 +64,50 @@
 .listItem {
     margin: 3px;
     color: white;
-    border-color: #253c78;
-    border-style: solid;
-    border-width: 2px;
     width: 90%;
     background-color: black;
 }
 
 .selected {
-    border-color: #00a5cf;
+    border-color: #2b59c3;
     background-color: #253c78;
+}
+
+.skillOverview {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    width: 45vw;
+    height: 90vh;
+    background-color: black;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.hardsoftskill {
+    font-size: 1rem;
+    font-weight: 100;
+}
+
+.icon {
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+}
+
+.info-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.edit {
+    align-self: flex-end;
 }
 
 @media (prefers-color-scheme: light) {

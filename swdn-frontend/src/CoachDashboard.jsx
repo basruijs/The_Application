@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import NavBar from './components/NavBar';
 import ListItem from './components/ListItem';
 import List from './components/List';
+import SkillOverview from './components/SkillOverview';
 
 export default function CoachDashboard() {
     const [people, setPeople] = useState([]);
@@ -31,7 +32,7 @@ export default function CoachDashboard() {
             });
     }, []);
     return (
-        <div>
+        <div className="dashboard">
             <List
                 content={people}
                 selected={person}
@@ -44,6 +45,7 @@ export default function CoachDashboard() {
                 select={setSkill}
                 title="Skills"
             />
+            <SkillOverview skill={skills.find((x) => x.id === skill)} />
         </div>
     );
 }

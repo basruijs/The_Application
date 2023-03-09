@@ -4,7 +4,9 @@ function ListItem(props) {
     return (
         <button
             className={
-                props.selected == props.id ? 'listItem selected' : 'listItem'
+                props.selected == props.id
+                    ? 'listItem bordered selected'
+                    : 'listItem bordered'
             }
             onClick={() => props.select(props.id)}
         >
