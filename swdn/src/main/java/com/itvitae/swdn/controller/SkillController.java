@@ -1,9 +1,8 @@
 package com.itvitae.swdn.controller;
 
 
-import com.itvitae.swdn.dto.PersonGetDto;
-import com.itvitae.swdn.dto.UserPostDto;
-import com.itvitae.swdn.service.PersonService;
+import com.itvitae.swdn.dto.SkillGetDto;
+import com.itvitae.swdn.dto.SkillPostDto;
 import com.itvitae.swdn.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +16,17 @@ public class SkillController {
     SkillService skillService;
 
     @PostMapping("/new/{personid}")
-    public void newUser(@RequestBody SkillDto skillDto, @PathVariable(value = "personid") long personid) {
-        skillService.newUser(skillDto, personid);
+    public void newUser(@RequestBody SkillPostDto skillDto, @PathVariable(value = "personid") long personid) {
+        skillService.newSkill(skillDto, personid);
     }
     //READ
     @GetMapping("/{id}")
-    public SkillDto getSkillById(@PathVariable(value = "id") long id) {
+    public SkillGetDto getSkillById(@PathVariable(value = "id") long id) {
         return skillService.getSkillById(id);
     }
 
     @GetMapping("/all")
-    public Iterable<SkillDto> getAllPeople() {
+    public Iterable<SkillGetDto> getAllSkills() {
         return skillService.getAllSkills();
     }
 }
