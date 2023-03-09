@@ -1,5 +1,7 @@
 package com.itvitae.swdn.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +22,8 @@ public class Skill {
     private Boolean hardSkill;
     private String report;
     private File certificate;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "trainee_id")
     private Person trainee;

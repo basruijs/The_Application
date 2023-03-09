@@ -6,9 +6,13 @@ import com.itvitae.swdn.model.Person;
 import com.itvitae.swdn.model.User;
 import com.itvitae.swdn.repository.PersonRepository;
 import com.itvitae.swdn.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
+@Transactional
 public class UserService {
     @Autowired
     UserRepository userRepository;
