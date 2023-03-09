@@ -1,43 +1,37 @@
-import React, { useState, useEffect } from "react";
-import NavBar from "./NavBar";
-import Person from "/src/Person.jsx"
+import React, { useState, useEffect } from 'react';
+import NavBar from './components/NavBar';
+import Person from './components/Person';
 
 export default function CoachDashboard() {
-    const [people, setPeople] = useState([])
+    const [people, setPeople] = useState([]);
 
     const fetchData = async () => {
-        const result = await fetch("http://localhost:8082/api/person/all");
+        const result = await fetch('http://localhost:8082/api/person/all');
         if (!result.ok) {
-            throw new Error('Data coud not be fetched!')
+            throw new Error('Data coud not be fetched!');
         } else {
-            return result.json()
+            return result.json();
         }
-    }
+    };
 
     useEffect(() => {
         fetchData()
             .then((result) => {
-                setPeople(result)
+                setPeople(result);
             })
             .catch((e) => {
-                console.log(e.message)
-            })
-    }, [])
+                console.log(e.message);
+            });
+    }, []);
     return (
-        <div>
-            <NavBar/>
-            <div className="peopleList">
-            {
-                people.map((person, index) => (
-                            <Person
-                                name={person.name}
-                                id={person.id}
-                                key={index.toString()}
-                            />
-                ))
-            }
-            </div>
+        <div className="peopleList">
+            {people.map((person, index) => (
+                <Person
+                    name={person.name}
+                    id={person.id}
+                    key={index.toString()}
+                />
+            ))}
         </div>
-    )
+    );
 }
-
