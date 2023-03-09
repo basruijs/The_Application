@@ -1,6 +1,5 @@
 package com.itvitae.swdn.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,9 +16,11 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(length = 100)
     private String name;
     private Boolean completed;
     private Boolean hardSkill;
+    @Column(length = 600)
     private String report;
     private File certificate;
 

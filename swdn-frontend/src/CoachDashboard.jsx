@@ -69,7 +69,18 @@ export default function CoachDashboard() {
                 select={setSkill}
                 title="Skills"
             />
-            <SkillOverview skill={skills.find((x) => x.id === skill)} />
+            <SkillOverview
+                skill={skills.find((x) => x.id === skill)}
+                update={() => {
+                    fetchSkills()
+                        .then((result) => {
+                            setSkills(result);
+                        })
+                        .catch((e) => {
+                            console.log(e.message);
+                        });
+                }}
+            />
             <div className="sidebar">
                 <NewSkill
                     person={person}
