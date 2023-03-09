@@ -69,13 +69,16 @@ public class SkillService {
                 oldSkill.setName(skill.getName());
             }
             if (skill.getHardSkill() != null) {
-                oldSkill.setName(skill.getName());
+                oldSkill.setHardSkill(skill.getHardSkill());
             }
             if (skill.getCompleted() != null) {
-                oldSkill.setName(skill.getName());
+                oldSkill.setCompleted(skill.getCompleted());
             }
             if (skill.getReport() != null) {
-                oldSkill.setName(skill.getName());
+                oldSkill.setReport(skill.getReport());
+            }
+            if (skill.getCertificate() != null) {
+                oldSkill.setCertificate(skill.getCertificate());
             }
 
             skillRepository.save(oldSkill);
