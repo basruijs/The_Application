@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -30,6 +31,14 @@ public class SkillService {
     public Iterable<SkillGetDto> getAllSkills() {
         return StreamSupport
                 .stream(skillRepository.findAll().spliterator(), false)
+                .map(skill -> skillMapper.toDto(skill))
+                .collect(Collectors.toList());
+    }
+
+    public Iterable<SkillGetDto> getSkillByPerson(long traineeid) {
+        return StreamSupport
+                .stream(skillRepository.findAll().spliterator(), false)
+                .filter(skill -> Objects.equals(skill.getTrainee().getId(), traineeid))
                 .map(skill -> skillMapper.toDto(skill))
                 .collect(Collectors.toList());
     }

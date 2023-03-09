@@ -16,7 +16,7 @@ public class SkillController {
     SkillService skillService;
 
     @PostMapping("/new/{personid}")
-    public void newUser(@RequestBody SkillPostDto skillDto, @PathVariable(value = "personid") long personid) {
+    public void newSkill(@RequestBody SkillPostDto skillDto, @PathVariable(value = "personid") long personid) {
         skillService.newSkill(skillDto, personid);
     }
     //READ
@@ -28,5 +28,10 @@ public class SkillController {
     @GetMapping("/all")
     public Iterable<SkillGetDto> getAllSkills() {
         return skillService.getAllSkills();
+    }
+
+    @GetMapping("/{traineeid}/all")
+    public Iterable<SkillGetDto> getSkillByPerson(@PathVariable(value = "traineeid") long traineeid) {
+        return skillService.getSkillByPerson(traineeid);
     }
 }
