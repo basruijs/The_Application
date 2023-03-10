@@ -3,16 +3,14 @@ import List from './components/List';
 import SkillOverview from './components/SkillOverview';
 import NewSkill from './components/NewSkill';
 
-export default function CoachDashboard() {
+export default function HRDashboard(props) {
     const [people, setPeople] = useState([]);
     const [person, setPerson] = useState(-1);
     const [skills, setSkills] = useState([]);
     const [skill, setSkill] = useState(-1);
 
     const fetchData = async () => {
-        const result = await fetch(
-            'http://localhost:8082/api/role/trainee/all'
-        );
+        const result = await fetch('http://localhost:8082/api/person/all');
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
         } else {
@@ -59,7 +57,7 @@ export default function CoachDashboard() {
                 content={people}
                 selected={person}
                 select={setPerson}
-                title="Trainees"
+                title="People"
             />
             <List
                 content={skills}
@@ -78,22 +76,9 @@ export default function CoachDashboard() {
                             console.log(e.message);
                         });
                 }}
-                editable={true}
+                editable={false}
             />
-            <div className="sidebar">
-                <NewSkill
-                    person={person}
-                    update={() => {
-                        fetchSkills()
-                            .then((result) => {
-                                setSkills(result);
-                            })
-                            .catch((e) => {
-                                console.log(e.message);
-                            });
-                    }}
-                />
-            </div>
+            <div className="sidebar"></div>
         </div>
     );
 }

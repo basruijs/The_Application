@@ -139,12 +139,16 @@ function SkillOverview(props) {
         } else {
             return (
                 <div className="skillOverview bordered">
-                    <button
-                        className="edit bordered"
-                        onClick={() => setEdit(true)}
-                    >
-                        ✎
-                    </button>
+                    {props.editable ? (
+                        <button
+                            className="edit bordered"
+                            onClick={() => setEdit(true)}
+                        >
+                            ✎
+                        </button>
+                    ) : (
+                        <></>
+                    )}
                     <h2>
                         {name}
                         <i className="hardsoftskill">
