@@ -183,6 +183,15 @@
     border-bottom: 1px solid white;
 }
 
+.title{
+    width: 100vw;
+    background-color: #2b59c3;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
