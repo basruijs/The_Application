@@ -4,7 +4,6 @@ import com.itvitae.swdn.dto.*;
 import com.itvitae.swdn.mapper.EvaluationMapper;
 import com.itvitae.swdn.mapper.PersonMapper;
 import com.itvitae.swdn.model.Evaluation;
-import com.itvitae.swdn.model.Person;
 import com.itvitae.swdn.repository.EvaluationRepository;
 import com.itvitae.swdn.repository.PersonRepository;
 import jakarta.transaction.Transactional;
@@ -31,9 +30,9 @@ public class EvaluationService {
     PersonMapper personMapper;
 
 
-    public void newEvaluation(EvaluationPostDto evaluationDto, long evaluatorid, long traineeid) {
+    public void newEvaluation(EvaluationDto evaluationDto, long evaluatorid, long traineeid) {
 
-        EvaluationPostDto newEvaluation = evaluationDto;
+        EvaluationDto newEvaluation = evaluationDto;
 
         //set evaluators
         PersonGetDto evaluator = personMapper.toDto(personRepository.findById(evaluatorid).get());
@@ -50,7 +49,7 @@ public class EvaluationService {
 
     }
 
-    public EvaluationGetDto getEvaluationById(long id) {
+    public EvaluationDto getEvaluationById(long id) {
         Optional<Evaluation> foundEvaluation = evaluationRepository.findById(id);
         if (!foundEvaluation.isPresent()) {
             throw new IllegalArgumentException("No such meeting exists");
@@ -58,14 +57,14 @@ public class EvaluationService {
         return evaluationMapper.toDto(foundEvaluation.get());
     }
 
-    public Iterable<EvaluationGetDto> getAllEvaluations() {
+    public Iterable<EvaluationDto> getAllEvaluations() {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
                 .collect(Collectors.toList());
     }
 
-    public Iterable<EvaluationGetDto> getSkillByTrainee(long traineeid) {
+    public Iterable<EvaluationDto> getSkillByTrainee(long traineeid) {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
                 .filter(evaluation -> Objects.equals(evaluation.getTrainee().getId(), traineeid))
@@ -73,7 +72,7 @@ public class EvaluationService {
                 .collect(Collectors.toList());
     }
 
-    public Iterable<EvaluationGetDto> getSkillByEvaluator(long evaluatorid) {
+    public Iterable<EvaluationDto> getSkillByEvaluator(long evaluatorid) {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
                 .filter(evaluation -> Objects.equals(evaluation.getEvaluator().getId(), evaluatorid))
