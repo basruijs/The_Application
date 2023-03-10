@@ -18,11 +18,9 @@ public class Evaluation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "trainee_id")
     private Person trainee;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "evaluator_id")
     private Person evaluator;

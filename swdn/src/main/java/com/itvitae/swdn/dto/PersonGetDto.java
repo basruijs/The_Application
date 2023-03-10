@@ -12,6 +12,4 @@ import java.util.List;
 public class PersonGetDto {
     private Long id;
     private String name;
-//    private List<EvaluationGetDto> traineeEvaluations = new ArrayList<>();
-//    private List<EvaluationGetDto> evaluatorEvaluations = new ArrayList<>();
 }
