@@ -27,8 +27,14 @@ public class Setup {
     public void onApplicationEvent(ApplicationReadyEvent event) {
         Role trainee = new Role("TRAINEE");
         roleRepository.save(trainee);
+        Role coach = new Role("COACH");
+        roleRepository.save(coach);
+        Role manager = new Role("MANAGER");
+        roleRepository.save(manager);
+        Role hr = new Role("HR");
+        roleRepository.save(hr);
 
-        User user = new User("admin", passwordEncoder.encode("admin"), "ROLE_ADMIN");
+        User user = new User("admin", passwordEncoder.encode("admin"), "ROLE_HR");
         userRepository.save(user);
     }
 }

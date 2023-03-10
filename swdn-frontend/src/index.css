@@ -118,6 +118,18 @@
     height: 25vh;
     background-color: black;
 }
+.naw {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    width: 25vw;
+    height: 25vh;
+    background-color: black;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 
 .newMeeting {
     margin: 0;
@@ -126,6 +138,25 @@
     width: 25vw;
     height: 25vh;
     background-color: black;
+}
+
+.changerequest {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    width: 25vw;
+    height: 30vh;
+    background-color: black;
+}
+
+.newperson {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    width: 25vw;
+    height: 35vh;
+    background-color: black;
+=======
 }
 
 .meetings {

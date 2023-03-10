@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import NavBar from './components/NavBar';
-import ListItem from './components/ListItem';
 import List from './components/List';
 import SkillOverview from './components/SkillOverview';
 import NewSkill from './components/NewSkill';
@@ -151,6 +149,7 @@ export default function CoachDashboard() {
                             console.log(e.message);
                         });
                 }}
+                editable={true}
             />
             <div className="sidebar">
                 <NewSkill
