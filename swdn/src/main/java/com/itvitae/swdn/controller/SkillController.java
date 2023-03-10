@@ -6,6 +6,8 @@ import com.itvitae.swdn.dto.SkillPostDto;
 import com.itvitae.swdn.dto.SkillPutDto;
 import com.itvitae.swdn.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -49,5 +51,10 @@ public class SkillController {
     @PutMapping("/{id}/certificate")
     public void addCertificate(@PathVariable(value = "id") long id, @RequestParam("file") MultipartFile file) throws IOException {
         skillService.addCertificate(id, file);
+    }
+
+    @GetMapping("/{id}/certificate")
+    public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
+        return skillService.downloadCertificate(id);
     }
 }

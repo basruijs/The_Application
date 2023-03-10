@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 function SkillOverview(props) {
     if (props.skill) {
-        const file = new File(
-            [props.skill.certificate.data],
-            props.skill.certificate.fileName,
-            { type: props.skill.certificate.fileType }
-        );
+        let file = null;
+        if (props.skill.certificate) {
+            file = new File(
+                [props.skill.certificate.data],
+                props.skill.certificate.fileName,
+                { type: props.skill.certificate.fileType }
+            );
+        }
         const [name, setName] = useState(props.skill.name);
         const [hardSkill, setHardSkill] = useState(props.skill.hardSkill);
         const [completed, setCompleted] = useState(props.skill.completed);
@@ -108,7 +111,9 @@ function SkillOverview(props) {
                     </div>
                     <div className="info-flex">
                         <span className="icon">🗎</span>
-                        <label htmlFor="certificate">{certificate.name}</label>
+                        <label htmlFor="certificate">
+                            {certificate ? certificate.name : ''}
+                        </label>
                         <input
                             type="file"
                             name="certificate"
@@ -152,11 +157,16 @@ function SkillOverview(props) {
                     </div>
                     <div className="info-flex">
                         <span className="icon">🗎</span>
-                        <span>
-                            {certificate
-                                ? certificate.name || certificate.fileName
-                                : 'No certificate'}
-                        </span>
+                        {certificate ? (
+                            <a
+                                href={`http://localhost:8082/api/skill/${props.skill.id}/certificate`}
+                                download={certificate.name}
+                            >
+                                {certificate.name}
+                            </a>
+                        ) : (
+                            <span>No certificate</span>
+                        )}
                     </div>
                     <p>{report}</p>
                 </div>

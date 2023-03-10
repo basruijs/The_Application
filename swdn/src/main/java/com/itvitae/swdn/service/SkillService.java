@@ -12,6 +12,11 @@ import com.itvitae.swdn.repository.PersonRepository;
 import com.itvitae.swdn.repository.SkillRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -106,5 +111,18 @@ public class SkillService {
         skillRepository.save(skill);
         dbFile.setSkill(skill);
         dbFileRepository.save(dbFile);
+    }
+
+    public ResponseEntity<Resource> downloadCertificate(long id) {
+        Optional<Skill> foundSkill = skillRepository.findById(id);
+        if (!foundSkill.isPresent()) {
+            throw new IllegalArgumentException("No such skill exists");
+        }
+        DBFile dbFile = foundSkill.get().getCertificate();
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(dbFile.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
+                .body(new ByteArrayResource(dbFile.getData()));
     }
 }
