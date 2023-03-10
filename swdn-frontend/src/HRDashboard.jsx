@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import List from './components/List';
 import SkillOverview from './components/SkillOverview';
 import NewSkill from './components/NewSkill';
+import NawData from './components/NawData';
+import ChangeRequested from './components/ChangeRequested';
+import NewPerson from './components/NewPerson';
 
 export default function HRDashboard(props) {
     const [people, setPeople] = useState([]);
@@ -78,7 +81,21 @@ export default function HRDashboard(props) {
                 }}
                 editable={false}
             />
-            <div className="sidebar"></div>
+            <div className="sidebar">
+                <NawData personid={person} />
+                <ChangeRequested />
+                <NewPerson
+                    update={() => {
+                        fetchData()
+                            .then((result) => {
+                                setPeople(result);
+                            })
+                            .catch((e) => {
+                                console.log(e.message);
+                            });
+                    }}
+                />
+            </div>
         </div>
     );
 }
