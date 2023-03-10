@@ -8,7 +8,11 @@ function NewMeeting(props) {
     function addMeeting(date, time, duration) {
         if (props.trainee == -1) {
             alert('No trainee selected!');
-        } else if (isDoubleBooked(props.traineeMeetings)) {
+        } else if (
+            isDoubleBooked(props.traineeMeetings) ||
+            isDoubleBooked(props.evaluatorMeetings)
+        ) {
+            alert('Overlapping times!');
         } else {
             const newMeeting = JSON.stringify({
                 date: date,
@@ -43,9 +47,12 @@ function NewMeeting(props) {
                 if (
                     (oldStartTime >= newStartTime &&
                         oldStartTime <= newEndTime) ||
-                    (oldEndTime >= newStartTime && oldEndTime <= newEndTime)
+                    (oldEndTime >= newStartTime && oldEndTime <= newEndTime) ||
+                    (oldStartTime >= newStartTime &&
+                        oldEndTime <= newEndTime) ||
+                    (newEndTime >= oldStartTime && newEndTime <= oldEndTime) ||
+                    (newStartTime >= oldStartTime && newStartTime <= oldEndTime)
                 ) {
-                    console.log('double booked');
                     return true;
                 }
             }
@@ -81,7 +88,7 @@ function NewMeeting(props) {
                     e.preventDefault();
                 }}
             >
-                <label for="date">Date: </label>
+                <label htmlFor="date">Date: </label>
                 <input
                     type="date"
                     name="date"
@@ -90,7 +97,7 @@ function NewMeeting(props) {
                     onChange={(e) => setDate(e.target.value)}
                 />
                 <br />
-                <label for="time">Time: </label>
+                <label htmlFor="time">Time: </label>
                 <input
                     type="time"
                     name="time"
@@ -99,7 +106,7 @@ function NewMeeting(props) {
                     onChange={(e) => setTime(e.target.value)}
                 />
                 <br />
-                <label for="duration">Duration: </label>
+                <label htmlFor="duration">Duration: </label>
                 <input
                     type="time"
                     name="duration"

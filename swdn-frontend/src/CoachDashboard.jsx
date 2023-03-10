@@ -5,6 +5,7 @@ import List from './components/List';
 import SkillOverview from './components/SkillOverview';
 import NewSkill from './components/NewSkill';
 import NewMeeting from './components/NewMeeting';
+import Meetings from './components/Meetings';
 
 export default function CoachDashboard() {
     const [viewer, setViewer] = useState(-1);
@@ -186,6 +187,7 @@ export default function CoachDashboard() {
                             });
                     }}
                 />
+                <Meetings meetings={viewerMeetings} />
             </div>
         </div>
     );
