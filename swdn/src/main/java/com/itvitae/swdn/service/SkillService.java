@@ -46,7 +46,7 @@ public class SkillService {
     public SkillGetDto getSkillById(long id) {
         Optional<Skill> foundSkill = skillRepository.findById(id);
         if (!foundSkill.isPresent()) {
-            throw new IllegalArgumentException("No such person exists");
+            throw new IllegalArgumentException("No such skill exists");
         }
         return skillMapper.toDto(foundSkill.get());
     }

@@ -36,9 +36,10 @@ public class Person {
     @OneToMany(mappedBy = "feedbackGiver")
     private List<Invitation> receivedInvitations = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "trainee")
     private List<Evaluation> traineeEvaluations = new ArrayList<>();
-
+    @JsonIgnore
     @OneToMany(mappedBy = "evaluator")
     private List<Evaluation> evaluatorEvaluations = new ArrayList<>();
 
