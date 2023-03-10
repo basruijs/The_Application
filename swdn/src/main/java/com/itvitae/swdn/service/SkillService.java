@@ -4,14 +4,18 @@ import com.itvitae.swdn.dto.SkillGetDto;
 import com.itvitae.swdn.dto.SkillPostDto;
 import com.itvitae.swdn.dto.SkillPutDto;
 import com.itvitae.swdn.mapper.SkillMapper;
+import com.itvitae.swdn.model.DBFile;
 import com.itvitae.swdn.model.Person;
 import com.itvitae.swdn.model.Skill;
+import com.itvitae.swdn.repository.DBFileRepository;
 import com.itvitae.swdn.repository.PersonRepository;
 import com.itvitae.swdn.repository.SkillRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +33,13 @@ public class SkillService {
 
     @Autowired
     PersonRepository personRepository;
+
+    @Autowired
+    DBFileStorageService dbFileStorageService;
+
+    @Autowired
+    DBFileRepository dbFileRepository;
+
     public Iterable<SkillGetDto> getAllSkills() {
         return StreamSupport
                 .stream(skillRepository.findAll().spliterator(), false)
@@ -77,11 +88,23 @@ public class SkillService {
             if (skill.getReport() != null) {
                 oldSkill.setReport(skill.getReport());
             }
-            if (skill.getCertificate() != null) {
-                oldSkill.setCertificate(skill.getCertificate());
-            }
+
 
             skillRepository.save(oldSkill);
         }
+    }
+
+    public void addCertificate(long id, MultipartFile file) throws IOException {
+        System.out.println("Adding certificate");
+        Optional<Skill> foundSkill = skillRepository.findById(id);
+        if (!foundSkill.isPresent()) {
+            throw new IllegalArgumentException("No such skill exists");
+        }
+        Skill skill = foundSkill.get();
+        DBFile dbFile = dbFileStorageService.storeFile(file);
+        skill.setCertificate(dbFile);
+        skillRepository.save(skill);
+        dbFile.setSkill(skill);
+        dbFileRepository.save(dbFile);
     }
 }
