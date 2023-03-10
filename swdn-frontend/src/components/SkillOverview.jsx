@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 function SkillOverview(props) {
     if (props.skill) {
+        let file = null;
+        if (props.skill.certificate) {
+            file = new File(
+                [props.skill.certificate.data],
+                props.skill.certificate.fileName,
+                { type: props.skill.certificate.fileType }
+            );
+        }
         const [name, setName] = useState(props.skill.name);
         const [hardSkill, setHardSkill] = useState(props.skill.hardSkill);
         const [completed, setCompleted] = useState(props.skill.completed);
-        const [certificate, setCertificate] = useState(props.skill.certificate);
+        const [certificate, setCertificate] = useState(file);
         const [report, setReport] = useState(props.skill.report);
         const [edit, setEdit] = useState(false);
 
@@ -13,7 +21,7 @@ function SkillOverview(props) {
                 name: name,
                 hardSkill: hardSkill,
                 completed: completed,
-                certificate: certificate,
+
                 report: report,
             });
             fetch(`http://localhost:8082/api/skill/${props.skill.id}`, {
@@ -21,6 +29,17 @@ function SkillOverview(props) {
                 headers: { 'Content-Type': 'application/json' },
                 body: newSkill,
             }).then(() => props.update());
+
+            let formData = new FormData();
+            formData.append('file', certificate);
+
+            fetch(
+                `http://localhost:8082/api/skill/${props.skill.id}/certificate`,
+                {
+                    method: 'PUT',
+                    body: formData,
+                }
+            );
         }
 
         if (edit) {
@@ -92,7 +111,9 @@ function SkillOverview(props) {
                     </div>
                     <div className="info-flex">
                         <span className="icon">🗎</span>
-
+                        <label htmlFor="certificate">
+                            {certificate ? certificate.name : ''}
+                        </label>
                         <input
                             type="file"
                             name="certificate"
@@ -109,7 +130,7 @@ function SkillOverview(props) {
                         id="report"
                         cols="60"
                         rows="10"
-                        value={report}
+                        value={report || ''}
                         onChange={(e) => setReport(e.target.value)}
                         maxLength={600}
                     ></textarea>
@@ -136,9 +157,16 @@ function SkillOverview(props) {
                     </div>
                     <div className="info-flex">
                         <span className="icon">🗎</span>
-                        <span>
-                            {certificate ? certificate.name : 'No certificate'}
-                        </span>
+                        {certificate ? (
+                            <a
+                                href={`http://localhost:8082/api/skill/${props.skill.id}/certificate`}
+                                download={certificate.name}
+                            >
+                                {certificate.name}
+                            </a>
+                        ) : (
+                            <span>No certificate</span>
+                        )}
                     </div>
                     <p>{report}</p>
                 </div>

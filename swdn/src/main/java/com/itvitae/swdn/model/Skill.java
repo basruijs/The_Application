@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.File;
-
 @Entity
 @Getter
 @Setter
@@ -22,7 +20,9 @@ public class Skill {
     private Boolean hardSkill;
     @Column(length = 600)
     private String report;
-    private File certificate;
+    @OneToOne
+    @JoinColumn(name = "certificate_id")
+    private DBFile certificate;
 
     @ManyToOne
     @JoinColumn(name = "trainee_id")

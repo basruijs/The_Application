@@ -3,8 +3,6 @@ package com.itvitae.swdn.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.File;
-
 @Getter
 @Setter
 public class SkillPutDto {
@@ -12,5 +10,4 @@ public class SkillPutDto {
     private Boolean completed;
     private Boolean hardSkill;
     private String report;
-    private File certificate;
 }
