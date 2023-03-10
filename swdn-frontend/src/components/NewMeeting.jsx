@@ -8,6 +8,7 @@ function NewMeeting(props) {
     function addMeeting(date, time, duration) {
         if (props.trainee == -1) {
             alert('No trainee selected!');
+        } else if (isDoubleBooked(props.traineeMeetings)) {
         } else {
             const newMeeting = JSON.stringify({
                 date: date,
@@ -26,6 +27,49 @@ function NewMeeting(props) {
                 }
             ).then(() => props.update());
         }
+    }
+
+    function isDoubleBooked(meetings) {
+        const newDate = date;
+        const newStartTime = time;
+        const newEndTime = addTimes(time, duration);
+
+        for (let index = 0; index < meetings.length; index++) {
+            const oldMeeting = meetings[index];
+            const oldDate = oldMeeting.date;
+            const oldStartTime = oldMeeting.time;
+            const oldEndTime = addTimes(oldMeeting.time, oldMeeting.duration);
+            if (oldDate === newDate) {
+                if (
+                    (oldStartTime >= newStartTime &&
+                        oldStartTime <= newEndTime) ||
+                    (oldEndTime >= newStartTime && oldEndTime <= newEndTime)
+                ) {
+                    console.log('double booked');
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    function timeToMins(time) {
+        var timePart = time.split(':');
+        return timePart[0] * 60 + +timePart[1];
+    }
+
+    function timeFromMins(mins) {
+        function z(n) {
+            return (n < 10 ? '0' : '') + n;
+        }
+        var hours = ((mins / 60) | 0) % 24;
+        var minutes = mins % 60;
+        return z(hours) + ':' + z(minutes);
+    }
+
+    function addTimes(t0, t1) {
+        return timeFromMins(timeToMins(t0) + timeToMins(t1));
     }
 
     return (

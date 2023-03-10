@@ -12,7 +12,8 @@ export default function CoachDashboard() {
     const [person, setPerson] = useState(-1);
     const [skills, setSkills] = useState([]);
     const [skill, setSkill] = useState(-1);
-    const [meetings, setMeetings] = useState([]);
+    const [viewerMeetings, setViewerMeetings] = useState([]);
+    const [traineeMeetings, setTraineeMeetings] = useState([]);
 
     const fetchViewer = async () => {
         //Hardcoded as person with an ID of 1 until log in features are added
@@ -46,9 +47,20 @@ export default function CoachDashboard() {
         }
     };
 
-    const fetchMeetings = async () => {
+    const fetchTraineeMeetings = async () => {
         const result = await fetch(
             `http://localhost:8082/api/evaluation/${person}/trainee/all`
+        );
+        if (!result.ok) {
+            throw new Error('Data coud not be fetched!');
+        } else {
+            return result.json();
+        }
+    };
+
+    const fetchViewerMeetings = async () => {
+        const result = await fetch(
+            `http://localhost:8082/api/evaluation/${viewer.id}/evaluator/all`
         );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
@@ -91,9 +103,21 @@ export default function CoachDashboard() {
 
     useEffect(() => {
         if (person > 0) {
-            fetchMeetings()
+            fetchViewerMeetings()
                 .then((result) => {
-                    setMeetings(result);
+                    setViewerMeetings(result);
+                })
+                .catch((e) => {
+                    console.log(e.message);
+                });
+        }
+    }, [person]);
+
+    useEffect(() => {
+        if (person > 0) {
+            fetchTraineeMeetings()
+                .then((result) => {
+                    setTraineeMeetings(result);
                 })
                 .catch((e) => {
                     console.log(e.message);
@@ -143,10 +167,19 @@ export default function CoachDashboard() {
                 <NewMeeting
                     evaluator={viewer.id}
                     trainee={person}
+                    evaluatorMeetings={viewerMeetings}
+                    traineeMeetings={traineeMeetings}
                     update={() => {
-                        fetchMeetings()
+                        fetchTraineeMeetings()
                             .then((result) => {
-                                setMeetings(result);
+                                setTraineeMeetings(result);
+                            })
+                            .catch((e) => {
+                                console.log(e.message);
+                            });
+                        fetchViewerMeetings()
+                            .then((result) => {
+                                setViewerMeetings(result);
                             })
                             .catch((e) => {
                                 console.log(e.message);
