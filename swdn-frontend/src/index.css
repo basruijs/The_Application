@@ -115,10 +115,9 @@
     padding: 1rem;
     color: white;
     width: 25vw;
-    height: 30vh;
+    height: 25vh;
     background-color: black;
 }
-
 .naw {
     margin: 0;
     padding: 1rem;
@@ -130,6 +129,15 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+.newMeeting {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    width: 25vw;
+    height: 25vh;
+    background-color: black;
 }
 
 .changerequest {
@@ -148,6 +156,31 @@
     width: 25vw;
     height: 35vh;
     background-color: black;
+=======
+}
+
+.meetings {
+    margin: 0;
+    color: white;
+    width: 25vw;
+    height: 40vh;
+    background-color: black;
+}
+.meetingsList {
+    overflow-y: scroll;
+    height: 90%;
+    width: 100%;
+    margin: 0;
+    border-top: 1px solid white;
+}
+
+.meeting {
+    margin: 0;
+    color: white;
+    border-color: white;
+    border-style: solid;
+    border-width: 0px;
+    border-bottom: 1px solid white;
 }
 
 @media (prefers-color-scheme: light) {

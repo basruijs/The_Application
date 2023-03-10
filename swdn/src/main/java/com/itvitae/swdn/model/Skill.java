@@ -24,7 +24,6 @@ public class Skill {
     @JoinColumn(name = "certificate_id")
     private DBFile certificate;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "trainee_id")
     private Person trainee;
