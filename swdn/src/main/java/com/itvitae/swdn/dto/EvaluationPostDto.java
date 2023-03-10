@@ -15,6 +15,5 @@ public class EvaluationPostDto {
     private PersonGetDto evaluator;
     private LocalDate date;
     private LocalTime time;
-    //duration in minutes
-    private int duration;
+    private LocalTime duration;
 }

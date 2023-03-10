@@ -41,7 +41,7 @@ public class EvaluationService {
         newEvaluation.setEvaluator(evaluator);
 
         //set trainee
-        PersonGetDto trainee = personMapper.toDto(personRepository.findById(evaluatorid).get());
+        PersonGetDto trainee = personMapper.toDto(personRepository.findById(traineeid).get());
 //        personMapper.toEntity(evaluator).getTraineeEvaluations().add(evaluationMapper.toEntity(newEvaluation));
         newEvaluation.setTrainee(trainee);
 

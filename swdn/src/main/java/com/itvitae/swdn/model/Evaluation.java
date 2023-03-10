@@ -1,5 +1,6 @@
 package com.itvitae.swdn.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,8 +28,7 @@ public class Evaluation {
     private Person evaluator;
     private LocalDate date;
     private LocalTime time;
-    //duration in minutes
-    private int duration;
+    private LocalTime duration;
 
 
 }
