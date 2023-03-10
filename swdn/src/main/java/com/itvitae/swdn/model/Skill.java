@@ -24,7 +24,6 @@ public class Skill {
     private String report;
     private File certificate;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "trainee_id")
     private Person trainee;
