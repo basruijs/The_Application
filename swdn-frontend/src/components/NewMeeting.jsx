@@ -6,23 +6,26 @@ function NewMeeting(props) {
     const [duration, setDuration] = useState();
 
     function addMeeting(date, time, duration) {
-        const newMeeting = JSON.stringify({
-            date: date,
-            time: time,
-            duration: duration,
-        });
-        setDate();
-        setTime();
-        setDuration();
-
-        fetch(
-            `http://localhost:8082/api/evaluation/new/${props.evaluator}/${props.trainee}`,
-            {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: newMeeting,
-            }
-        ).then(() => props.update());
+        if (props.trainee == -1) {
+            alert('No trainee selected!');
+        } else {
+            const newMeeting = JSON.stringify({
+                date: date,
+                time: time,
+                duration: duration,
+            });
+            setDate();
+            setTime();
+            setDuration();
+            fetch(
+                `http://localhost:8082/api/evaluation/new/${props.evaluator}/${props.trainee}`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: newMeeting,
+                }
+            ).then(() => props.update());
+        }
     }
 
     return (

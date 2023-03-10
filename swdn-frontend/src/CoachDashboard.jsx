@@ -15,6 +15,7 @@ export default function CoachDashboard() {
     const [meetings, setMeetings] = useState([]);
 
     const fetchViewer = async () => {
+        //Hardcoded as person with an ID of 1 until log in features are added
         const result = await fetch('http://localhost:8082/api/person/1');
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
