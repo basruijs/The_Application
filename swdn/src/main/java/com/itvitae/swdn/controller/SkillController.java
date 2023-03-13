@@ -32,10 +32,6 @@ public class SkillController {
         return skillService.getSkillById(id);
     }
 
-    @GetMapping("/all")
-    public Iterable<SkillGetDto> getAllSkills() {
-        return skillService.getAllSkills();
-    }
 
     @GetMapping("/{traineeid}/all")
     public Iterable<SkillGetDto> getSkillByPerson(@PathVariable(value = "traineeid") long traineeid) {
@@ -43,17 +39,17 @@ public class SkillController {
     }
 
     //UPDATE
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public void updateSkill(@PathVariable(value = "id") long id, @RequestBody SkillPutDto skill) {
         skillService.updateSkill(id, skill);
     }
 
-    @PutMapping("/{id}/certificate")
+    @PutMapping("/add/certificate/{id}")
     public void addCertificate(@PathVariable(value = "id") long id, @RequestParam("file") MultipartFile file) throws IOException {
         skillService.addCertificate(id, file);
     }
 
-    @GetMapping("/{id}/certificate")
+    @GetMapping("/certificate/{id}")
     public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
         return skillService.downloadCertificate(id);
     }
