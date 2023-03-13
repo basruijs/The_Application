@@ -17,16 +17,13 @@ public class EvaluationController {
     public void newEvaluation(@RequestBody EvaluationDto evaluationDto, @PathVariable(value = "coachid") long coachid, @PathVariable(value = "traineeid") long traineeid) {
         evaluationService.newEvaluation(evaluationDto, coachid, traineeid);
     }
+
     //READ
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public EvaluationDto getEvaluationById(@PathVariable(value = "id") long id) {
         return evaluationService.getEvaluationById(id);
     }
 
-    @GetMapping("/all")
-    public Iterable<EvaluationDto> getAllEvaluations() {
-        return evaluationService.getAllEvaluations();
-    }
 
     @GetMapping("/{traineeid}/trainee/all")
     public Iterable<EvaluationDto> getSkillByTrainee(@PathVariable(value = "traineeid") long traineeid) {
