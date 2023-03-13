@@ -8,13 +8,15 @@ import HRDashboard from './HRDashboard';
 import LoginPage from './LoginPage';
 
 function App() {
-    const [count, setCount] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [person, setPerson] = useState({
+        name: 'Dummy Name',
+    });
 
     return (
         <div className="App">
-            <NavBar />
+            <NavBar person={person} />
             <Routes>
                 <Route
                     path="/coach"
@@ -31,6 +33,7 @@ function App() {
                         <HRDashboard
                             email={email}
                             password={password}
+                            person={person}
                         />
                     }
                 />
@@ -40,6 +43,7 @@ function App() {
                         <LoginPage
                             setEmail={setEmail}
                             setPassword={setPassword}
+                            setPerson={setPerson}
                         />
                     }
                 />

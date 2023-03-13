@@ -20,8 +20,21 @@
 }
 
 .navBar {
-    height: 7vh;
+    height: 10vh;
     background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 0.5rem;
+}
+
+.navBar nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .bordered {
@@ -182,7 +195,7 @@
     border-bottom: 1px solid white;
 }
 
-.title{
+.title {
     width: 100vw;
     background-color: #2b59c3;
     color: white;
@@ -191,7 +204,7 @@
     align-items: center;
 }
 
-.login-wrapper{
+.login-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
