@@ -25,12 +25,12 @@ public class EvaluationController {
     }
 
 
-    @GetMapping("/{traineeid}/trainee/all")
+    @GetMapping("/trainee/{traineeid}/all")
     public Iterable<EvaluationDto> getSkillByTrainee(@PathVariable(value = "traineeid") long traineeid) {
         return evaluationService.getSkillByTrainee(traineeid);
     }
 
-    @GetMapping("/{evaluatorid}/evaluator/all")
+    @GetMapping("/evaluator/{evaluatorid}/all")
     public Iterable<EvaluationDto> getSkillByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
         return evaluationService.getSkillByEvaluator(evaluatorid);
     }

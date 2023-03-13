@@ -30,13 +30,13 @@ public class SecurityConfig {
                 .requestMatchers("/user/new/**", "/person/all")
                 .hasRole("HR")
 
-                .requestMatchers("/evaluation/**/trainee/all")
+                .requestMatchers("/evaluation/trainee/**")
                 .hasRole("TRAINEE")
 
-                .requestMatchers("/skill/new/**", "/skill/**/update", "/skill/**/add/certificate")
+                .requestMatchers("/skill/new/**", "/skill/update/**", "/skill/add/certificate/**")
                 .hasAnyRole("TRAINEE", "COACH")
 
-                .requestMatchers("/evaluation/new/**", "/evaluation/**/evaluator/all", "/role/trainee/all")
+                .requestMatchers("/evaluation/new/**", "/evaluation/evaluator/**", "/role/trainee/all")
                 .hasAnyRole("COACH", "MANAGER")
 
                 .requestMatchers("/evaluation/get/**")

@@ -24,7 +24,7 @@ function SkillOverview(props) {
 
                 report: report,
             });
-            fetch(`http://localhost:8082/api/skill/${props.skill.id}/update`, {
+            fetch(`http://localhost:8082/api/skill/update/${props.skill.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ function SkillOverview(props) {
             formData.append('file', certificate);
 
             fetch(
-                `http://localhost:8082/api/skill/${props.skill.id}/add/certificate`,
+                `http://localhost:8082/api/skill/add/certificate/${props.skill.id}`,
                 {
                     method: 'PUT',
                     headers: {
@@ -171,7 +171,7 @@ function SkillOverview(props) {
                         <span className="icon">🗎</span>
                         {certificate ? (
                             <a
-                                href={`http://localhost:8082/api/skill/${props.skill.id}/certificate`}
+                                href={`http://localhost:8082/api/skill/certificate/${props.skill.id}`}
                                 download={certificate.name}
                             >
                                 {certificate.name}

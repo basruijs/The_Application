@@ -39,17 +39,17 @@ public class SkillController {
     }
 
     //UPDATE
-    @PutMapping("/{id}/update")
+    @PutMapping("/update/{id}")
     public void updateSkill(@PathVariable(value = "id") long id, @RequestBody SkillPutDto skill) {
         skillService.updateSkill(id, skill);
     }
 
-    @PutMapping("/{id}/add/certificate")
+    @PutMapping("/add/certificate/{id}")
     public void addCertificate(@PathVariable(value = "id") long id, @RequestParam("file") MultipartFile file) throws IOException {
         skillService.addCertificate(id, file);
     }
 
-    @GetMapping("/{id}/certificate")
+    @GetMapping("/certificate/{id}")
     public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
         return skillService.downloadCertificate(id);
     }
