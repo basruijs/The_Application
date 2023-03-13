@@ -24,9 +24,13 @@ function SkillOverview(props) {
 
                 report: report,
             });
-            fetch(`http://localhost:8082/api/skill/${props.skill.id}`, {
+            fetch(`http://localhost:8082/api/skill/${props.skill.id}/update`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
                 body: newSkill,
             }).then(() => props.update());
 
@@ -34,9 +38,13 @@ function SkillOverview(props) {
             formData.append('file', certificate);
 
             fetch(
-                `http://localhost:8082/api/skill/${props.skill.id}/certificate`,
+                `http://localhost:8082/api/skill/${props.skill.id}/add/certificate`,
                 {
                     method: 'PUT',
+                    headers: {
+                        Authorization:
+                            'Basic ' + btoa(props.email + ':' + props.password),
+                    },
                     body: formData,
                 }
             );

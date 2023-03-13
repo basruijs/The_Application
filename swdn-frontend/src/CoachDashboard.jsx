@@ -16,7 +16,12 @@ export default function CoachDashboard() {
 
     const fetchViewer = async () => {
         //Hardcoded as person with an ID of 1 until log in features are added
-        const result = await fetch('http://localhost:8082/api/person/1');
+        const result = await fetch('http://localhost:8082/api/person/1', {
+            headers: {
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+        });
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
         } else {
@@ -26,7 +31,13 @@ export default function CoachDashboard() {
 
     const fetchData = async () => {
         const result = await fetch(
-            'http://localhost:8082/api/role/trainee/all'
+            'http://localhost:8082/api/role/trainee/all',
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
         );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
@@ -37,7 +48,13 @@ export default function CoachDashboard() {
 
     const fetchSkills = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/skill/${person}/all`
+            `http://localhost:8082/api/skill/${person}/all`,
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
         );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
@@ -48,7 +65,13 @@ export default function CoachDashboard() {
 
     const fetchTraineeMeetings = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/evaluation/${person}/trainee/all`
+            `http://localhost:8082/api/evaluation/${person}/trainee/all`,
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
         );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
@@ -59,7 +82,13 @@ export default function CoachDashboard() {
 
     const fetchViewerMeetings = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/evaluation/${viewer.id}/evaluator/all`
+            `http://localhost:8082/api/evaluation/${viewer.id}/evaluator/all`,
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
         );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
@@ -150,6 +179,8 @@ export default function CoachDashboard() {
                         });
                 }}
                 editable={true}
+                email={props.email}
+                password={props.password}
             />
             <div className="sidebar">
                 <NewSkill
@@ -163,6 +194,8 @@ export default function CoachDashboard() {
                                 console.log(e.message);
                             });
                     }}
+                    email={props.email}
+                    password={props.password}
                 />
                 <NewMeeting
                     evaluator={viewer.id}
@@ -185,6 +218,8 @@ export default function CoachDashboard() {
                                 console.log(e.message);
                             });
                     }}
+                    email={props.email}
+                    password={props.password}
                 />
                 <Meetings meetings={viewerMeetings} />
             </div>
