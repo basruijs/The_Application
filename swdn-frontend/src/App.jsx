@@ -12,6 +12,9 @@ function App() {
     const [password, setPassword] = useState('');
     const [person, setPerson] = useState({
         name: 'Dummy Name',
+        role: {
+            name: 'Not Logged In',
+        },
     });
 
     return (
