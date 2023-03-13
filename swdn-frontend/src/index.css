@@ -182,7 +182,7 @@
     border-bottom: 1px solid white;
 }
 
-.title{
+.title {
     width: 100vw;
     background-color: #2b59c3;
     color: white;
@@ -191,7 +191,31 @@
     align-items: center;
 }
 
-.login-wrapper{
+.accountPage {
+    padding: 5vh;
+    width: 100vw;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account .edit {
+    display: block;
+}
+
+.account {
+    margin: 0;
+    background-color: black;
+    padding: 5vh;
+    width: 50vw;
+    height: 60vh;
+    color: white;
+    align-items: center;
+    text-align: center;
+}
+
+.login-wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
