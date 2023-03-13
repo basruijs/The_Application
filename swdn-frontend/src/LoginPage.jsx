@@ -15,12 +15,16 @@ export default function LoginPage(props) {
             headers: { 'Content-Type': 'application/json' },
             body: loginCredentials,
         }).then(
-            () => {
-                props.setEmail(email);
-                props.setPassword(password);
+            (response) => {
+                if (response.ok) {
+                    props.setEmail(email);
+                    props.setPassword(password);
+                } else {
+                    alert('Incorrect username or password.');
+                }
             },
             () => {
-                alert('Incorrect username or password.');
+                alert('Server is currently unavailable, try again later');
             }
         );
     }
