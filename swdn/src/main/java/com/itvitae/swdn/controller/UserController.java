@@ -1,8 +1,10 @@
 package com.itvitae.swdn.controller;
 
+import com.itvitae.swdn.dto.LoginRequest;
 import com.itvitae.swdn.dto.UserPostDto;
 import com.itvitae.swdn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,5 +18,10 @@ public class UserController {
     @PostMapping("/new/{roleid}")
     public void newUser(@RequestBody UserPostDto userPostDto, @PathVariable(value = "roleid") long roleid) {
         userService.newUser(userPostDto, roleid);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest){
+        return userService.login(loginRequest);
     }
 }
