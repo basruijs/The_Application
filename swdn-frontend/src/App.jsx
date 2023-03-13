@@ -5,9 +5,12 @@ import CoachDashboard from './CoachDashboard';
 import NavBar from './components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import HRDashboard from './HRDashboard';
+import LoginPage from './LoginPage';
 
 function App() {
     const [count, setCount] = useState(0);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     return (
         <div className="App">
@@ -20,6 +23,15 @@ function App() {
                 <Route
                     path="/hr"
                     element={<HRDashboard />}
+                />
+                <Route
+                    path="/login"
+                    element={
+                        <LoginPage
+                            setEmail={setEmail}
+                            setPassword={setPassword}
+                        />
+                    }
                 />
             </Routes>
         </div>
