@@ -34,7 +34,7 @@ public class Setup {
         Role hr = new Role("HR");
         roleRepository.save(hr);
 
-        User user = new User("admin", passwordEncoder.encode("admin"), "ROLE_HR");
+        User user = new User("admin@admin.nl", passwordEncoder.encode("admin"), "ROLE_HR");
         userRepository.save(user);
     }
 }

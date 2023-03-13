@@ -182,6 +182,24 @@
     border-bottom: 1px solid white;
 }
 
+.title{
+    width: 100vw;
+    background-color: #2b59c3;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    gap: 0.5rem;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
