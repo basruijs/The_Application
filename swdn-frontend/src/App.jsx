@@ -18,11 +18,21 @@ function App() {
             <Routes>
                 <Route
                     path="/coach"
-                    element={<CoachDashboard />}
+                    element={
+                        <CoachDashboard
+                            email={email}
+                            password={password}
+                        />
+                    }
                 />
                 <Route
                     path="/hr"
-                    element={<HRDashboard />}
+                    element={
+                        <HRDashboard
+                            email={email}
+                            password={password}
+                        />
+                    }
                 />
                 <Route
                     path="/login"

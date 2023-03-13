@@ -26,7 +26,11 @@ function NewMeeting(props) {
                 `http://localhost:8082/api/evaluation/new/${props.evaluator}/${props.trainee}`,
                 {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization:
+                            'Basic ' + btoa(props.email + ':' + props.password),
+                    },
                     body: newMeeting,
                 }
             ).then(() => props.update());

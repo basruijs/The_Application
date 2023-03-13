@@ -25,7 +25,11 @@ export default function NewPerson(props) {
 
         fetch(`http://localhost:8082/api/user/new/${role}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
             body: newUser,
         }).then(() => props.update());
     }

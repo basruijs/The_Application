@@ -13,7 +13,12 @@ export default function HRDashboard(props) {
     const [skill, setSkill] = useState(-1);
 
     const fetchData = async () => {
-        const result = await fetch('http://localhost:8082/api/person/all');
+        const result = await fetch('http://localhost:8082/api/person/all', {
+            headers: {
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+        });
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
         } else {
@@ -23,7 +28,13 @@ export default function HRDashboard(props) {
 
     const fetchSkills = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/skill/${person}/all`
+            `http://localhost:8082/api/skill/${person}/all`,
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
         );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
@@ -80,6 +91,8 @@ export default function HRDashboard(props) {
                         });
                 }}
                 editable={false}
+                email={props.email}
+                password={props.password}
             />
             <div className="sidebar">
                 <NawData personid={person} />
@@ -94,6 +107,8 @@ export default function HRDashboard(props) {
                                 console.log(e.message);
                             });
                     }}
+                    email={props.email}
+                    password={props.password}
                 />
             </div>
         </div>

@@ -27,8 +27,20 @@ public class SecurityConfig {
                 .disable()
 
                 .authorizeHttpRequests()
-                .requestMatchers("/admin/**")
-                .hasRole("ADMIN")
+                .requestMatchers("/user/new/**", "/person/all")
+                .hasRole("HR")
+
+                .requestMatchers("/evaluation/trainee/**")
+                .hasRole("TRAINEE")
+
+                .requestMatchers("/skill/new/**", "/skill/update/**", "/skill/add/certificate/**")
+                .hasAnyRole("TRAINEE", "COACH")
+
+                .requestMatchers("/evaluation/new/**", "/evaluation/evaluator/**", "/role/trainee/all")
+                .hasAnyRole("COACH", "MANAGER")
+
+                .requestMatchers("/evaluation/get/**")
+                .hasAnyRole("TRAINEE", "COACH", "MANAGER")
 
                 .requestMatchers("/**")
                 .permitAll()

@@ -9,7 +9,11 @@ function NewSkill(props) {
         setName('');
         fetch(`http://localhost:8082/api/skill/new/${props.person}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
             body: newSkill,
         }).then(() => props.update());
     }
