@@ -8,6 +8,25 @@ import Meetings from './components/Meetings';
 export default function TraineeDashboard(props) {
     const [skills, setSkills] = useState([]);
     const [skill, setSkill] = useState(-1);
+    const [viewerMeetings, setViewerMeetings] = useState([]);
+    const [traineeMeetings, setTraineeMeetings] = useState([]);
+
+    const fetchTraineeMeetings = async () => {
+        const result = await fetch(
+            `http://localhost:8082/api/evaluation/trainee/${props.person.id}/all`,
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
+        );
+        if (!result.ok) {
+            throw new Error('Data coud not be fetched!');
+        } else {
+            return result.json();
+        }
+    };
 
     const fetchSkills = async () => {
         const result = await fetch(
@@ -25,6 +44,16 @@ export default function TraineeDashboard(props) {
             return result.json();
         }
     };
+
+    useEffect(() => {
+        fetchTraineeMeetings()
+            .then((result) => {
+                setTraineeMeetings(result);
+            })
+            .catch((e) => {
+                console.log(e.message);
+            });
+    }, [props.person]);
 
     useEffect(() => {
         fetchSkills()
@@ -74,6 +103,7 @@ export default function TraineeDashboard(props) {
                     email={props.email}
                     password={props.password}
                 />
+                <Meetings meetings={traineeMeetings} />
             </div>
         </div>
     );

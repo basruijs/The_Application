@@ -223,7 +223,10 @@ export default function CoachDashboard(props) {
                     email={props.email}
                     password={props.password}
                 />
-                <Meetings meetings={viewerMeetings} />
+                <Meetings
+                    meetings={viewerMeetings}
+                    isTrainee={false}
+                />
             </div>
         </div>
     );

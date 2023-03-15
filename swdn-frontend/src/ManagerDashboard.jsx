@@ -215,7 +215,10 @@ export default function ManagerDashboard(props) {
                     email={props.email}
                     password={props.password}
                 />
-                <Meetings meetings={viewerMeetings} />
+                <Meetings
+                    meetings={viewerMeetings}
+                    isTrainee={true}
+                />
             </div>
         </div>
     );
