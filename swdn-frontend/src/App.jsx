@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import HRDashboard from './HRDashboard';
 import LoginPage from './LoginPage';
+import AccountPage from './AccountPage';
 
 function App() {
     const [email, setEmail] = useState('');
@@ -50,6 +51,17 @@ function App() {
                         />
                     }
                 />
+                '
+                <Route
+                    path="/account"
+                    element={
+                        <AccountPage
+                            email={email}
+                            password={password}
+                        />
+                    }
+                />
+                '
             </Routes>
         </div>
     );
