@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react';
 
 export default function AccountPage(props) {
     const [edit, setEdit] = useState(false);
-    const [person, setPerson] = useState(-1);
-    const [name, setName] = useState(person.name);
-    const [address, setAddress] = useState(-1);
-    const [city, setCity] = useState(-1);
-    const [email, setEmail] = useState(-1);
+    const [person, setPerson] = useState(props.person);
+    const [name, setName] = useState(props.person.name);
+    const [address, setAddress] = useState(props.person.address);
+    const [city, setCity] = useState(props.person.city);
 
     const fetchData = async () => {
-        //Hardcoded as person with an ID of 1 until log in features are added
-        const result = await fetch('http://localhost:8082/api/person/1');
+        const result = await fetch(
+            `http://localhost:8082/api/person/${props.person.id}`,
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
+        );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
         } else {
@@ -18,12 +24,12 @@ export default function AccountPage(props) {
         }
     };
 
-    function addChangeRequest(name, address, city, email) {
+    function addChangeRequest(name, address, city) {
         const newChangeRequest = JSON.stringify({
             name: name,
             address: address,
             city: city,
-            email: email,
+            // email: email,
         });
         setName('');
         fetch(`http://localhost:8082/api/changerequest/new/${person.id}`, {
@@ -44,21 +50,21 @@ export default function AccountPage(props) {
                 setName(result.name);
                 setAddress(result.address);
                 setCity(result.city);
-                setEmail(result.user.email);
             })
             .catch((e) => {
                 console.log(e.message);
             });
     }, []);
 
-    if (person.user != null) {
+    if (props.person.name != null) {
         if (edit) {
             return (
                 <div className="accountPage">
                     <div className="account bordered">
                         <form
                             onSubmit={(e) => {
-                                addChangeRequest(name, address, city, email);
+                                addChangeRequest(name, address, city);
+                                setEdit(false);
                                 e.preventDefault();
                             }}
                         >
@@ -94,14 +100,7 @@ export default function AccountPage(props) {
                                 value={city}
                             />
                             <br />
-                            <label htmlFor="email">E-mail: </label>
-                            <input
-                                id="email"
-                                name="email"
-                                type="email"
-                                onChange={(e) => setEmail(e.target.value)}
-                                value={email}
-                            />
+                            <p>{props.email}</p>
                             <br />
                         </form>
                     </div>
@@ -118,13 +117,13 @@ export default function AccountPage(props) {
                             ✎
                         </button>
 
-                        <h2>{person.name}</h2>
+                        <h2>{props.person.name}</h2>
                         <br />
-                        <p>{person.address}</p>
+                        <p>{props.person.address}</p>
                         <br />
-                        <p>{person.city}</p>
+                        <p>{props.person.city}</p>
                         <br />
-                        <p>{person.user.email}</p>
+                        <p>{props.email}</p>
                         <br />
                     </div>
                 </div>

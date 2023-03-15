@@ -12,13 +12,19 @@ export default function LoginPage(props) {
 
         fetch(`http://localhost:8082/api/user/login`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: loginCredentials,
         }).then(
             (response) => {
                 if (response.ok) {
                     props.setEmail(email);
                     props.setPassword(password);
+                    response.json().then((data) => {
+                        console.log(data);
+                        props.setPerson(data);
+                    });
                 } else {
                     alert('Incorrect username or password.');
                 }

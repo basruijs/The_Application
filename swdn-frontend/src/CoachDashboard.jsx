@@ -5,7 +5,7 @@ import NewSkill from './components/NewSkill';
 import NewMeeting from './components/NewMeeting';
 import Meetings from './components/Meetings';
 
-export default function CoachDashboard() {
+export default function CoachDashboard(props) {
     const [viewer, setViewer] = useState(-1);
     const [people, setPeople] = useState([]);
     const [person, setPerson] = useState(-1);
@@ -15,13 +15,15 @@ export default function CoachDashboard() {
     const [traineeMeetings, setTraineeMeetings] = useState([]);
 
     const fetchViewer = async () => {
-        //Hardcoded as person with an ID of 1 until log in features are added
-        const result = await fetch('http://localhost:8082/api/person/1', {
-            headers: {
-                Authorization:
-                    'Basic ' + btoa(props.email + ':' + props.password),
-            },
-        });
+        const result = await fetch(
+            `http://localhost:8082/api/person/${props.person.id}`,
+            {
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
+        );
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
         } else {

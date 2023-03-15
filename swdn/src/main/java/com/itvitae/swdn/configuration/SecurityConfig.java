@@ -27,23 +27,26 @@ public class SecurityConfig {
                 .disable()
 
                 .authorizeHttpRequests()
-                .requestMatchers("/user/new/**", "/person/all")
+                .requestMatchers("/api/user/new/**", "/api/person/all")
                 .hasRole("HR")
 
-                .requestMatchers("/evaluation/trainee/**")
+                .requestMatchers("/api/evaluation/trainee/**")
                 .hasRole("TRAINEE")
 
-                .requestMatchers("/skill/new/**", "/skill/update/**", "/skill/add/certificate/**")
+                .requestMatchers("/api/skill/new/**", "/api/skill/update/**", "/api/skill/add/certificate/**")
                 .hasAnyRole("TRAINEE", "COACH")
 
-                .requestMatchers("/evaluation/new/**", "/evaluation/evaluator/**", "/role/trainee/all")
+                .requestMatchers("/api/evaluation/new/**", "/api/evaluation/evaluator/**", "/api/role/trainee/all")
                 .hasAnyRole("COACH", "MANAGER")
 
-                .requestMatchers("/evaluation/get/**")
+                .requestMatchers("/api/evaluation/get/**")
                 .hasAnyRole("TRAINEE", "COACH", "MANAGER")
 
-                .requestMatchers("/**")
+                .requestMatchers("/api/user/login")
                 .permitAll()
+
+                .requestMatchers("/**")
+                .authenticated()
 
                 .and()
                 .userDetailsService(myUserDetailsService)

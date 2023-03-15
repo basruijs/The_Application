@@ -9,13 +9,17 @@ import LoginPage from './LoginPage';
 import AccountPage from './AccountPage';
 
 function App() {
-    const [count, setCount] = useState(0);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [person, setPerson] = useState({
+        role: {
+            name: 'Not Logged In',
+        },
+    });
 
     return (
         <div className="App">
-            <NavBar />
+            <NavBar person={person} />
             <Routes>
                 <Route
                     path="/coach"
@@ -32,6 +36,7 @@ function App() {
                         <HRDashboard
                             email={email}
                             password={password}
+                            person={person}
                         />
                     }
                 />
@@ -41,6 +46,7 @@ function App() {
                         <LoginPage
                             setEmail={setEmail}
                             setPassword={setPassword}
+                            setPerson={setPerson}
                         />
                     }
                 />
@@ -51,6 +57,7 @@ function App() {
                         <AccountPage
                             email={email}
                             password={password}
+                            person={person}
                         />
                     }
                 />

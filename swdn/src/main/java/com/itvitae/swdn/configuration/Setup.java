@@ -1,9 +1,11 @@
 package com.itvitae.swdn.configuration;
 
+import com.itvitae.swdn.dto.PersonPostDto;
+import com.itvitae.swdn.dto.UserPostDto;
 import com.itvitae.swdn.model.Role;
-import com.itvitae.swdn.model.User;
 import com.itvitae.swdn.repository.RoleRepository;
 import com.itvitae.swdn.repository.UserRepository;
+import com.itvitae.swdn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
@@ -21,6 +23,8 @@ public class Setup {
 
     @Autowired
     RoleRepository roleRepository;
+    @Autowired
+    UserService userService;
 
     @EventListener
     @Transactional
@@ -34,7 +38,21 @@ public class Setup {
         Role hr = new Role("HR");
         roleRepository.save(hr);
 
-        User user = new User("admin@admin.nl", passwordEncoder.encode("admin"), "ROLE_HR");
-        userRepository.save(user);
+        PersonPostDto adminPerson = new PersonPostDto();
+        adminPerson.setName("Admin");
+        adminPerson.setCity("Admin city");
+        adminPerson.setAddress("Admin address");
+
+
+        UserPostDto admin = new UserPostDto();
+        admin.setEmail("admin@admin.nl");
+        admin.setPassword("admin");
+        admin.setRoles("ROLE_HR");
+        admin.setPerson(adminPerson);
+
+
+        userService.newUser(admin, 4);
+
+
     }
 }
