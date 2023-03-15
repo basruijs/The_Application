@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 function SkillOverview(props) {
     if (props.skill) {
         let file = null;
@@ -49,6 +49,20 @@ function SkillOverview(props) {
                 }
             );
         }
+
+        useEffect(() => {
+            setName(props.skill.name);
+            setHardSkill(props.skill.hardSkill);
+            setCompleted(props.skill.completed);
+            if (props.skill.certificate) {
+                file = new File(
+                    [props.skill.certificate.data],
+                    props.skill.certificate.fileName,
+                    { type: props.skill.certificate.fileType }
+                );
+            }
+            setCertificate(file);
+        }, [props.skill]);
 
         if (edit) {
             return (

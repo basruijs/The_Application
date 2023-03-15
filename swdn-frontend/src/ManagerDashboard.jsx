@@ -5,7 +5,7 @@ import NewMeeting from './components/NewMeeting';
 import Meetings from './components/Meetings';
 import cat from './img/cat.jpg';
 
-export default function CoachDashboard(props) {
+export default function ManagerDashboard(props) {
     const [viewer, setViewer] = useState(-1);
     const [people, setPeople] = useState([]);
     const [person, setPerson] = useState(-1);
