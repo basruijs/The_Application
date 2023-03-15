@@ -4,6 +4,7 @@ import SkillOverview from './components/SkillOverview';
 import NewSkill from './components/NewSkill';
 import NewMeeting from './components/NewMeeting';
 import Meetings from './components/Meetings';
+import FeedbackRequest from './components/FeedbackRequest';
 
 export default function TraineeDashboard(props) {
     const [skills, setSkills] = useState([]);
@@ -103,7 +104,11 @@ export default function TraineeDashboard(props) {
                     email={props.email}
                     password={props.password}
                 />
-                <Meetings meetings={traineeMeetings} />
+                <FeedbackRequest></FeedbackRequest>
+                <Meetings
+                    meetings={traineeMeetings}
+                    isTrainee={true}
+                />
             </div>
         </div>
     );

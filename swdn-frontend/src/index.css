@@ -254,6 +254,15 @@
     height: 80vh;
     gap: 0.5rem;
 }
+
+.feedbackRequest {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    width: 25vw;
+    height: 24vh;
+    background-color: black;
+}
 .importantImage {
     width: 25vw;
     height: 25vh;

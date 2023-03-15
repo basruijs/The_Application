@@ -3,9 +3,9 @@ import React from 'react';
 function Meeting(props) {
     let person;
     if (props.isTrainee) {
-        person = props.trainee;
-    } else {
         person = props.evaluator;
+    } else {
+        person = props.trainee;
     }
     return (
         <div className="meeting">
