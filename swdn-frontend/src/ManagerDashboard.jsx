@@ -217,7 +217,7 @@ export default function ManagerDashboard(props) {
                 />
                 <Meetings
                     meetings={viewerMeetings}
-                    isTrainee={true}
+                    isTrainee={false}
                 />
             </div>
         </div>
