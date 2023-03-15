@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ChangeRequestRepository extends CrudRepository<ChangeRequest, Long> {
-    Optional<ChangeRequest> findFirstByRequester(Person requester);
+    Optional<ChangeRequest> findByRequester(Person requester);
 }

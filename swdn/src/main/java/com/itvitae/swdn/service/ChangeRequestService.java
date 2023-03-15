@@ -40,7 +40,7 @@ public class ChangeRequestService {
             throw new IllegalArgumentException("No such person");
         }
         Person person = foundPerson.get();
-        Optional<ChangeRequest> foundRequest = changeRequestRepository.findFirstByRequester(person);
+        Optional<ChangeRequest> foundRequest = changeRequestRepository.findByRequester(person);
         return foundRequest.map(changeRequest -> changeRequestMapper.toDto(changeRequest)).orElse(new ChangeRequestGetDto());
     }
 
