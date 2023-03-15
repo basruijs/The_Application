@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/evaluation/get/**")
                 .hasAnyRole("TRAINEE", "COACH", "MANAGER")
 
-                .requestMatchers("/api/user/login", "/api/changerequest/new/**")
+                .requestMatchers("/api/user/login")
                 .permitAll()
 
                 .requestMatchers("/**")
