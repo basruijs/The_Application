@@ -42,6 +42,16 @@ function NavBar(props) {
                 ) : (
                     ''
                 )}
+                {props.person.role.name === 'MANAGER' ? (
+                    <NavLink
+                        to="/manager"
+                        className="navButton"
+                    >
+                        Dashboard
+                    </NavLink>
+                ) : (
+                    ''
+                )}
             </nav>
             <h2>😎</h2>
         </div>
