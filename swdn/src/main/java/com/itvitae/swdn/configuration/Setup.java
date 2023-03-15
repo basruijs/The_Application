@@ -53,24 +53,5 @@ public class Setup {
 
         userService.newUser(admin, 4);
 
-
-
-
-        PersonPostDto managerPerson = new PersonPostDto();
-        adminPerson.setName("Managé Manager");
-        adminPerson.setCity("Manager city");
-        adminPerson.setAddress("Manager address");
-
-
-        UserPostDto managerUser = new UserPostDto();
-        managerUser.setEmail("manager@manager.nl");
-        managerUser.setPassword("manager");
-        managerUser.setRoles("ROLE_MANAGER");
-        managerUser.setPerson(managerPerson);
-
-
-        userService.newUser(managerUser, 3);
-
-
     }
 }
