@@ -50,8 +50,24 @@ public class Setup {
         admin.setRoles("ROLE_HR");
         admin.setPerson(adminPerson);
 
-
         userService.newUser(admin, 4);
+
+
+        PersonPostDto traineePerson = new PersonPostDto();
+        traineePerson.setName("Trenée");
+        traineePerson.setCity("Traineetown");
+        traineePerson.setAddress("trainee address");
+
+
+        UserPostDto traineeUser = new UserPostDto();
+        traineeUser.setEmail("trainee@trainee.nl");
+        traineeUser.setPassword("trainee");
+        traineeUser.setRoles("ROLE_TRAINEE");
+        traineeUser.setPerson(traineePerson);
+
+
+
+        userService.newUser(traineeUser, 1);
 
     }
 }

@@ -59,7 +59,22 @@ export default function TraineeDashboard(props) {
                 email={props.email}
                 password={props.password}
             />
-            <div className="sidebar"></div>
+            <div className="sidebar">
+                <NewSkill
+                    person={props.person.id}
+                    update={() => {
+                        fetchSkills()
+                            .then((result) => {
+                                setSkills(result);
+                            })
+                            .catch((e) => {
+                                console.log(e.message);
+                            });
+                    }}
+                    email={props.email}
+                    password={props.password}
+                />
+            </div>
         </div>
     );
 }
