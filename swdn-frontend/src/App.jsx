@@ -12,7 +12,6 @@ function App() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [person, setPerson] = useState({
-        name: 'Dummy Name',
         role: {
             name: 'Not Logged In',
         },
@@ -58,6 +57,7 @@ function App() {
                         <AccountPage
                             email={email}
                             password={password}
+                            person={person}
                         />
                     }
                 />

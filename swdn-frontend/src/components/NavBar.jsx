@@ -6,12 +6,22 @@ function NavBar(props) {
         <div className="navBar bordered">
             <h2>{props.person.name || ''}</h2>
             <nav>
-                <NavLink
-                    to="/login"
-                    className="navButton"
-                >
-                    Login
-                </NavLink>
+                {props.person.role.name === 'Not Logged In' ? (
+                    <NavLink
+                        to="/login"
+                        className="navButton"
+                    >
+                        Login
+                    </NavLink>
+                ) : (
+                    <NavLink
+                        to="/account"
+                        className="navButton"
+                    >
+                        Account
+                    </NavLink>
+                )}
+
                 {props.person.role.name === 'HR' ? (
                     <NavLink
                         to="/hr"
