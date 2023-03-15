@@ -53,6 +53,5 @@ public class Setup {
 
         userService.newUser(admin, 4);
 
-
     }
 }
