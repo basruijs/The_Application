@@ -95,7 +95,11 @@ export default function HRDashboard(props) {
                 password={props.password}
             />
             <div className="sidebar">
-                <NawData personid={person} />
+                <NawData
+                    personid={person}
+                    email={props.email}
+                    password={props.password}
+                />
                 <ChangeRequested />
                 <NewPerson
                     update={() => {

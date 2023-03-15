@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function NawData(props) {
+    const [person, setPerson] = useState({
+        name: 'Dummy Name',
+        address: 'Dummy Address',
+        city: 'Dummy City',
+    });
+
+    useEffect(() => {
+        fetch(`http://localhost:8082/api/person/${props.personid}`, {
+            headers: {
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => setPerson(data));
+    }, [props.personid]);
+
     return (
         <div className="naw bordered">
             <button
@@ -9,11 +26,11 @@ export default function NawData(props) {
             >
                 ✎
             </button>
-            <h3>Dummy Name</h3>
+            <h3>{person.name}</h3>
             <br />
-            <p>Dummy Address</p>
+            <p>{person.address}</p>
             <br />
-            <p>Dummy City</p>
+            <p>{person.city}</p>
         </div>
     );
 }
