@@ -43,6 +43,32 @@ export default function HRDashboard(props) {
         }
     };
 
+    function changeNAW(name, address, city) {
+        const newNAW = JSON.stringify({
+            name: name,
+            address: address,
+            city: city,
+        });
+
+        fetch(`http://localhost:8082/api/person/update/${person}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+            body: newNAW,
+        }).then(() => {
+            fetchData()
+                .then((result) => {
+                    setPeople(result);
+                })
+                .catch((e) => {
+                    console.log(e.message);
+                });
+        });
+    }
+
     useEffect(() => {
         fetchData()
             .then((result) => {
@@ -99,6 +125,7 @@ export default function HRDashboard(props) {
                     personid={person}
                     email={props.email}
                     password={props.password}
+                    changeNAW={changeNAW}
                 />
                 <ChangeRequested />
                 <NewPerson

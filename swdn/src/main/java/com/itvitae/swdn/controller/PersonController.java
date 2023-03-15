@@ -1,5 +1,6 @@
 package com.itvitae.swdn.controller;
 
+import com.itvitae.swdn.dto.NawDto;
 import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,11 @@ public class PersonController {
     @GetMapping("/all")
     public Iterable<PersonGetDto> getAllPeople() {
         return personService.getAllPeople();
+    }
+
+    //UPDATE
+    @PutMapping("/update/{id}")
+    public void updatePersonById(@PathVariable(value = "id") long id, @RequestBody NawDto nawDto) {
+        personService.updatePersonById(id, nawDto);
     }
 }
