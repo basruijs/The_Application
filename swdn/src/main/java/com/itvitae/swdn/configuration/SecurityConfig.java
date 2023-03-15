@@ -27,7 +27,7 @@ public class SecurityConfig {
                 .disable()
 
                 .authorizeHttpRequests()
-                .requestMatchers("/api/user/new/**", "/api/person/all")
+                .requestMatchers("/api/user/new/**", "/api/person/all", "/api/person/update/**")
                 .hasRole("HR")
 
                 .requestMatchers("/api/evaluation/trainee/**")
