@@ -40,7 +40,7 @@ export default function AccountPage(props) {
                     'Basic ' + btoa(props.email + ':' + props.password),
             },
             body: newChangeRequest,
-        }).then(() => props.update());
+        });
     }
 
     useEffect(() => {
