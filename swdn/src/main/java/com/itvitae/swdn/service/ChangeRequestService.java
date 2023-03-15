@@ -27,11 +27,37 @@ public class ChangeRequestService {
     PersonRepository personRepository;
 
     public void addChangeRequest(ChangeRequestDto changeRequestDto, long personid) {
-        ChangeRequest newChangeRequest = changeRequestMapper.toEntity(changeRequestDto);
         Person person = personRepository.findById(personid).get();
-        person.setChangeRequest(newChangeRequest);
-        newChangeRequest.setRequester(person);
-        changeRequestRepository.save(newChangeRequest);
+        ChangeRequest newChangeRequest = changeRequestMapper.toEntity(changeRequestDto);
+        if(person.getChangeRequest() == null){
+            person.setChangeRequest(newChangeRequest);
+            newChangeRequest.setRequester(person);
+            changeRequestRepository.save(newChangeRequest);
+        } else {
+            Long id = person.getChangeRequest().getId();
+            updateChangeRequest(changeRequestDto, id);
+        }
+
+    }
+
+    private void updateChangeRequest(ChangeRequestDto changeRequestDto, Long id) {
+        if (!changeRequestRepository.existsById(id)) {
+            //do nothing
+        } else {
+            ChangeRequest oldChangeRequest = changeRequestRepository.findById(id).get();
+            if (oldChangeRequest.getName() != null) {
+                oldChangeRequest.setName(changeRequestDto.getName());
+            }
+            if (oldChangeRequest.getAddress() != null) {
+                oldChangeRequest.setAddress(changeRequestDto.getAddress());
+            }
+            if (oldChangeRequest.getCity() != null) {
+                oldChangeRequest.setCity(changeRequestDto.getCity());
+            }
+
+            changeRequestRepository.save(oldChangeRequest);
+        }
+
     }
 
     public ChangeRequestGetDto getRequestByPerson(long id) {
