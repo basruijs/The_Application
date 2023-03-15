@@ -1,7 +1,7 @@
 package com.itvitae.swdn.controller;
 
 import com.itvitae.swdn.dto.ChangeRequestDto;
-import com.itvitae.swdn.dto.SkillPostDto;
+import com.itvitae.swdn.dto.ChangeRequestGetDto;
 import com.itvitae.swdn.service.ChangeRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,4 +18,13 @@ public class ChangeRequestController {
         changeRequestService.addChangeRequest(changeRequestDto, personid);
     }
 
+    @GetMapping("/byperson/{id}")
+    public ChangeRequestGetDto getRequestByPerson(@PathVariable(value = "id") long id) {
+        return changeRequestService.getRequestByPerson(id);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteChangeRequest(@PathVariable(value = "id") long id) {
+        changeRequestService.deleteChangeRequest(id);
+    }
 }

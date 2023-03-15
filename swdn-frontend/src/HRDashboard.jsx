@@ -8,7 +8,7 @@ import NewPerson from './components/NewPerson';
 
 export default function HRDashboard(props) {
     const [people, setPeople] = useState([]);
-    const [person, setPerson] = useState(-1);
+    const [person, setPerson] = useState(1);
     const [skills, setSkills] = useState([]);
     const [skill, setSkill] = useState(-1);
 
@@ -122,12 +122,17 @@ export default function HRDashboard(props) {
             />
             <div className="sidebar">
                 <NawData
+                    person={people.find((x) => x.id === person)}
+                    email={props.email}
+                    password={props.password}
+                    changeNAW={changeNAW}
+                />
+                <ChangeRequested
                     personid={person}
                     email={props.email}
                     password={props.password}
                     changeNAW={changeNAW}
                 />
-                <ChangeRequested />
                 <NewPerson
                     update={() => {
                         fetchData()
