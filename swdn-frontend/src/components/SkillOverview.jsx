@@ -54,6 +54,7 @@ function SkillOverview(props) {
             setName(props.skill.name);
             setHardSkill(props.skill.hardSkill);
             setCompleted(props.skill.completed);
+            setReport(props.skill.report);
             if (props.skill.certificate) {
                 file = new File(
                     [props.skill.certificate.data],
