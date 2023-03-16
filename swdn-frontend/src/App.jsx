@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import HRDashboard from './HRDashboard';
 import LoginPage from './LoginPage';
 import AccountPage from './AccountPage';
+import TraineeDashboard from './TraineeDashboard';
 
 function App() {
     const [email, setEmail] = useState('');
@@ -38,6 +39,16 @@ function App() {
                         <ManagerDashboard
                             email={email}
                             password={password}
+                        />
+                    }
+                />
+                <Route
+                    path="/trainee"
+                    element={
+                        <TraineeDashboard
+                            email={email}
+                            password={password}
+                            person={person}
                         />
                     }
                 />
