@@ -48,6 +48,8 @@ public class InvitationService {
             invitation.setFeedbackAsker(requester);
             invitation.setFeedbackGiver(giver);
             invitationRepository.save(invitation);
+        } else {
+            throw new RuntimeException("email not found");
         }
     }
 }
