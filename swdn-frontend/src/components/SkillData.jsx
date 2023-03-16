@@ -14,29 +14,33 @@ export default function SkillData(props) {
                 <></>
             )}
             <h2>
-                {props.name}
+                {props.skill.name}
                 <i className="hardsoftskill">
-                    {props.hardSkill ? ' Hard skill' : ' Soft skill'}
+                    {props.skill.hardSkill ? ' Hard skill' : ' Soft skill'}
                 </i>
             </h2>
             <div className="info-flex">
-                <span className="icon">{props.completed ? '✓' : '✘'}</span>
-                <span>{props.completed ? 'Completed' : 'Not completed'}</span>
+                <span className="icon">
+                    {props.skill.completed ? '✓' : '✘'}
+                </span>
+                <span>
+                    {props.skill.completed ? 'Completed' : 'Not completed'}
+                </span>
             </div>
             <div className="info-flex">
                 <span className="icon">🗎</span>
-                {props.certificate ? (
+                {props.skill.certificate ? (
                     <a
                         href={`http://localhost:8082/api/skill/certificate/${props.skill.id}`}
-                        download={props.certificate.name}
+                        download={props.skill.certificate.fileName}
                     >
-                        {props.certificate.name}
+                        {props.skill.certificate.fileName}
                     </a>
                 ) : (
                     <span>No certificate</span>
                 )}
             </div>
-            <p>{props.report}</p>
+            <p>{props.skill.report}</p>
         </div>
     );
 }
