@@ -69,14 +69,19 @@ public class UserService {
     }
 
     public void updatePassword(PasswordChange newCredentials) {
-        Optional<User> foundUser = userRepository.findById(newCredentials.getId());
+        Optional<User> foundUser = userRepository.findByEmail(newCredentials.getEmail());
         if (!foundUser.isPresent()) {
             throw new IllegalArgumentException("No such user exists");
         }
         User user = foundUser.get();
-        if (!user.getPassword().equals(passwordEncoder.encode(newCredentials.getOldPassword()))) {
-            throw new IllegalArgumentException("Wrong password detected");
-        }
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getEmail(),
+                        newCredentials.getOldPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
         user.setPassword(passwordEncoder.encode(newCredentials.getNewPassword()));
         userRepository.save(user);
     }
