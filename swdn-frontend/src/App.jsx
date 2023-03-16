@@ -9,6 +9,7 @@ import { Routes, Route } from 'react-router-dom';
 import HRDashboard from './HRDashboard';
 import LoginPage from './LoginPage';
 import AccountPage from './AccountPage';
+import FeedbackPage from './FeedbackPage';
 import TraineeDashboard from './TraineeDashboard';
 
 function App() {
@@ -84,6 +85,16 @@ function App() {
                     }
                 />
                 '
+                <Route
+                    path="/feedback"
+                    element={
+                        <FeedbackPage
+                            email={email}
+                            password={password}
+                            person={person}
+                        />
+                    }
+                />
             </Routes>
         </div>
     );
