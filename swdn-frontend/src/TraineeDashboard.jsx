@@ -104,7 +104,11 @@ export default function TraineeDashboard(props) {
                     email={props.email}
                     password={props.password}
                 />
-                <FeedbackRequest></FeedbackRequest>
+                <FeedbackRequest
+                    person={props.person.id}
+                    email={props.email}
+                    password={props.password}
+                />
                 <Meetings
                     meetings={traineeMeetings}
                     isTrainee={true}

@@ -3,8 +3,12 @@ import React, { useState } from 'react';
 function FeedbackRequest(props) {
     const [email, setEmail] = useState('');
 
-    function addInvitation(name, hardness) {
-        const newInvitation = JSON.stringify({ email: email });
+    function addInvitation(email) {
+        const currentDate = new Date();
+        const newInvitation = JSON.stringify({
+            email: email,
+            sendDate: currentDate,
+        });
         fetch(`http://localhost:8082/api/invitation/new/${props.person}`, {
             method: 'POST',
             headers: {
@@ -13,7 +17,7 @@ function FeedbackRequest(props) {
                     'Basic ' + btoa(props.email + ':' + props.password),
             },
             body: newInvitation,
-        }).then(() => props.update());
+        });
     }
 
     return (
