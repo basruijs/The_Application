@@ -37,4 +37,9 @@ public class ChangeRequestController {
     public void deleteChangeRequest(@PathVariable(value = "id") long id) {
         changeRequestService.deleteChangeRequest(id);
     }
+
+    @DeleteMapping("/deny/{id}")
+    public void denyChangeRequest(@PathVariable(value = "id") long id, @RequestBody String message) {
+        changeRequestService.denyChangeRequest(id, message);
+    }
 }
