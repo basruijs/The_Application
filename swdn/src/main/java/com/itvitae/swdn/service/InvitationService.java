@@ -1,6 +1,8 @@
 package com.itvitae.swdn.service;
 
 import com.itvitae.swdn.dto.InvitationDto;
+import com.itvitae.swdn.dto.InvitationGetDto;
+import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.mapper.InvitationMapper;
 import com.itvitae.swdn.model.Invitation;
 import com.itvitae.swdn.model.Person;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -49,5 +52,21 @@ public class InvitationService {
             invitation.setFeedbackGiver(giver);
             invitationRepository.save(invitation);
         }
+    }
+
+    public Iterable<InvitationGetDto> getRequestersByGiver(Long giverid) {
+        return StreamSupport
+                .stream(invitationRepository.findAll().spliterator(), false)
+                .filter(invitation -> Objects.equals(invitation.getFeedbackGiver().getId(), giverid))
+                .map(invitation -> invitationMapper.toDto(invitation))
+                .collect(Collectors.toList());
+    }
+
+    public Iterable<InvitationGetDto> getGiversByRequester(Long requesterid) {
+        return StreamSupport
+                .stream(invitationRepository.findAll().spliterator(), false)
+                .filter(invitation -> Objects.equals(invitation.getFeedbackAsker().getId(), requesterid))
+                .map(invitation -> invitationMapper.toDto(invitation))
+                .collect(Collectors.toList());
     }
 }

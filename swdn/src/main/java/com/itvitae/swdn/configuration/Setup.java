@@ -52,5 +52,33 @@ public class Setup {
 
         userService.newUser(admin, 4);
 
+        PersonPostDto trainee1Person = new PersonPostDto();
+        trainee1Person.setName("Trenée");
+        trainee1Person.setCity("trainee city");
+        trainee1Person.setAddress("trainee address");
+
+
+        UserPostDto trainee1User = new UserPostDto();
+        trainee1User.setEmail("trainee@trainee.nl");
+        trainee1User.setPassword("trainee");
+        trainee1User.setRoles("ROLE_TRAINEE");
+        trainee1User.setPerson(trainee1Person);
+
+        userService.newUser(trainee1User, 1);
+
+        PersonPostDto mangoPerson = new PersonPostDto();
+        mangoPerson.setName("Magnificent Mangoes");
+        mangoPerson.setCity("trainee city");
+        mangoPerson.setAddress("trainee address");
+
+
+        UserPostDto mangoUser = new UserPostDto();
+        mangoUser.setEmail("magnificentmangoes.com@gmail.com");
+        mangoUser.setPassword("mango");
+        mangoUser.setRoles("ROLE_TRAINEE");
+        mangoUser.setPerson(mangoPerson);
+
+        userService.newUser(mangoUser, 1);
+
     }
 }
