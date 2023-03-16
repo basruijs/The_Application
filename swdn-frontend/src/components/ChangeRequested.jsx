@@ -43,6 +43,21 @@ export default function ChangeRequested(props) {
         }).then(() => getRequest());
     }
 
+    function denyRequest() {
+        let denyReason = prompt(
+            'Please give the reason for denying the request.'
+        );
+        fetch(`http://localhost:8082/api/changerequest/deny/${request.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'text/plain',
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+            body: denyReason,
+        }).then(() => getRequest());
+    }
+
     if (request.id) {
         return (
             <div className="changerequest bordered">
@@ -65,7 +80,7 @@ export default function ChangeRequested(props) {
                     >
                         Approve
                     </button>
-                    <button onClick={() => deleteRequest()}>Deny</button>
+                    <button onClick={() => denyRequest()}>Deny</button>
                 </span>
             </div>
         );

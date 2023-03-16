@@ -32,7 +32,8 @@ public class SecurityConfig {
                         "/api/person/all",
                         "/api/person/update/**",
                         "/api/changerequest/byperson/**",
-                        "/api/changerequest/delete/**"
+                        "/api/changerequest/delete/**",
+                        "/api/changerequest/deny/**"
                 )
                 .hasRole("HR")
 

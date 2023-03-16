@@ -5,6 +5,7 @@ import com.itvitae.swdn.dto.ChangeRequestGetDto;
 import com.itvitae.swdn.mapper.ChangeRequestMapper;
 import com.itvitae.swdn.model.ChangeRequest;
 import com.itvitae.swdn.model.Person;
+import com.itvitae.swdn.model.User;
 import com.itvitae.swdn.repository.ChangeRequestRepository;
 import com.itvitae.swdn.repository.PersonRepository;
 import jakarta.transaction.Transactional;
@@ -26,10 +27,13 @@ public class ChangeRequestService {
     @Autowired
     PersonRepository personRepository;
 
+    @Autowired
+    EmailService emailService;
+
     public void addChangeRequest(ChangeRequestDto changeRequestDto, long personid) {
         Person person = personRepository.findById(personid).get();
         ChangeRequest newChangeRequest = changeRequestMapper.toEntity(changeRequestDto);
-        if(person.getChangeRequest() == null){
+        if (person.getChangeRequest() == null) {
             person.setChangeRequest(newChangeRequest);
             newChangeRequest.setRequester(person);
             changeRequestRepository.save(newChangeRequest);
@@ -75,5 +79,24 @@ public class ChangeRequestService {
             throw new IllegalArgumentException("No such request");
         }
         changeRequestRepository.deleteById(id);
+    }
+
+    public void denyChangeRequest(long id, String message) {
+        Optional<ChangeRequest> foundRequest = changeRequestRepository.findById(id);
+        if (!foundRequest.isPresent()) {
+            throw new IllegalArgumentException("No such request");
+        }
+        ChangeRequest request = foundRequest.get();
+        User user = request.getRequester().getUser();
+
+        String emailText = "Your request to change your name and/or address to:\n"
+                + request.getName() + "\n"
+                + request.getAddress() + "\n"
+                + request.getCity() + "\n"
+                + "was denied for the following reason(s):\n\n"
+                + message;
+
+        emailService.sendEmail(user.getEmail(), "Change Request Denied", emailText);
+        deleteChangeRequest(id);
     }
 }
