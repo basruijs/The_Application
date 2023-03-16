@@ -14,6 +14,8 @@ import java.util.stream.StreamSupport;
 
 @Service
 public class InvitationService {
+    @Autowired
+    EmailService emailService;
 
     @Autowired
     InvitationMapper invitationMapper;
@@ -36,6 +38,11 @@ public class InvitationService {
 
 
         if(giver != null) {
+            String emailText = "Hello " + giver.getName() + ", \n\n"
+                    + "You have recieved an invitation from " + requester.getName() + " to give them 360 feedback.";
+
+            emailService.sendEmail(giver.getUser().getEmail(), "Feedback Request", emailText);
+
             giver.getReceivedInvitations().add(invitation);
             requester.getSentInvitations().add(invitation);
             invitation.setFeedbackAsker(requester);
