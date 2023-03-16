@@ -20,10 +20,12 @@ function Meetings(props) {
                 {sortMeetings().map((meeting, index) => (
                     <Meeting
                         date={meeting.date}
-                        person={meeting.trainee.name}
+                        trainee={meeting.trainee.name}
+                        evaluator={meeting.evaluator.name}
                         time={meeting.time}
                         duration={meeting.duration}
                         key={meeting.id}
+                        isTrainee={props.isTrainee}
                     />
                 ))}
             </div>

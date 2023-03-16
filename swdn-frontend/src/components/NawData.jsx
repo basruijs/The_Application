@@ -1,31 +1,22 @@
 import React, { useEffect, useState } from 'react';
 
 export default function NawData(props) {
-    const [person, setPerson] = useState({
-        name: 'Dummy Name',
-        address: 'Dummy Address',
-        city: 'Dummy City',
-    });
     const [edit, setEdit] = useState(false);
-    const [name, setName] = useState(person.name);
-    const [address, setAddress] = useState(person.address);
-    const [city, setCity] = useState(person.city);
+    const [name, setName] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
 
     useEffect(() => {
-        fetch(`http://localhost:8082/api/person/${props.personid}`, {
-            headers: {
-                Authorization:
-                    'Basic ' + btoa(props.email + ':' + props.password),
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                setPerson(data);
-                setName(data.name);
-                setAddress(data.address);
-                setCity(data.city);
-            });
-    }, [props.personid]);
+        if (props.person) {
+            setName(props.person.name);
+            setAddress(props.person.address);
+            setCity(props.person.city);
+        } else {
+            setName('');
+            setAddress('');
+            setCity('');
+        }
+    }, [props.person]);
 
     if (edit) {
         return (

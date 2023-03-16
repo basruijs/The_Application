@@ -1,6 +1,7 @@
 package com.itvitae.swdn.service;
 
 import com.itvitae.swdn.dto.ChangeRequestDto;
+import com.itvitae.swdn.dto.ChangeRequestGetDto;
 import com.itvitae.swdn.mapper.ChangeRequestMapper;
 import com.itvitae.swdn.model.ChangeRequest;
 import com.itvitae.swdn.model.Person;
@@ -9,6 +10,8 @@ import com.itvitae.swdn.repository.PersonRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,6 +25,7 @@ public class ChangeRequestService {
 
     @Autowired
     PersonRepository personRepository;
+
     public void addChangeRequest(ChangeRequestDto changeRequestDto, long personid) {
         Person person = personRepository.findById(personid).get();
         ChangeRequest newChangeRequest = changeRequestMapper.toEntity(changeRequestDto);
@@ -54,5 +58,22 @@ public class ChangeRequestService {
             changeRequestRepository.save(oldChangeRequest);
         }
 
+    }
+
+    public ChangeRequestGetDto getRequestByPerson(long id) {
+        Optional<Person> foundPerson = personRepository.findById(id);
+        if (!foundPerson.isPresent()) {
+            throw new IllegalArgumentException("No such person");
+        }
+        Person person = foundPerson.get();
+        Optional<ChangeRequest> foundRequest = changeRequestRepository.findByRequester(person);
+        return foundRequest.map(changeRequest -> changeRequestMapper.toDto(changeRequest)).orElse(new ChangeRequestGetDto());
+    }
+
+    public void deleteChangeRequest(long id) {
+        if (!changeRequestRepository.existsById(id)) {
+            throw new IllegalArgumentException("No such request");
+        }
+        changeRequestRepository.deleteById(id);
     }
 }

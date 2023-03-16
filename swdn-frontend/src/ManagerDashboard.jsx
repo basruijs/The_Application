@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import List from './components/List';
 import SkillOverview from './components/SkillOverview';
-import NewSkill from './components/NewSkill';
 import NewMeeting from './components/NewMeeting';
 import Meetings from './components/Meetings';
+import cat from './img/cat.jpg';
 
-export default function CoachDashboard(props) {
+export default function ManagerDashboard(props) {
     const [viewer, setViewer] = useState(-1);
     const [people, setPeople] = useState([]);
     const [person, setPerson] = useState(-1);
@@ -180,25 +180,17 @@ export default function CoachDashboard(props) {
                             console.log(e.message);
                         });
                 }}
-                editable={true}
+                editable={false}
                 email={props.email}
                 password={props.password}
             />
             <div className="sidebar">
-                <NewSkill
-                    person={person}
-                    update={() => {
-                        fetchSkills()
-                            .then((result) => {
-                                setSkills(result);
-                            })
-                            .catch((e) => {
-                                console.log(e.message);
-                            });
-                    }}
-                    email={props.email}
-                    password={props.password}
-                />
+                <div className="importantImage bordered">
+                    <img
+                        src={cat}
+                        className="cat"
+                    />
+                </div>
                 <NewMeeting
                     evaluator={viewer.id}
                     trainee={person}

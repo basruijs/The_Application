@@ -2,11 +2,14 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import CoachDashboard from './CoachDashboard';
+import ManagerDashboard from './ManagerDashboard';
+
 import NavBar from './components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import HRDashboard from './HRDashboard';
 import LoginPage from './LoginPage';
 import AccountPage from './AccountPage';
+import TraineeDashboard from './TraineeDashboard';
 
 function App() {
     const [email, setEmail] = useState('');
@@ -27,6 +30,25 @@ function App() {
                         <CoachDashboard
                             email={email}
                             password={password}
+                        />
+                    }
+                />
+                <Route
+                    path="/manager"
+                    element={
+                        <ManagerDashboard
+                            email={email}
+                            password={password}
+                        />
+                    }
+                />
+                <Route
+                    path="/trainee"
+                    element={
+                        <TraineeDashboard
+                            email={email}
+                            password={password}
+                            person={person}
                         />
                     }
                 />

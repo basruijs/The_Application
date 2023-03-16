@@ -255,6 +255,25 @@
     gap: 0.5rem;
 }
 
+.feedbackRequest {
+    margin: 0;
+    padding: 1rem;
+    color: white;
+    width: 25vw;
+    height: 24vh;
+    background-color: black;
+}
+.importantImage {
+    width: 25vw;
+    height: 25vh;
+}
+
+.cat {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
