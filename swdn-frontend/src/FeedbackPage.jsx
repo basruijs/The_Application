@@ -9,12 +9,6 @@ export default function FeedbackPage(props) {
     const [given, setGiven] = useState(-1);
     const [requested, setRequested] = useState(-1);
 
-    const [givers, setGivers] = useState([]);
-    const [requesters, setRequesters] = useState([]);
-
-    const [giver, setGiver] = useState(-1);
-    const [requester, setRequester] = useState(-1);
-
     const fetchFeedbackRequested = async () => {
         const result = await fetch(
             `http://localhost:8082/api/invitation/requesters/${props.person.id}`,
@@ -29,12 +23,10 @@ export default function FeedbackPage(props) {
             throw new Error('Data coud not be fetched!');
         } else {
             const data = await result.json();
-            console.log(data);
             return data;
         }
     };
     const fetchFeedbackGiven = async () => {
-        console.log(props.person.id);
         const result = await fetch(
             `http://localhost:8082/api/invitation/givers/${props.person.id}`,
             {
@@ -48,7 +40,6 @@ export default function FeedbackPage(props) {
             throw new Error('Data coud not be fetched!');
         } else {
             const data = await result.json();
-            console.log(data);
             return data;
         }
     };
@@ -58,7 +49,6 @@ export default function FeedbackPage(props) {
             .then((result) => {
                 result.map((item) => (item.name = item.feedbackGiver.name));
                 setAllGiven(result);
-                console.log(result);
             })
             .catch((e) => {
                 console.log(e.message);
@@ -70,7 +60,6 @@ export default function FeedbackPage(props) {
             .then((result) => {
                 result.map((item) => (item.name = item.feedbackAsker.name));
                 setAllRequested(result);
-                console.log(result);
             })
             .catch((e) => {
                 console.log(e.message);
