@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SkillData from './SkillData';
 function SkillOverview(props) {
     if (props.skill) {
         let file = null;
@@ -161,42 +162,16 @@ function SkillOverview(props) {
             );
         } else {
             return (
-                <div className="skillOverview bordered">
-                    {props.editable ? (
-                        <button
-                            className="edit bordered"
-                            onClick={() => setEdit(true)}
-                        >
-                            ✎
-                        </button>
-                    ) : (
-                        <></>
-                    )}
-                    <h2>
-                        {name}
-                        <i className="hardsoftskill">
-                            {hardSkill ? ' Hard skill' : ' Soft skill'}
-                        </i>
-                    </h2>
-                    <div className="info-flex">
-                        <span className="icon">{completed ? '✓' : '✘'}</span>
-                        <span>{completed ? 'Completed' : 'Not completed'}</span>
-                    </div>
-                    <div className="info-flex">
-                        <span className="icon">🗎</span>
-                        {certificate ? (
-                            <a
-                                href={`http://localhost:8082/api/skill/certificate/${props.skill.id}`}
-                                download={certificate.name}
-                            >
-                                {certificate.name}
-                            </a>
-                        ) : (
-                            <span>No certificate</span>
-                        )}
-                    </div>
-                    <p>{report}</p>
-                </div>
+                <SkillData
+                    editable={props.editable}
+                    skill={props.skill}
+                    setEdit={setEdit}
+                    name={name}
+                    hardSkill={hardSkill}
+                    completed={completed}
+                    certificate={certificate}
+                    report={report}
+                />
             );
         }
     } else {
