@@ -55,6 +55,7 @@ export default function FeedbackPage(props) {
     useEffect(() => {
         fetchFeedbackGiven()
             .then((result) => {
+                result.map((item) => (item.name = item.feedbackGiver.name));
                 setAllGiven(result);
                 console.log(result);
             })
@@ -66,6 +67,7 @@ export default function FeedbackPage(props) {
     useEffect(() => {
         fetchFeedbackRequested()
             .then((result) => {
+                result.map((item) => (item.name = item.feedbackAsker.name));
                 setAllRequested(result);
                 console.log(result);
             })
