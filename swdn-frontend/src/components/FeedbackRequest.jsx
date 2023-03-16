@@ -5,11 +5,6 @@ function FeedbackRequest(props) {
 
     function addInvitation(email) {
         const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth() + 1;
-        const day = currentDate.getDate();
-        const date = year + '/' + month + '/' + day;
-        console.log(date);
         const newInvitation = JSON.stringify({
             email: email,
             sendDate: currentDate,
