@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import FeedbackOverview from './components/FeedbackOverview';
 import List from './components/List';
 
 export default function FeedbackPage(props) {
@@ -84,11 +85,41 @@ export default function FeedbackPage(props) {
                 select={setRequested}
                 title="Requested feedback"
             />
+            <FeedbackOverview
+                feedback={allRequested.find((x) => x.id === requested)}
+                update={() => {
+                    fetchFeedbackRequested()
+                        .then((result) => {
+                            setAllRequested(result);
+                        })
+                        .catch((e) => {
+                            console.log(e.message);
+                        });
+                }}
+                editable={true}
+                email={props.email}
+                password={props.password}
+            />
             <List
                 content={allGiven}
                 selected={given}
                 select={setGiven}
                 title="Received feedback"
+            />
+            <FeedbackOverview
+                feedback={allGiven.find((x) => x.id === given)}
+                update={() => {
+                    fetchFeedbackGiven()
+                        .then((result) => {
+                            setAllGiven(result);
+                        })
+                        .catch((e) => {
+                            console.log(e.message);
+                        });
+                }}
+                editable={true}
+                email={props.email}
+                password={props.password}
             />
         </div>
     );

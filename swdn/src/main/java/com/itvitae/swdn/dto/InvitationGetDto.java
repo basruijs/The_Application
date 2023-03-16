@@ -12,4 +12,5 @@ public class InvitationGetDto {
     private PersonGetDto feedbackGiver;
     private PersonGetDto feedbackAsker;
     private LocalDate sendDate;
+    private String feedback;
 }

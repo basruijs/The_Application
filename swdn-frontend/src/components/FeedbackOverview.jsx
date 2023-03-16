@@ -1,0 +1,31 @@
+import React, { useState } from 'react';
+import FeedbackData from './FeedbackData';
+import FeedbackEditor from './FeedbackEditor';
+function FeedbackOverview(props) {
+    if (props.feedback) {
+        const [edit, setEdit] = useState(true);
+
+        if (edit) {
+            return (
+                <FeedbackData
+                    feedback={props.feedback}
+                    setEdit={setEdit}
+                    email={props.email}
+                    password={props.password}
+                    update={props.update}
+                />
+            );
+        } else {
+            return (
+                <FeedbackEditor
+                    editable={props.editable}
+                    feedback={props.feedback}
+                    setEdit={setEdit}
+                />
+            );
+        }
+    } else {
+        return <div className="feedbackOverview bordered">None selected</div>;
+    }
+}
+export default FeedbackOverview;
