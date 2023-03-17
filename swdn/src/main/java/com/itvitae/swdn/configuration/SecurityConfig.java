@@ -31,14 +31,23 @@ public class SecurityConfig {
                         "/api/user/new/**",
                         "/api/person/all",
                         "/api/person/update/**",
+                        "api/person/setpeople/**",
                         "/api/changerequest/byperson/**",
                         "/api/changerequest/delete/**",
-                        "/api/changerequest/deny/**"
+                        "/api/changerequest/deny/**",
+                        "/api/role/coach/all",
+                        "/api/role/manager/all"
                 )
                 .hasRole("HR")
 
                 .requestMatchers("/api/evaluation/trainee/**", "/api/invitation/new/**")
                 .hasRole("TRAINEE")
+
+                .requestMatchers("/api/person/gettrainees/**")
+                .hasRole("COACH")
+
+                .requestMatchers("/api/person/getsubordinates/**")
+                .hasRole("MANAGER")
 
                 .requestMatchers("/api/skill/new/**", "/api/skill/update/**", "/api/skill/add/certificate/**")
                 .hasAnyRole("TRAINEE", "COACH")

@@ -18,6 +18,17 @@ public class RoleController {
     //READ
     @GetMapping("/trainee/all")
     public Iterable<PersonGetDto> getAllTrainees() {
-        return roleService.getAllTrainees();
+        return roleService.getAllOfRole("TRAINEE");
     }
+
+    @GetMapping("/coach/all")
+    public Iterable<PersonGetDto> getAllCoaches() {
+        return roleService.getAllOfRole("COACH");
+    }
+
+    @GetMapping("/manager/all")
+    public Iterable<PersonGetDto> getAllManagers() {
+        return roleService.getAllOfRole("MANAGER");
+    }
+
 }

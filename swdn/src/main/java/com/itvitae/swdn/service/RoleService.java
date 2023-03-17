@@ -2,9 +2,7 @@ package com.itvitae.swdn.service;
 
 
 import com.itvitae.swdn.dto.PersonGetDto;
-import com.itvitae.swdn.dto.RoleDto;
 import com.itvitae.swdn.mapper.PersonMapper;
-
 import com.itvitae.swdn.mapper.RoleMapper;
 import com.itvitae.swdn.model.Person;
 import com.itvitae.swdn.model.Role;
@@ -48,6 +46,17 @@ public class RoleService {
         Optional<Role> foundRole = roleRepository.findByName("TRAINEE");
         if (!foundRole.isPresent()) {
             throw new IllegalArgumentException("Role 'trainee' does not exist");
+        }
+        return foundRole.get()
+                .getPeople().stream()
+                .map(person -> personMapper.toDto(person))
+                .collect(Collectors.toList());
+    }
+
+    public Iterable<PersonGetDto> getAllOfRole(String roleName) {
+        Optional<Role> foundRole = roleRepository.findByName(roleName);
+        if (!foundRole.isPresent()) {
+            throw new IllegalArgumentException("Role '" + roleName + "' does not exist");
         }
         return foundRole.get()
                 .getPeople().stream()
