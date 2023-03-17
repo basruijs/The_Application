@@ -53,4 +53,10 @@ public class SkillController {
     public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
         return skillService.downloadCertificate(id);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteSkillById(@PathVariable(value = "id") long id) {
+        skillService.deleteSkillById(id);
+    }
+
 }
