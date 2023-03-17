@@ -31,7 +31,7 @@ export default function SkillEditor(props) {
             >
                 <input
                     type="submit"
-                    className="edit bordered"
+                    className="feedbackEditButton bordered"
                     value="✓"
                 />
                 <h2>{props.feedback.name}</h2>

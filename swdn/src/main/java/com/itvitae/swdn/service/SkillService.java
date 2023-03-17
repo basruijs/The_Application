@@ -128,4 +128,11 @@ public class SkillService {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
                 .body(new ByteArrayResource(dbFile.getData()));
     }
+
+    public void deleteSkillById(long id) {
+        if (!skillRepository.existsById(id)) {
+            throw new IllegalArgumentException("No such skill exists");
+        }
+        skillRepository.deleteById(id);
+    }
 }

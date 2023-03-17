@@ -41,6 +41,39 @@ export default function SkillData(props) {
                 )}
             </div>
             <p>{props.skill.report}</p>
+            {props.editable ? (
+                <button
+                    onClick={() => {
+                        if (
+                            confirm(
+                                'Are you sure you want to delete ' +
+                                    props.skill.name +
+                                    '?'
+                            )
+                        ) {
+                            fetch(
+                                `http://localhost:8082/api/skill/delete/${props.skill.id}`,
+                                {
+                                    method: 'DELETE',
+                                    headers: {
+                                        Authorization:
+                                            'Basic ' +
+                                            btoa(
+                                                props.email +
+                                                    ':' +
+                                                    props.password
+                                            ),
+                                    },
+                                }
+                            ).then(() => props.update());
+                        }
+                    }}
+                >
+                    ✘
+                </button>
+            ) : (
+                <></>
+            )}
         </div>
     );
 }

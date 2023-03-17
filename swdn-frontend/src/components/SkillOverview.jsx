@@ -21,6 +21,9 @@ function SkillOverview(props) {
                     editable={props.editable}
                     skill={props.skill}
                     setEdit={setEdit}
+                    email={props.email}
+                    password={props.password}
+                    update={props.update}
                 />
             );
         }

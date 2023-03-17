@@ -166,7 +166,7 @@ export default function NawData(props) {
                     ✎
                 </button>
                 <h3>
-                    {name}, {props.person.role.name}
+                    {name}, {props.person ? props.person.role.name : ''}
                 </h3>
                 <span>{address}</span>
                 <span>{city}</span>
