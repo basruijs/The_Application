@@ -19,6 +19,8 @@ export default function SkillData(props) {
                     {props.skill.hardSkill ? ' Hard skill' : ' Soft skill'}
                 </i>
             </h2>
+            <h3>Learning goals:</h3>
+            <p>{props.skill.learningGoals}</p>
             <div className="info-flex">
                 <span className="icon">
                     {props.skill.completed ? '✓' : '✘'}

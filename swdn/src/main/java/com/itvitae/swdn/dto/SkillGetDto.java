@@ -11,5 +11,6 @@ public class SkillGetDto {
     private Boolean completed;
     private Boolean hardSkill;
     private String report;
+    private String learningGoals;
     private FileDto certificate;
 }
