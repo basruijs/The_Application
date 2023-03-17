@@ -106,7 +106,7 @@ export default function FeedbackPage(props) {
                             console.log(e.message);
                         });
                 }}
-                editable={true}
+                editable={false}
                 email={props.email}
                 password={props.password}
             />

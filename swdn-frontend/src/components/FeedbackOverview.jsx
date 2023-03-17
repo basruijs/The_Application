@@ -3,11 +3,11 @@ import FeedbackData from './FeedbackData';
 import FeedbackEditor from './FeedbackEditor';
 function FeedbackOverview(props) {
     if (props.feedback) {
-        const [edit, setEdit] = useState(true);
+        const [edit, setEdit] = useState(false);
 
         if (edit) {
             return (
-                <FeedbackData
+                <FeedbackEditor
                     feedback={props.feedback}
                     setEdit={setEdit}
                     email={props.email}
@@ -17,7 +17,7 @@ function FeedbackOverview(props) {
             );
         } else {
             return (
-                <FeedbackEditor
+                <FeedbackData
                     editable={props.editable}
                     feedback={props.feedback}
                     setEdit={setEdit}

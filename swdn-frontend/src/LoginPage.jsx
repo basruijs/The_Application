@@ -22,7 +22,6 @@ export default function LoginPage(props) {
                     props.setEmail(email);
                     props.setPassword(password);
                     response.json().then((data) => {
-                        console.log(data);
                         props.setPerson(data);
                     });
                 } else {
