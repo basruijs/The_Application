@@ -44,7 +44,8 @@ public class EvaluationService {
         
         String emailText = "Hello " + trainee.getName() + ", \n\n"
                 + evaluator.getName() + " scheduled a meeting with you on " +
-                newEvaluation.getDate() + " at " + newEvaluation.getTime();
+                newEvaluation.getDate() + " at " + newEvaluation.getTime() + ".\n"
+                + "The expected duration is " + newEvaluation.getDuration();
 
         emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
 
