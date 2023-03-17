@@ -287,6 +287,11 @@
     height: 70vh;
     resize: none;
 }
+.feedbackEditButton {
+    position: relative;
+    top: 10px;
+    left: 30vw;
+}
 
 .importantImage {
     width: 25vw;

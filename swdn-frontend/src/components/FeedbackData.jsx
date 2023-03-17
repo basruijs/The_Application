@@ -5,7 +5,7 @@ export default function FeedbackData(props) {
         <div className="feedbackOverview bordered">
             {props.editable ? (
                 <button
-                    className="edit bordered"
+                    className="feedbackEditButton bordered"
                     onClick={() => props.setEdit(true)}
                 >
                     ✎
