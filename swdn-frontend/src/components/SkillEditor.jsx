@@ -14,13 +14,16 @@ export default function SkillEditor(props) {
     const [completed, setCompleted] = useState(props.skill.completed);
     const [certificate, setCertificate] = useState(file);
     const [report, setReport] = useState(props.skill.report);
+    const [learningGoals, setLearningGoals] = useState(
+        props.skill.learningGoals
+    );
 
     function sendChanges() {
         const newSkill = JSON.stringify({
             name: name,
             hardSkill: hardSkill,
             completed: completed,
-
+            learningGoals: learningGoals,
             report: report,
         });
         fetch(`http://localhost:8082/api/skill/update/${props.skill.id}`, {
@@ -54,6 +57,7 @@ export default function SkillEditor(props) {
         setHardSkill(props.skill.hardSkill);
         setCompleted(props.skill.completed);
         setReport(props.skill.report);
+        setLearningGoals(props.skill.learningGoals);
         if (props.skill.certificate) {
             file = new File(
                 [props.skill.certificate.data],
@@ -117,6 +121,16 @@ export default function SkillEditor(props) {
                     </label>
                 </div>
             </h2>
+            <h3>Learning goals:</h3>
+            <textarea
+                name="learninggoals"
+                id="learninggoals"
+                cols="60"
+                rows="5"
+                value={learningGoals || ''}
+                onChange={(e) => setLearningGoals(e.target.value)}
+                maxLength={255}
+            ></textarea>
             <div className="info-flex">
                 <button
                     className="icon"
