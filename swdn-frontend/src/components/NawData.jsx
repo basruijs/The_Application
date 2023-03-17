@@ -5,15 +5,9 @@ export default function NawData(props) {
     const [name, setName] = useState('');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
-    const [coaches, setCoaches] = useState([
-        { id: 1, name: 'Coach 1' },
-        { id: 2, name: 'Coach 2' },
-    ]);
+    const [coaches, setCoaches] = useState([]);
     const [coach, setCoach] = useState(0);
-    const [managers, setManagers] = useState([
-        { id: 1, name: 'Coach 1' },
-        { id: 2, name: 'Coach 2' },
-    ]);
+    const [managers, setManagers] = useState([]);
     const [manager, setManager] = useState(0);
 
     useEffect(() => {
@@ -37,6 +31,25 @@ export default function NawData(props) {
             setCity('');
         }
     }, [props.person]);
+
+    useEffect(() => {
+        fetch(`http://localhost:8082/api/role/coach/all`, {
+            headers: {
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+        })
+            .then((result) => result.json())
+            .then((data) => setCoaches(data));
+        fetch(`http://localhost:8082/api/role/manager/all`, {
+            headers: {
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+        })
+            .then((result) => result.json())
+            .then((data) => setManagers(data));
+    }, []);
 
     if (edit) {
         return (
