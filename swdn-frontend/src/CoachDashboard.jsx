@@ -33,7 +33,7 @@ export default function CoachDashboard(props) {
 
     const fetchData = async () => {
         const result = await fetch(
-            'http://localhost:8082/api/role/trainee/all',
+            `http://localhost:8082/api/person/gettrainees/${props.person.id}`,
             {
                 headers: {
                     Authorization:

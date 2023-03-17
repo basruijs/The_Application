@@ -25,9 +25,24 @@ public class PersonController {
         return personService.getAllPeople();
     }
 
+    @GetMapping("/gettrainees/{id}")
+    public Iterable<PersonGetDto> getTrainees(@PathVariable(value = "id") long id) {
+        return personService.getTrainees(id);
+    }
+
+    @GetMapping("/getsubordinates/{id}")
+    public Iterable<PersonGetDto> getSubordinates(@PathVariable(value = "id") long id) {
+        return personService.getSubordinates(id);
+    }
+
     //UPDATE
     @PutMapping("/update/{id}")
     public void updatePersonById(@PathVariable(value = "id") long id, @RequestBody NawDto nawDto) {
         personService.updatePersonById(id, nawDto);
+    }
+
+    @PutMapping("/setpeople/{id}/coach/{coachid}/manager/{managerid}")
+    public void setPeople(@PathVariable(value = "id") long id, @PathVariable(value = "coachid") long coachid, @PathVariable(value = "managerid") long managerid) {
+        personService.setPeople(id, coachid, managerid);
     }
 }
