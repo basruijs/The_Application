@@ -281,6 +281,13 @@
     display: flex;
 }
 
+.feedbackInputBox {
+    margin: 2.5vw;
+    width: 35vw;
+    height: 70vh;
+    resize: none;
+}
+
 .importantImage {
     width: 25vw;
     height: 25vh;
