@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/person/getsubordinates/**")
                 .hasRole("MANAGER")
 
-                .requestMatchers("/api/skill/new/**", "/api/skill/update/**", "/api/skill/add/certificate/**")
+                .requestMatchers("/api/skill/new/**", "/api/skill/update/**", "/api/skill/add/certificate/**", "/api/skill/delete/**")
                 .hasAnyRole("TRAINEE", "COACH")
 
                 .requestMatchers("/api/evaluation/new/**", "/api/evaluation/evaluator/**", "/api/role/trainee/all")
