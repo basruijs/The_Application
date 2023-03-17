@@ -81,6 +81,7 @@ function App() {
                             email={email}
                             password={password}
                             person={person}
+                            setPassword={setPassword}
                         />
                     }
                 />

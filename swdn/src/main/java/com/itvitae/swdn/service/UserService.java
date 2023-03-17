@@ -1,6 +1,7 @@
 package com.itvitae.swdn.service;
 
 import com.itvitae.swdn.dto.LoginRequest;
+import com.itvitae.swdn.dto.PasswordChange;
 import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.dto.UserPostDto;
 import com.itvitae.swdn.mapper.PersonMapper;
@@ -65,5 +66,23 @@ public class UserService {
         }
         Person person = foundUser.get().getPerson();
         return personMapper.toDto(person);
+    }
+
+    public void updatePassword(PasswordChange newCredentials) {
+        Optional<User> foundUser = userRepository.findByEmail(newCredentials.getEmail());
+        if (!foundUser.isPresent()) {
+            throw new IllegalArgumentException("No such user exists");
+        }
+        User user = foundUser.get();
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getEmail(),
+                        newCredentials.getOldPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
+        user.setPassword(passwordEncoder.encode(newCredentials.getNewPassword()));
+        userRepository.save(user);
     }
 }
