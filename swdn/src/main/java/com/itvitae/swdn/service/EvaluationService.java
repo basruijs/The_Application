@@ -29,6 +29,8 @@ public class EvaluationService {
     @Autowired
     PersonMapper personMapper;
 
+    @Autowired
+    EmailService emailService;
 
     public void newEvaluation(EvaluationDto evaluationDto, long evaluatorid, long traineeid) {
 
@@ -39,7 +41,13 @@ public class EvaluationService {
 
         PersonGetDto trainee = personMapper.toDto(personRepository.findById(traineeid).get());
         newEvaluation.setTrainee(trainee);
+        
+        String emailText = "Hello " + trainee.getName() + ", \n\n"
+                + evaluator.getName() + " scheduled a meeting with you on " +
+                newEvaluation.getDate() + " at " + newEvaluation.getTime() + ".\n"
+                + "The expected duration is " + newEvaluation.getDuration();
 
+        emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
 
         evaluationRepository.save(evaluationMapper.toEntity(newEvaluation));
 
