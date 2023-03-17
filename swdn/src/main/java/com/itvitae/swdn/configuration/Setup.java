@@ -51,7 +51,5 @@ public class Setup {
         admin.setPerson(adminPerson);
 
         userService.newUser(admin, 4);
-
-
     }
 }

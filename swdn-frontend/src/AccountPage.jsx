@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PasswordChanger from './components/PasswordChanger';
 
 export default function AccountPage(props) {
     const [edit, setEdit] = useState(false);
@@ -6,6 +7,7 @@ export default function AccountPage(props) {
     const [name, setName] = useState(props.person.name);
     const [address, setAddress] = useState(props.person.address);
     const [city, setCity] = useState(props.person.city);
+    const [passwordChange, setPasswordChange] = useState(false);
 
     const fetchData = async () => {
         const result = await fetch(
@@ -125,6 +127,18 @@ export default function AccountPage(props) {
                         <br />
                         <p>{props.email}</p>
                         <br />
+                        {passwordChange ? (
+                            <PasswordChanger
+                                setPasswordChange={setPasswordChange}
+                                email={props.email}
+                                password={props.password}
+                                setPassword={props.setPassword}
+                            />
+                        ) : (
+                            <button onClick={() => setPasswordChange(true)}>
+                                Change Password
+                            </button>
+                        )}
                     </div>
                 </div>
             );

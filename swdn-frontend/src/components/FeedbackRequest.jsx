@@ -17,6 +17,10 @@ function FeedbackRequest(props) {
                     'Basic ' + btoa(props.email + ':' + props.password),
             },
             body: newInvitation,
+        }).then((response) => {
+            if (!response.ok) {
+                alert('Email not found');
+            }
         });
     }
 
