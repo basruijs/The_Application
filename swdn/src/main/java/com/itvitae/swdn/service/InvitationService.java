@@ -3,14 +3,13 @@ package com.itvitae.swdn.service;
 import com.itvitae.swdn.dto.InvitationDto;
 import com.itvitae.swdn.dto.InvitationGetDto;
 import com.itvitae.swdn.dto.InvitationPutDto;
-import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.mapper.InvitationMapper;
 import com.itvitae.swdn.model.Invitation;
 import com.itvitae.swdn.model.Person;
-import com.itvitae.swdn.model.Skill;
 import com.itvitae.swdn.repository.InvitationRepository;
 import com.itvitae.swdn.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -42,7 +41,7 @@ public class InvitationService {
                 .orElse(null);
 
 
-        if(giver != null) {
+        if (giver != null) {
             String emailText = "Hello " + giver.getName() + ", \n\n"
                     + "You have received an invitation from " + requester.getName() + " to give them 360 feedback.";
 
@@ -75,15 +74,30 @@ public class InvitationService {
     }
 
     public void giveFeedback(long id, InvitationPutDto invitation) {
-            if (!invitationRepository.existsById(id)) {
-                //do nothing
-            } else {
-                Invitation oldInvitation = invitationRepository.findById(id).get();
-                if (invitation.getFeedback() != null) {
-                    oldInvitation.setFeedback(invitation.getFeedback());
-                }
-                invitationRepository.save(oldInvitation);
+        if (!invitationRepository.existsById(id)) {
+            //do nothing
+        } else {
+            Invitation oldInvitation = invitationRepository.findById(id).get();
+            if (invitation.getFeedback() != null) {
+                oldInvitation.setFeedback(invitation.getFeedback());
             }
+            invitationRepository.save(oldInvitation);
         }
+    }
+
+    // 1x a day = 86400000, 1x a minute = 60000
+    @Scheduled(fixedRate = 86400000)
+    public void checkForUnansweredRequests() {
+        System.out.println("Checking for unanswered feedback requests...");
+        StreamSupport.stream(
+                        invitationRepository.findAll().spliterator(), false)
+                .filter(invitation -> invitation.getFeedback() == null)
+                .forEach(invitation -> emailService.sendEmail(
+                        invitation.getFeedbackGiver().getUser().getEmail(),
+                        "Remember to give feedback!",
+                        "Dear " + invitation.getFeedbackGiver().getName() + ",\n\n" +
+                                "Don't forget, you still have to give 360 feedback to " + invitation.getFeedbackAsker().getName() + " today!\n" +
+                                "This is your daily reminder. You will continue receiving these mails once a day until you manage to give feedback."));
+    }
 
 }
