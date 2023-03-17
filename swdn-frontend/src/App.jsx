@@ -30,6 +30,7 @@ function App() {
                         <CoachDashboard
                             email={email}
                             password={password}
+                            person={person}
                         />
                     }
                 />
@@ -39,6 +40,7 @@ function App() {
                         <ManagerDashboard
                             email={email}
                             password={password}
+                            person={person}
                         />
                     }
                 />

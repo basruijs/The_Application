@@ -43,6 +43,12 @@ public class SecurityConfig {
                 .requestMatchers("/api/evaluation/trainee/**", "/api/invitation/new/**")
                 .hasRole("TRAINEE")
 
+                .requestMatchers("/api/person/gettrainees/**")
+                .hasRole("COACH")
+
+                .requestMatchers("/api/person/getsubordinates/**")
+                .hasRole("MANAGER")
+
                 .requestMatchers("/api/skill/new/**", "/api/skill/update/**", "/api/skill/add/certificate/**")
                 .hasAnyRole("TRAINEE", "COACH")
 

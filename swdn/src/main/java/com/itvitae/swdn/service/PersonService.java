@@ -44,6 +44,25 @@ public class PersonService {
                 .collect(Collectors.toList());
     }
 
+    public Iterable<PersonGetDto> getTrainees(long id) {
+        Optional<Person> foundPerson = personRepository.findById(id);
+        if (!foundPerson.isPresent()) {
+            throw new IllegalArgumentException("No such person exists");
+        }
+        return foundPerson.get().getTrainees().stream()
+                .map(person -> personMapper.toDto(person))
+                .collect(Collectors.toList());
+    }
+
+    public Iterable<PersonGetDto> getSubordinates(long id) {
+        Optional<Person> foundPerson = personRepository.findById(id);
+        if (!foundPerson.isPresent()) {
+            throw new IllegalArgumentException("No such person exists");
+        }
+        return foundPerson.get().getSubordinates().stream()
+                .map(person -> personMapper.toDto(person))
+                .collect(Collectors.toList());
+    }
 
     public void updatePersonById(long id, NawDto nawDto) {
         Optional<Person> foundPerson = personRepository.findById(id);
@@ -94,4 +113,6 @@ public class PersonService {
         }
         personRepository.save(person);
     }
+
+
 }
