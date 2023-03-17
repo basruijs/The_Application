@@ -31,6 +31,7 @@ public class SecurityConfig {
                         "/api/user/new/**",
                         "/api/person/all",
                         "/api/person/update/**",
+                        "api/person/setpeople/**",
                         "/api/changerequest/byperson/**",
                         "/api/changerequest/delete/**",
                         "/api/changerequest/deny/**",

@@ -10,6 +10,19 @@ export default function NawData(props) {
     const [managers, setManagers] = useState([]);
     const [manager, setManager] = useState(0);
 
+    function sendPeople() {
+        fetch(
+            `http://localhost:8082/api/person/setpeople/${props.person.id}/coach/${coach}/manager/${manager}`,
+            {
+                method: 'PUT',
+                headers: {
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+            }
+        ).then(() => console.log('manager: ' + manager + ' coach: ' + coach));
+    }
+
     useEffect(() => {
         if (props.person) {
             setName(props.person.name);
@@ -56,6 +69,7 @@ export default function NawData(props) {
             <form
                 className="naw bordered"
                 onSubmit={(e) => {
+                    sendPeople();
                     props.changeNAW(name, address, city);
                     setEdit(false);
                     e.preventDefault();
