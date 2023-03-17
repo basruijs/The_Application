@@ -1,6 +1,5 @@
 package com.itvitae.swdn.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +19,8 @@ public class Skill {
     private Boolean hardSkill;
     @Column(length = 600)
     private String report;
+
+    private String learningGoals;
     @OneToOne
     @JoinColumn(name = "certificate_id")
     private DBFile certificate;

@@ -10,4 +10,5 @@ public class SkillPutDto {
     private Boolean completed;
     private Boolean hardSkill;
     private String report;
+    private String learningGoals;
 }
