@@ -85,8 +85,19 @@ public class InvitationService {
         }
     }
 
+    // 1x a day = 86400000, 1x a minute = 60000
     @Scheduled(fixedRate = 86400000)
-    public void schedulingTest() {
-        System.out.println("Scheduling something once every 5 seconds");
+    public void checkForUnansweredRequests() {
+        System.out.println("Checking for unanswered feedback requests...");
+        StreamSupport.stream(
+                        invitationRepository.findAll().spliterator(), false)
+                .filter(invitation -> invitation.getFeedback() == null)
+                .forEach(invitation -> emailService.sendEmail(
+                        invitation.getFeedbackGiver().getUser().getEmail(),
+                        "Remember to give feedback!",
+                        "Dear " + invitation.getFeedbackGiver().getName() + ",\n\n" +
+                                "Don't forget, you still have to give 360 feedback to " + invitation.getFeedbackAsker().getName() + " today!\n" +
+                                "This is your daily reminder. You will continue receiving these mails once a day until you manage to give feedback."));
     }
+
 }
