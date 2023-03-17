@@ -62,6 +62,17 @@ function NavBar(props) {
                 ) : (
                     ''
                 )}
+
+                {props.person.role.name === 'TRAINEE' ? (
+                    <NavLink
+                        to="/feedback"
+                        className="navButton"
+                    >
+                        Feedback
+                    </NavLink>
+                ) : (
+                    ''
+                )}
             </nav>
             <h2>😎</h2>
         </div>

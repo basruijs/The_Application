@@ -263,6 +263,20 @@
     height: 24vh;
     background-color: black;
 }
+
+.feedbackOverview {
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    width: 34vw;
+    height: 90vh;
+    background-color: black;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
 .importantImage {
     width: 25vw;
     height: 25vh;
