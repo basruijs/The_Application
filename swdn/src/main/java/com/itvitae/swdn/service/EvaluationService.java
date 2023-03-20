@@ -10,6 +10,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,7 +48,7 @@ public class EvaluationService {
                 + evaluator.getName() + " scheduled a meeting with you on " +
                 newEvaluation.getDate() + " at " + newEvaluation.getTime();
 
-        emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
+//        emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
 
         evaluationRepository.save(evaluationMapper.toEntity(newEvaluation));
 
@@ -67,7 +69,7 @@ public class EvaluationService {
                 .collect(Collectors.toList());
     }
 
-    public Iterable<EvaluationDto> getSkillByTrainee(long traineeid) {
+    public Iterable<EvaluationDto> getAllEvaluationsByTrainee(long traineeid) {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
                 .filter(evaluation -> Objects.equals(evaluation.getTrainee().getId(), traineeid))
@@ -75,10 +77,30 @@ public class EvaluationService {
                 .collect(Collectors.toList());
     }
 
-    public Iterable<EvaluationDto> getSkillByEvaluator(long evaluatorid) {
+    public Iterable<EvaluationDto> getAllEvaluationsByEvaluator(long evaluatorid) {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
                 .filter(evaluation -> Objects.equals(evaluation.getEvaluator().getId(), evaluatorid))
+                .map(evaluation -> evaluationMapper.toDto(evaluation))
+                .collect(Collectors.toList());
+    }
+
+    public Iterable<EvaluationDto> getFutureEvaluationsByTrainee(long traineeid) {
+        LocalDate date = LocalDate.now();
+        return StreamSupport
+                .stream(evaluationRepository.findAll().spliterator(), false)
+                .filter(evaluation -> Objects.equals(evaluation.getTrainee().getId(), traineeid))
+                .filter(evaluation -> evaluation.getDate().isAfter(date))
+                .map(evaluation -> evaluationMapper.toDto(evaluation))
+                .collect(Collectors.toList());
+    }
+
+    public Iterable<EvaluationDto> getFutureEvaluationsByEvaluator(long evaluatorid) {
+        LocalDate date = LocalDate.now();
+        return StreamSupport
+                .stream(evaluationRepository.findAll().spliterator(), false)
+                .filter(evaluation -> Objects.equals(evaluation.getEvaluator().getId(), evaluatorid))
+                .filter(evaluation -> evaluation.getDate().isAfter(date))
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
                 .collect(Collectors.toList());
     }

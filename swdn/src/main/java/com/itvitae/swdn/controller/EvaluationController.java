@@ -26,12 +26,22 @@ public class EvaluationController {
 
 
     @GetMapping("/trainee/{traineeid}/all")
-    public Iterable<EvaluationDto> getSkillByTrainee(@PathVariable(value = "traineeid") long traineeid) {
-        return evaluationService.getSkillByTrainee(traineeid);
+    public Iterable<EvaluationDto> getAllEvaluationsByTrainee(@PathVariable(value = "traineeid") long traineeid) {
+        return evaluationService.getAllEvaluationsByTrainee(traineeid);
     }
 
     @GetMapping("/evaluator/{evaluatorid}/all")
-    public Iterable<EvaluationDto> getSkillByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
-        return evaluationService.getSkillByEvaluator(evaluatorid);
+    public Iterable<EvaluationDto> getAllEvaluationsByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
+        return evaluationService.getAllEvaluationsByEvaluator(evaluatorid);
+    }
+
+    @GetMapping("/trainee/{traineeid}/future")
+    public Iterable<EvaluationDto> getFutureEvaluationsByTrainee(@PathVariable(value = "traineeid") long traineeid) {
+        return evaluationService.getFutureEvaluationsByTrainee(traineeid);
+    }
+
+    @GetMapping("/evaluator/{evaluatorid}/future")
+    public Iterable<EvaluationDto> getFutureEvaluationsByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
+        return evaluationService.getFutureEvaluationsByEvaluator(evaluatorid);
     }
 }

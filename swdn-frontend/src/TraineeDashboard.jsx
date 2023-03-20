@@ -14,7 +14,7 @@ export default function TraineeDashboard(props) {
 
     const fetchTraineeMeetings = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/evaluation/trainee/${props.person.id}/all`,
+            `http://localhost:8082/api/evaluation/trainee/${props.person.id}/future`,
             {
                 headers: {
                     Authorization:
