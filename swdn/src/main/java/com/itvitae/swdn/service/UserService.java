@@ -38,6 +38,9 @@ public class UserService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
+    EmailService emailService;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     public void newUser(UserPostDto userPostDto, long roleid) {
@@ -48,6 +51,14 @@ public class UserService {
         User newerUser = userRepository.save(newUser);
         person.setUser(newerUser);
         person.setRole(roleService.getRoleById(roleid));
+
+        String emailText = "Hello " + person.getName() + ", \n\n"
+                + "An account for you has been created.\n"
+                + "To log in, use the email " + newerUser.getEmail() + " and the password \"password\"\n"
+                + "Once you are logged in, it is reccomended you change your password.";
+
+        emailService.sendEmail(newerUser.getEmail(), "Your account has been created", emailText);
+
         roleService.addPersonToRole(personRepository.save(person));
     }
 
@@ -84,5 +95,17 @@ public class UserService {
         
         user.setPassword(passwordEncoder.encode(newCredentials.getNewPassword()));
         userRepository.save(user);
+    }
+
+    public void newAdmin(UserPostDto userPostDto, long roleid) {
+        User newUser = userMapper.toEntity(userPostDto);
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        Person person = personRepository.save(newUser.getPerson());
+        newUser.setPerson(person);
+        User newerUser = userRepository.save(newUser);
+        person.setUser(newerUser);
+        person.setRole(roleService.getRoleById(roleid));
+
+        roleService.addPersonToRole(personRepository.save(person));
     }
 }

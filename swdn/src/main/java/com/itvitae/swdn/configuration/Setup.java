@@ -50,6 +50,6 @@ public class Setup {
         admin.setRoles("ROLE_HR");
         admin.setPerson(adminPerson);
 
-        userService.newUser(admin, 4);
+        userService.newAdmin(admin, 4);
     }
 }
