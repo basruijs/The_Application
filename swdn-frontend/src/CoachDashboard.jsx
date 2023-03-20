@@ -67,7 +67,7 @@ export default function CoachDashboard(props) {
 
     const fetchTraineeMeetings = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/evaluation/trainee/${person}/all`,
+            `http://localhost:8082/api/evaluation/trainee/${person}/future`,
             {
                 headers: {
                     Authorization:
@@ -84,7 +84,7 @@ export default function CoachDashboard(props) {
 
     const fetchViewerMeetings = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/evaluation/evaluator/${viewer.id}/all`,
+            `http://localhost:8082/api/evaluation/evaluator/${viewer.id}/future`,
             {
                 headers: {
                     Authorization:
