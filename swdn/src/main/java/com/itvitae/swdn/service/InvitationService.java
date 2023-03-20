@@ -80,6 +80,13 @@ public class InvitationService {
             Invitation oldInvitation = invitationRepository.findById(id).get();
             if (invitation.getFeedback() != null) {
                 oldInvitation.setFeedback(invitation.getFeedback());
+                String emailText = "Hello " + oldInvitation.getFeedbackAsker().getName() + ", \n\n"
+                        + oldInvitation.getFeedbackGiver().getName() + " has given you feedback:\n"
+                        + oldInvitation.getFeedback();
+
+                emailService.sendEmail(oldInvitation.getFeedbackAsker().getUser().getEmail(),
+                        "You have feedback", emailText);
+
             }
             invitationRepository.save(oldInvitation);
         }
