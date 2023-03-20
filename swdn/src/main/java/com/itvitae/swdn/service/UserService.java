@@ -53,9 +53,9 @@ public class UserService {
         person.setRole(roleService.getRoleById(roleid));
 
         String emailText = "Hello " + person.getName() + ", \n\n"
-                + "An account for you has been created.\n"
+                + "An account has been created for you.\n"
                 + "To log in, use the email " + newerUser.getEmail() + " and the password \"password\"\n"
-                + "Once you are logged in, it is reccomended you change your password.";
+                + "Once you are logged in, it is recommended you change your password.";
 
         emailService.sendEmail(newerUser.getEmail(), "Your account has been created", emailText);
 
