@@ -10,11 +10,6 @@ export default function NewPerson(props) {
     const roles = ['NONE', 'TRAINEE', 'COACH', 'MANAGER', 'HR'];
 
     function sendPersonData() {
-        setEmail('');
-        setName('');
-        setAddress('');
-        setCity('');
-        setRole(1);
         console.log('send person data');
         if (!emailExists(email)) {
             const newUser = JSON.stringify({
@@ -27,6 +22,11 @@ export default function NewPerson(props) {
                     city: city,
                 },
             });
+            setEmail('');
+            setName('');
+            setAddress('');
+            setCity('');
+            setRole(1);
 
             fetch(`http://localhost:8082/api/user/new/${role}`, {
                 method: 'POST',
