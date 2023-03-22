@@ -4,6 +4,8 @@ function FeedbackRequest(props) {
     const [email, setEmail] = useState('');
 
     function addInvitation(email) {
+        setEmail();
+
         const currentDate = new Date();
         const newInvitation = JSON.stringify({
             email: email,

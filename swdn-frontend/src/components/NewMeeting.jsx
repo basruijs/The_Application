@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 
 function NewMeeting(props) {
-    const [date, setDate] = useState();
-    const [time, setTime] = useState();
-    const [duration, setDuration] = useState();
+    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
+    const [duration, setDuration] = useState('');
 
-    function addMeeting(date, time, duration) {
+    function addMeeting() {
+        setDate('');
+        setTime('');
+        setDuration('');
         if (props.trainee == -1) {
             alert('No trainee selected!');
         } else if (
@@ -19,9 +22,7 @@ function NewMeeting(props) {
                 time: time,
                 duration: duration,
             });
-            setDate();
-            setTime();
-            setDuration();
+
             fetch(
                 `http://localhost:8082/api/evaluation/new/${props.evaluator}/${props.trainee}`,
                 {
@@ -88,7 +89,7 @@ function NewMeeting(props) {
             <h2>Plan evaluation meeting</h2>
             <form
                 onSubmit={(e) => {
-                    addMeeting(date, time, duration);
+                    addMeeting();
                     e.preventDefault();
                 }}
             >
@@ -98,6 +99,7 @@ function NewMeeting(props) {
                     name="date"
                     id="date"
                     required
+                    value={date}
                     onChange={(e) => setDate(e.target.value)}
                 />
                 <br />
@@ -107,6 +109,7 @@ function NewMeeting(props) {
                     name="time"
                     id="time"
                     required
+                    value={time}
                     onChange={(e) => setTime(e.target.value)}
                 />
                 <br />
@@ -116,6 +119,7 @@ function NewMeeting(props) {
                     name="duration"
                     id="duration"
                     required
+                    value={duration}
                     onChange={(e) => setDuration(e.target.value)}
                 />
                 <br />

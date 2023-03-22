@@ -10,6 +10,11 @@ export default function NewPerson(props) {
     const roles = ['NONE', 'TRAINEE', 'COACH', 'MANAGER', 'HR'];
 
     function sendPersonData() {
+        setEmail('');
+        setName('');
+        setAddress('');
+        setCity('');
+        setRole(1);
         console.log('send person data');
         if (!emailExists(email)) {
             const newUser = JSON.stringify({
