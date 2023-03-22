@@ -9,6 +9,7 @@ export default function NawData(props) {
     const [coach, setCoach] = useState(0);
     const [managers, setManagers] = useState([]);
     const [manager, setManager] = useState(0);
+    const [people, setPeople] = useState(props.people);
 
     function sendPeople() {
         fetch(
@@ -63,7 +64,6 @@ export default function NawData(props) {
             .then((result) => result.json())
             .then((data) => setManagers(data));
     }, []);
-
     if (edit) {
         return (
             <form

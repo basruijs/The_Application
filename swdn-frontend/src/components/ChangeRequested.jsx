@@ -21,10 +21,8 @@ export default function ChangeRequested(props) {
                 },
             }
         ).then((response) => {
-            console.log(response);
             if (response) {
                 response.json().then((data) => {
-                    console.log(data);
                     setRequest(data);
                 });
             } else {
