@@ -49,7 +49,7 @@ public class EvaluationService {
                 newEvaluation.getDate() + " at " + newEvaluation.getTime() + ".\n"
                 + "The expected duration is " + newEvaluation.getDuration();
 
-//        emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
+        emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
 
         evaluationRepository.save(evaluationMapper.toEntity(newEvaluation));
 

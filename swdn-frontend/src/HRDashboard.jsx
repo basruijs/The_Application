@@ -143,6 +143,7 @@ export default function HRDashboard(props) {
                                 console.log(e.message);
                             });
                     }}
+                    people={people}
                     email={props.email}
                     password={props.password}
                 />
