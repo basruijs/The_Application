@@ -79,6 +79,9 @@ export default function FeedbackPage(props) {
                 update={() => {
                     fetchFeedbackRequested()
                         .then((result) => {
+                            result.map(
+                                (item) => (item.name = item.feedbackAsker.name)
+                            );
                             setAllRequested(result);
                         })
                         .catch((e) => {
