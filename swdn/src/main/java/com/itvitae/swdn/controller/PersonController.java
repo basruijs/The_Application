@@ -4,44 +4,46 @@ import com.itvitae.swdn.dto.NawDto;
 import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/person")
-public class PersonController {
+public class PersonController implements PersonApi {
     @Autowired
     PersonService personService;
 
 
     //READ
-    @GetMapping("/{id}")
+    @Override
     public PersonGetDto getPersonById(@PathVariable(value = "id") long id) {
         return personService.getPersonById(id);
     }
 
-    @GetMapping("/all")
+    @Override
     public Iterable<PersonGetDto> getAllPeople() {
         return personService.getAllPeople();
     }
 
-    @GetMapping("/gettrainees/{id}")
+    @Override
     public Iterable<PersonGetDto> getTrainees(@PathVariable(value = "id") long id) {
         return personService.getTrainees(id);
     }
 
-    @GetMapping("/getsubordinates/{id}")
+    @Override
     public Iterable<PersonGetDto> getSubordinates(@PathVariable(value = "id") long id) {
         return personService.getSubordinates(id);
     }
 
     //UPDATE
-    @PutMapping("/update/{id}")
+    @Override
     public void updatePersonById(@PathVariable(value = "id") long id, @RequestBody NawDto nawDto) {
         personService.updatePersonById(id, nawDto);
     }
 
-    @PutMapping("/setpeople/{id}/coach/{coachid}/manager/{managerid}")
+    @Override
     public void setPeople(@PathVariable(value = "id") long id, @PathVariable(value = "coachid") long coachid, @PathVariable(value = "managerid") long managerid) {
         personService.setPeople(id, coachid, managerid);
     }

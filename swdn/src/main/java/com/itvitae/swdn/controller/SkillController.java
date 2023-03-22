@@ -15,46 +15,45 @@ import java.io.IOException;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/skill")
-public class SkillController {
+public class SkillController implements SkillApi {
 
     @Autowired
     SkillService skillService;
 
-    @PostMapping("/new/{personid}")
+    @Override
     public void newSkill(@RequestBody SkillPostDto skillDto, @PathVariable(value = "personid") long personid) {
         skillService.newSkill(skillDto, personid);
     }
 
     //READ
-    @GetMapping("/{id}")
+    @Override
     public SkillGetDto getSkillById(@PathVariable(value = "id") long id) {
         return skillService.getSkillById(id);
     }
 
 
-    @GetMapping("/{traineeid}/all")
+    @Override
     public Iterable<SkillGetDto> getSkillByPerson(@PathVariable(value = "traineeid") long traineeid) {
         return skillService.getSkillByPerson(traineeid);
     }
 
     //UPDATE
-    @PutMapping("/update/{id}")
+    @Override
     public void updateSkill(@PathVariable(value = "id") long id, @RequestBody SkillPutDto skill) {
         skillService.updateSkill(id, skill);
     }
 
-    @PutMapping("/add/certificate/{id}")
+    @Override
     public void addCertificate(@PathVariable(value = "id") long id, @RequestParam("file") MultipartFile file) throws IOException {
         skillService.addCertificate(id, file);
     }
 
-    @GetMapping("/certificate/{id}")
+    @Override
     public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
         return skillService.downloadCertificate(id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @Override
     public void deleteSkillById(@PathVariable(value = "id") long id) {
         skillService.deleteSkillById(id);
     }

@@ -6,28 +6,30 @@ import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.dto.UserPostDto;
 import com.itvitae.swdn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/user")
-public class UserController {
+public class UserController implements UserApi {
     @Autowired
     UserService userService;
 
     //CREATE
-    @PostMapping("/new/{roleid}")
+    @Override
     public void newUser(@RequestBody UserPostDto userPostDto, @PathVariable(value = "roleid") long roleid) {
         userService.newUser(userPostDto, roleid);
     }
 
-    @PostMapping("/login")
+    @Override
     public PersonGetDto authenticateUser(@RequestBody LoginRequest loginRequest) {
         return userService.login(loginRequest);
     }
 
     //UPDATE
-    @PutMapping("/changepassword")
+    @Override
     public void updatePassword(@RequestBody PasswordChange newCredentials) {
         userService.updatePassword(newCredentials);
     }
