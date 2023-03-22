@@ -40,7 +40,7 @@ export default function SkillEditor(props) {
                     className="feedbackInputBox"
                     value={feedback || ''}
                     onChange={(e) => setFeedback(e.target.value)}
-                    maxLength="255"
+                    maxLength={255}
                 ></textarea>
             </form>
         </div>
