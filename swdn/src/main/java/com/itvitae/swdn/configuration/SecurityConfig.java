@@ -40,7 +40,7 @@ public class SecurityConfig {
                 )
                 .hasRole("HR")
 
-                .requestMatchers("/api/evaluation/trainee/**", "/api/invitation/new/**")
+                .requestMatchers("/api/invitation/new/**")
                 .hasRole("TRAINEE")
 
                 .requestMatchers("/api/person/gettrainees/**")
@@ -55,7 +55,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/evaluation/new/**", "/api/evaluation/evaluator/**", "/api/role/trainee/all")
                 .hasAnyRole("COACH", "MANAGER")
 
-                .requestMatchers("/api/evaluation/get/**")
+                //De coach en manager hebben de meetings van de trainee nodig om ervoor te zorgen dat er geen dubbele boekingen zijn.
+                .requestMatchers("/api/evaluation/get/**", "/api/evaluation/trainee/**")
                 .hasAnyRole("TRAINEE", "COACH", "MANAGER")
 
                 .requestMatchers("/api/user/login")

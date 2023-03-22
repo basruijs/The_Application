@@ -22,6 +22,11 @@ export default function NewPerson(props) {
                     city: city,
                 },
             });
+            setEmail('');
+            setName('');
+            setAddress('');
+            setCity('');
+            setRole(1);
 
             fetch(`http://localhost:8082/api/user/new/${role}`, {
                 method: 'POST',

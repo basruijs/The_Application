@@ -9,6 +9,7 @@ function FeedbackRequest(props) {
             email: email,
             sendDate: currentDate,
         });
+        setEmail('');
         fetch(`http://localhost:8082/api/invitation/new/${props.person}`, {
             method: 'POST',
             headers: {
