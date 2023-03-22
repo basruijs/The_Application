@@ -3,44 +3,46 @@ package com.itvitae.swdn.controller;
 import com.itvitae.swdn.dto.EvaluationDto;
 import com.itvitae.swdn.service.EvaluationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/evaluation")
-public class EvaluationController {
+public class EvaluationController implements EvaluationApi {
     @Autowired
     EvaluationService evaluationService;
 
 
-    @PostMapping("/new/{coachid}/{traineeid}")
+    @Override
     public void newEvaluation(@RequestBody EvaluationDto evaluationDto, @PathVariable(value = "coachid") long coachid, @PathVariable(value = "traineeid") long traineeid) {
         evaluationService.newEvaluation(evaluationDto, coachid, traineeid);
     }
 
     //READ
-    @GetMapping("/get/{id}")
+    @Override
     public EvaluationDto getEvaluationById(@PathVariable(value = "id") long id) {
         return evaluationService.getEvaluationById(id);
     }
 
 
-    @GetMapping("/trainee/{traineeid}/all")
+    @Override
     public Iterable<EvaluationDto> getAllEvaluationsByTrainee(@PathVariable(value = "traineeid") long traineeid) {
         return evaluationService.getAllEvaluationsByTrainee(traineeid);
     }
 
-    @GetMapping("/evaluator/{evaluatorid}/all")
+    @Override
     public Iterable<EvaluationDto> getAllEvaluationsByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
         return evaluationService.getAllEvaluationsByEvaluator(evaluatorid);
     }
 
-    @GetMapping("/trainee/{traineeid}/future")
+    @Override
     public Iterable<EvaluationDto> getFutureEvaluationsByTrainee(@PathVariable(value = "traineeid") long traineeid) {
         return evaluationService.getFutureEvaluationsByTrainee(traineeid);
     }
 
-    @GetMapping("/evaluator/{evaluatorid}/future")
+    @Override
     public Iterable<EvaluationDto> getFutureEvaluationsByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
         return evaluationService.getFutureEvaluationsByEvaluator(evaluatorid);
     }
