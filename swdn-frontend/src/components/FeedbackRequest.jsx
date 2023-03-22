@@ -4,13 +4,12 @@ function FeedbackRequest(props) {
     const [email, setEmail] = useState('');
 
     function addInvitation(email) {
-        setEmail();
-
         const currentDate = new Date();
         const newInvitation = JSON.stringify({
             email: email,
             sendDate: currentDate,
         });
+        setEmail('');
         fetch(`http://localhost:8082/api/invitation/new/${props.person}`, {
             method: 'POST',
             headers: {

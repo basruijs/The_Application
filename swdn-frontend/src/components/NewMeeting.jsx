@@ -6,15 +6,18 @@ function NewMeeting(props) {
     const [duration, setDuration] = useState('');
 
     function addMeeting() {
-        setDate('');
-        setTime('');
-        setDuration('');
         if (props.trainee == -1) {
             alert('No trainee selected!');
+            setDate('');
+            setTime('');
+            setDuration('');
         } else if (
             isDoubleBooked(props.traineeMeetings) ||
             isDoubleBooked(props.evaluatorMeetings)
         ) {
+            setDate('');
+            setTime('');
+            setDuration('');
             alert('Overlapping times!');
         } else {
             const newMeeting = JSON.stringify({
@@ -22,7 +25,9 @@ function NewMeeting(props) {
                 time: time,
                 duration: duration,
             });
-
+            setDate('');
+            setTime('');
+            setDuration('');
             fetch(
                 `http://localhost:8082/api/evaluation/new/${props.evaluator}/${props.trainee}`,
                 {
