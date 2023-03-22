@@ -58,7 +58,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/evaluation/get/**")
                 .hasAnyRole("TRAINEE", "COACH", "MANAGER")
 
-                .requestMatchers("/api/user/login")
+                .requestMatchers("/api/user/login", "/swagger-ui/**", "/v3/api-docs/**")
                 .permitAll()
 
                 .requestMatchers("/**")
