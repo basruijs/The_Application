@@ -14,12 +14,20 @@ function NavBar(props) {
                         Login
                     </NavLink>
                 ) : (
-                    <NavLink
-                        to="/account"
-                        className="navButton"
-                    >
-                        Account
-                    </NavLink>
+                    <>
+                        <a
+                            href="/login"
+                            className="navButton"
+                        >
+                            Log out
+                        </a>
+                        <NavLink
+                            to="/account"
+                            className="navButton"
+                        >
+                            Account
+                        </NavLink>
+                    </>
                 )}
 
                 {props.person.role.name === 'HR' ? (

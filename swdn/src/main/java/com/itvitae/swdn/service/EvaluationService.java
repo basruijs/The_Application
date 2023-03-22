@@ -49,7 +49,7 @@ public class EvaluationService {
                 newEvaluation.getDate() + " at " + newEvaluation.getTime() + ".\n"
                 + "The expected duration is " + newEvaluation.getDuration();
 
-//        emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
+        emailService.sendEmail(trainee.getUser().getEmail(), "Meeting with " + evaluator.getName(), emailText);
 
         evaluationRepository.save(evaluationMapper.toEntity(newEvaluation));
 
@@ -91,7 +91,7 @@ public class EvaluationService {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
                 .filter(evaluation -> Objects.equals(evaluation.getTrainee().getId(), traineeid))
-                .filter(evaluation -> evaluation.getDate().isAfter(date))
+                .filter(evaluation -> !evaluation.getDate().isBefore(date))
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
                 .collect(Collectors.toList());
     }
@@ -101,7 +101,7 @@ public class EvaluationService {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
                 .filter(evaluation -> Objects.equals(evaluation.getEvaluator().getId(), evaluatorid))
-                .filter(evaluation -> evaluation.getDate().isAfter(date))
+                .filter(evaluation -> !evaluation.getDate().isBefore(date))
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
                 .collect(Collectors.toList());
     }

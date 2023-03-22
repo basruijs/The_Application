@@ -11,27 +11,42 @@ export default function NewPerson(props) {
 
     function sendPersonData() {
         console.log('send person data');
+        if (!emailExists(email)) {
+            const newUser = JSON.stringify({
+                email: email,
+                password: 'password',
+                roles: 'ROLE_' + roles[role],
+                person: {
+                    name: name,
+                    address: address,
+                    city: city,
+                },
+            });
 
-        const newUser = JSON.stringify({
-            email: email,
-            password: 'password',
-            roles: 'ROLE_' + roles[role],
-            person: {
-                name: name,
-                address: address,
-                city: city,
-            },
-        });
+            fetch(`http://localhost:8082/api/user/new/${role}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+                body: newUser,
+            }).then(() => props.update());
+        } else {
+            alert('A user with this email account already exists!');
+            props.update();
+        }
+    }
 
-        fetch(`http://localhost:8082/api/user/new/${role}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization:
-                    'Basic ' + btoa(props.email + ':' + props.password),
-            },
-            body: newUser,
-        }).then(() => props.update());
+    function emailExists(email) {
+        const people = props.people;
+        for (let index = 0; index < people.length; index++) {
+            const person = people[index];
+            if (email === person.user.email) {
+                return true;
+            }
+        }
+        return false;
     }
 
     return (
