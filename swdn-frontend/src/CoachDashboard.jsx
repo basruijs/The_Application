@@ -198,6 +198,7 @@ export default function CoachDashboard(props) {
                     }}
                     email={props.email}
                     password={props.password}
+                    skills={skills}
                 />
                 <NewMeeting
                     evaluator={viewer.id}

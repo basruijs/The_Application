@@ -103,6 +103,7 @@ export default function TraineeDashboard(props) {
                     }}
                     email={props.email}
                     password={props.password}
+                    skills={skills}
                 />
                 <FeedbackRequest
                     person={props.person.id}
