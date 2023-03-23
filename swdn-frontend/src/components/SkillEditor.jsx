@@ -17,6 +17,7 @@ export default function SkillEditor(props) {
     const [learningGoals, setLearningGoals] = useState(
         props.skill.learningGoals
     );
+    const [fileChanged, setFileChanged] = useState(false);
 
     async function sendChanges() {
         const newSkill = JSON.stringify({
@@ -39,20 +40,21 @@ export default function SkillEditor(props) {
             }
         );
 
-        let formData = new FormData();
-        formData.append('file', certificate);
-
-        await fetch(
-            `http://localhost:8082/api/skill/add/certificate/${props.skill.id}`,
-            {
-                method: 'PUT',
-                headers: {
-                    Authorization:
-                        'Basic ' + btoa(props.email + ':' + props.password),
-                },
-                body: formData,
-            }
-        );
+        if (fileChanged) {
+            let formData = new FormData();
+            formData.append('file', certificate);
+            await fetch(
+                `http://localhost:8082/api/skill/add/certificate/${props.skill.id}`,
+                {
+                    method: 'PUT',
+                    headers: {
+                        Authorization:
+                            'Basic ' + btoa(props.email + ':' + props.password),
+                    },
+                    body: formData,
+                }
+            );
+        }
         props.update();
     }
 
@@ -156,9 +158,9 @@ export default function SkillEditor(props) {
                     type="file"
                     name="certificate"
                     id="certificate"
-                    files={[certificate]}
                     onChange={(e) => {
                         setCertificate(e.target.files[0]);
+                        setFileChanged(true);
                     }}
                 />
             </div>
