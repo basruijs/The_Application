@@ -70,7 +70,14 @@ public class SkillService {
 
     public void newSkill(SkillPostDto skillDto, long personid) {
         Skill newSkill = skillMapper.toEntity(skillDto);
-        Person person = personRepository.findById(personid).get();
+        Optional<Person> foundPerson = personRepository.findById(personid);
+        if (!foundPerson.isPresent()) {
+            throw new IllegalArgumentException("Person does not exist");
+        }
+        Person person = foundPerson.get();
+        if (skillRepository.existsByNameAndTrainee(newSkill.getName(), person)) {
+            throw new IllegalArgumentException("Duplicate skill name");
+        }
         person.getSkills().add(newSkill);
         newSkill.setTrainee(person);
         skillRepository.save(newSkill);
