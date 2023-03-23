@@ -62,8 +62,7 @@ export default function NawData(props) {
         })
             .then((result) => result.json())
             .then((data) => setManagers(data));
-    }, []);
-
+    }, [props.people]);
     if (edit) {
         return (
             <form
