@@ -122,7 +122,7 @@ export default function HRDashboard(props) {
             <div className="sidebar">
                 <NawData
                     person={people.find((x) => x.id === person)}
-                    people={people};
+                    people={people}
                     email={props.email}
                     password={props.password}
                     changeNAW={changeNAW}
