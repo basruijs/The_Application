@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage(props) {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -23,6 +26,7 @@ export default function LoginPage(props) {
                     props.setPassword(password);
                     response.json().then((data) => {
                         props.setPerson(data);
+                        goToDashboard(data);
                     });
                 } else {
                     alert('Incorrect username or password.');
@@ -34,6 +38,10 @@ export default function LoginPage(props) {
         );
     }
 
+    function goToDashboard(data) {
+        let role = data.role.name;
+        navigate('/' + role.toLowerCase());
+    }
     return (
         <div>
             <div className="title">
