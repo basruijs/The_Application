@@ -6,17 +6,20 @@ function NewSkill(props) {
 
     function addSkill(name, hardness) {
         const newSkill = JSON.stringify({ name: name, hardSkill: hardness });
+        if (!name.replace(/\s/g, '').length) {
+        } else {
+            fetch(`http://localhost:8082/api/skill/new/${props.person}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization:
+                        'Basic ' + btoa(props.email + ':' + props.password),
+                },
+                body: newSkill,
+            }).then(() => props.update());
+        }
         setName('');
         setHardSkill(true);
-        fetch(`http://localhost:8082/api/skill/new/${props.person}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization:
-                    'Basic ' + btoa(props.email + ':' + props.password),
-            },
-            body: newSkill,
-        }).then(() => props.update());
     }
 
     return (
