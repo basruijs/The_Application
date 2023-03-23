@@ -5,6 +5,8 @@ function NewMeeting(props) {
     const [time, setTime] = useState('');
     const [duration, setDuration] = useState('');
 
+    let currentDate = new Date();
+    currentDate = currentDate.toISOString().slice(0, 10);
     function addMeeting() {
         if (props.trainee == -1) {
             alert('No trainee selected!');
@@ -105,6 +107,7 @@ function NewMeeting(props) {
                     id="date"
                     required
                     value={date}
+                    min={currentDate}
                     onChange={(e) => setDate(e.target.value)}
                 />
                 <br />
