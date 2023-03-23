@@ -16,7 +16,13 @@ function Meetings(props) {
     }
 
     return (
-        <div className="meetings bordered">
+        <div
+            className={
+                props.isTrainee
+                    ? 'traineemeetings bordered'
+                    : 'meetings bordered'
+            }
+        >
             <h2>Meetings:</h2>
             <div className="meetingsList">
                 {sortMeetings().map((meeting, index) => (
