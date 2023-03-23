@@ -7,7 +7,6 @@ function NewSkill(props) {
     function addSkill(name, hardness) {
         const newSkill = JSON.stringify({ name: name, hardSkill: hardness });
         if (!name.replace(/\s/g, '').length) {
-            console.log('owo');
         } else {
             fetch(`http://localhost:8082/api/skill/new/${props.person}`, {
                 method: 'POST',
