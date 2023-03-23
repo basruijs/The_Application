@@ -164,7 +164,7 @@ export default function ManagerDashboard(props) {
                 title="Trainees"
             />
             <List
-                content={skills}
+                content={skills.sort((a, b) => a.completed - b.completed)}
                 selected={skill}
                 select={setSkill}
                 title="Skills"

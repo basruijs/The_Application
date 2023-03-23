@@ -6,6 +6,8 @@ function ListItem(props) {
             className={
                 props.selected == props.id
                     ? 'listItem bordered selected'
+                    : props.completed
+                    ? 'listItem completed-skill bordered'
                     : 'listItem bordered'
             }
             onClick={() => props.select(props.id)}

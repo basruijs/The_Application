@@ -99,7 +99,7 @@ export default function HRDashboard(props) {
                 title="People"
             />
             <List
-                content={skills}
+                content={skills.sort((a, b) => a.completed - b.completed)}
                 selected={skill}
                 select={setSkill}
                 title="Skills"
