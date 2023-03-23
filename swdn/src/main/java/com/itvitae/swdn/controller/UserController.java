@@ -33,4 +33,10 @@ public class UserController implements UserApi {
     public void updatePassword(@RequestBody PasswordChange newCredentials) {
         userService.updatePassword(newCredentials);
     }
+
+    //DELETE
+    @Override
+    public void deleteUserById(@PathVariable(value = "id") long id) {
+        userService.deleteUserById(id);
+    }
 }

@@ -187,6 +187,43 @@ export default function NawData(props) {
                 ) : (
                     <></>
                 )}
+                {props.person != null &&
+                typeof props.person != undefined &&
+                props.viewer != null &&
+                (typeof props.viewer != undefined) &
+                    (props.person.id != props.viewer.id) ? (
+                    <button
+                        onClick={() => {
+                            if (
+                                confirm(
+                                    'Are you sure you want to delete ' +
+                                        props.person.name +
+                                        '?'
+                                )
+                            ) {
+                                fetch(
+                                    `http://localhost:8082/api/user/delete/${props.person.id}`,
+                                    {
+                                        method: 'DELETE',
+                                        headers: {
+                                            Authorization:
+                                                'Basic ' +
+                                                btoa(
+                                                    props.email +
+                                                        ':' +
+                                                        props.password
+                                                ),
+                                        },
+                                    }
+                                ).then(() => props.update());
+                            }
+                        }}
+                    >
+                        ✘
+                    </button>
+                ) : (
+                    <></>
+                )}
             </div>
         );
     }

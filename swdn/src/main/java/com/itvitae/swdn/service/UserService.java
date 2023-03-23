@@ -108,4 +108,17 @@ public class UserService {
 
         roleService.addPersonToRole(personRepository.save(person));
     }
+
+    public void deleteUserById(long id) {
+        if (!userRepository.existsById(id)) {
+            throw new IllegalArgumentException("No such user exists");
+        }
+
+        User executeeUser = userRepository.findById(id).get();
+        Person executeePerson = executeeUser.getPerson();
+        long personId = executeePerson.getId();
+
+        personRepository.deleteById(personId);
+        userRepository.deleteById(id);
+    }
 }
