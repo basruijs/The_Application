@@ -20,7 +20,7 @@ export default function SkillData(props) {
                 </i>
             </h2>
             <h3>Learning goals:</h3>
-            <p>{props.skill.learningGoals}</p>
+            <p className="text">{props.skill.learningGoals}</p>
             <div className="info-flex">
                 <span className="icon">
                     {props.skill.completed ? '✓' : '✘'}
@@ -42,7 +42,7 @@ export default function SkillData(props) {
                     <span>No certificate</span>
                 )}
             </div>
-            <p>{props.skill.report}</p>
+            <p className="text">{props.skill.report}</p>
             {props.editable ? (
                 <button
                     onClick={() => {

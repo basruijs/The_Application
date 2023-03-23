@@ -19,6 +19,10 @@
     -webkit-text-size-adjust: 100%;
 }
 
+.text {
+    white-space: pre-line;
+}
+
 .navBar {
     height: 10vh;
     background-color: black;

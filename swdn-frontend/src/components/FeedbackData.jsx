@@ -15,7 +15,7 @@ export default function FeedbackData(props) {
             )}
             <h2>{props.feedback.name}</h2>
             <p>{props.feedback.sendDate}</p>
-            <div className="info-flex">{props.feedback.feedback}</div>
+            <div className="info-flex text">{props.feedback.feedback}</div>
         </div>
     );
 }
