@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import List from './components/List';
 import SkillOverview from './components/SkillOverview';
 import NewSkill from './components/NewSkill';
-import NewMeeting from './components/NewMeeting';
 import Meetings from './components/Meetings';
 import FeedbackRequest from './components/FeedbackRequest';
+import cat from './img/cat-long.avif';
 
 export default function TraineeDashboard(props) {
     const [skills, setSkills] = useState([]);
@@ -114,6 +114,10 @@ export default function TraineeDashboard(props) {
                     isTrainee={true}
                 />
             </div>
+            <img
+                src={cat}
+                className="cat-long bordered"
+            />
         </div>
     );
 }

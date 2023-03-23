@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function NavBar(props) {
     return (
         <div className="navBar bordered">
-            <h2>{props.person.name || ''}</h2>
+            <h2 className="nav-centering-left">{props.person.name || ''}</h2>
             <nav>
                 {props.person.role.name === 'Not Logged In' ? (
                     <NavLink
@@ -82,7 +82,7 @@ function NavBar(props) {
                     ''
                 )}
             </nav>
-            <h2>😎</h2>
+            <h2 className="nav-centering-right">😎</h2>
         </div>
     );
 }
