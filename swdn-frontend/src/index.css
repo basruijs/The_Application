@@ -319,6 +319,16 @@
     object-fit: cover;
 }
 
+.nav-centering-left {
+    width: 30vw;
+    text-align: left;
+}
+
+.nav-centering-right {
+    width: 30vw;
+    text-align: right;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;
