@@ -4,6 +4,7 @@ import com.itvitae.swdn.dto.*;
 import com.itvitae.swdn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -29,8 +30,16 @@ public class UserController implements UserApi {
         userService.updatePassword(newCredentials);
     }
 
+    //DELETE
     @Override
-    public void updateEmail(EmailChange newCredentials) {
-        userService.updateEmail(newCredentials);
+    public void deleteUserById(@PathVariable(value = "id") long id) {
+        userService.deleteUserById(id);
     }
-}
+
+    @Override
+    public void updateEmail(EmailChange newCredentials){
+            userService.updateEmail(newCredentials);
+        }
+
+    }
+

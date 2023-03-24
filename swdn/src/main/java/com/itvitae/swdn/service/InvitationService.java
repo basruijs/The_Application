@@ -61,6 +61,7 @@ public class InvitationService {
         return StreamSupport
                 .stream(invitationRepository.findAll().spliterator(), false)
                 .filter(invitation -> Objects.equals(invitation.getFeedbackGiver().getId(), giverid))
+                .filter(invitation -> !invitation.getFeedbackGiver().isDeleted())
                 .map(invitation -> invitationMapper.toDto(invitation))
                 .collect(Collectors.toList());
     }

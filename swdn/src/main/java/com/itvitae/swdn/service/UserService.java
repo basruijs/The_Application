@@ -3,10 +3,8 @@ package com.itvitae.swdn.service;
 import com.itvitae.swdn.dto.*;
 import com.itvitae.swdn.mapper.PersonMapper;
 import com.itvitae.swdn.mapper.UserMapper;
-import com.itvitae.swdn.model.Person;
-import com.itvitae.swdn.model.User;
-import com.itvitae.swdn.repository.PersonRepository;
-import com.itvitae.swdn.repository.UserRepository;
+import com.itvitae.swdn.model.*;
+import com.itvitae.swdn.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.cert.Certificate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +37,18 @@ public class UserService {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    SkillRepository skillRepository;
+
+    @Autowired
+    DBFileRepository dbFileRepository;
+
+    @Autowired
+    EvaluationRepository evaluationRepository;
+
+    @Autowired
+    InvitationRepository invitationRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -107,21 +120,70 @@ public class UserService {
         roleService.addPersonToRole(personRepository.save(person));
     }
 
-    public void updateEmail(EmailChange newCredentials) {
-        Optional<User> foundUser = userRepository.findByEmail(newCredentials.getOldEmail());
-        if (!foundUser.isPresent()) {
+    public void deleteUserById(long id) {
+        if (!userRepository.existsById(id)) {
             throw new IllegalArgumentException("No such user exists");
         }
-        User user = foundUser.get();
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        user.getEmail(),
-                        newCredentials.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        
-        user.setEmail(newCredentials.getNewEmail());
-        userRepository.save(user);
+
+        User executeeUser = userRepository.findById(id).get();
+        Person executeePerson = executeeUser.getPerson();
+
+        //The skills must be executed for their crimes
+        List<Skill> skillDeathRow = executeePerson.getSkills();
+
+        List<Invitation> feedbackDeathRow = executeePerson.getSentInvitations();
+
+        List<Evaluation> evaluationDeathRow = executeePerson.getEvaluatorEvaluations();
+        evaluationDeathRow.addAll(executeePerson.getTraineeEvaluations());
+
+        long personId = executeePerson.getId();
+        int skillCount = skillDeathRow.size();
+        int feedbackCount = feedbackDeathRow.size();
+        int evaluationCount = evaluationDeathRow.size();
+
+
+        for (int i = 0; i < feedbackCount; i++) {
+            Invitation feedbackThatsGoingToDie = feedbackDeathRow.get(i);
+            invitationRepository.deleteById(feedbackThatsGoingToDie.getId());
+        }
+
+        for (int i = 0; i < evaluationCount; i++) {
+            Evaluation evaluationThatsGoingToDie = evaluationDeathRow.get(i);
+            evaluationRepository.deleteById(evaluationThatsGoingToDie.getId());
+        }
+
+        for (int i = 0; i < skillCount; i++) {
+            Skill skillThatsGoingToDie = skillDeathRow.get(i);
+            DBFile fileThatsGoingToDie = skillThatsGoingToDie.getCertificate();
+            if (fileThatsGoingToDie != null) {
+                dbFileRepository.deleteById(fileThatsGoingToDie.getId());
+            }
+            skillRepository.deleteById(skillThatsGoingToDie.getId());
+        }
+        executeePerson.setName("Deleted User");
+        executeePerson.setAddress("Deleted");
+        executeePerson.setCity("Deleted");
+        executeePerson.setDeleted(true);
+        executeeUser.setEmail("deleted user");
+        executeeUser.setPassword(null);
     }
-}
+    public void updateEmail(EmailChange newCredentials){
+            Optional<User> foundUser = userRepository.findByEmail(newCredentials.getOldEmail());
+            if (!foundUser.isPresent()) {
+                throw new IllegalArgumentException("No such user exists");
+            }
+            User user = foundUser.get();
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getEmail(),
+                            newCredentials.getPassword()
+                    )
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            user.setEmail(newCredentials.getNewEmail());
+            userRepository.save(user);
+        }
+
+    }
+
