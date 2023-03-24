@@ -1,9 +1,6 @@
 package com.itvitae.swdn.controller;
 
-import com.itvitae.swdn.dto.LoginRequest;
-import com.itvitae.swdn.dto.PasswordChange;
-import com.itvitae.swdn.dto.PersonGetDto;
-import com.itvitae.swdn.dto.UserPostDto;
+import com.itvitae.swdn.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,10 +34,19 @@ public interface UserApi {
     //UPDATE
     @Operation(
             summary = "Updates the password of a user",
-            description = "Updates the password of a user",
+            description = "Replaces the password of a user with a new one",
             tags = {"user"}
     )
     @ApiResponse(responseCode = "200", description = "Successful operation")
     @PutMapping("/changepassword")
     void updatePassword(@RequestBody PasswordChange newCredentials);
+
+    @Operation(
+            summary = "Updates the email of a user",
+            description = "Replaces the email address of a user with a new one",
+            tags = {"user"}
+    )
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @PutMapping("/changeemail")
+    void updateEmail(@RequestBody EmailChange newCredentials);
 }
