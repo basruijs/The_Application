@@ -11,6 +11,7 @@ import LoginPage from './LoginPage';
 import AccountPage from './AccountPage';
 import FeedbackPage from './FeedbackPage';
 import TraineeDashboard from './TraineeDashboard';
+import CoachFeedbackPage from './CoachFeedbackPage';
 
 function App() {
     const [email, setEmail] = useState('');
@@ -20,6 +21,8 @@ function App() {
             name: 'Not Logged In',
         },
     });
+    const [trainees, setTrainees] = useState([]);
+    const [trainee, setTrainee] = useState(-1);
 
     return (
         <div className="App">
@@ -32,6 +35,10 @@ function App() {
                             email={email}
                             password={password}
                             person={person}
+                            trainees={trainees}
+                            setTrainees={setTrainees}
+                            trainee={trainee}
+                            setTrainee={setTrainee}
                         />
                     }
                 />
@@ -75,7 +82,6 @@ function App() {
                         />
                     }
                 />
-                '
                 <Route
                     path="/account"
                     element={
@@ -88,7 +94,6 @@ function App() {
                         />
                     }
                 />
-                '
                 <Route
                     path="/feedback"
                     element={
@@ -96,6 +101,19 @@ function App() {
                             email={email}
                             password={password}
                             person={person}
+                        />
+                    }
+                />
+                <Route
+                    path="/coachfeedback"
+                    element={
+                        <CoachFeedbackPage
+                            email={email}
+                            password={password}
+                            person={person}
+                            trainees={trainees}
+                            trainee={trainee}
+                            setTrainee={setTrainee}
                         />
                     }
                 />

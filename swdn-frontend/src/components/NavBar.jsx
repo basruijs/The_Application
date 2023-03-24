@@ -41,12 +41,20 @@ function NavBar(props) {
                     ''
                 )}
                 {props.person.role.name === 'COACH' ? (
-                    <NavLink
-                        to="/coach"
-                        className="navButton"
-                    >
-                        Dashboard
-                    </NavLink>
+                    <>
+                        <NavLink
+                            to="/coach"
+                            className="navButton"
+                        >
+                            Dashboard
+                        </NavLink>
+                        <NavLink
+                            to="/coachfeedback"
+                            className="navButton"
+                        >
+                            Feedback
+                        </NavLink>
+                    </>
                 ) : (
                     ''
                 )}
@@ -61,23 +69,20 @@ function NavBar(props) {
                     ''
                 )}
                 {props.person.role.name === 'TRAINEE' ? (
-                    <NavLink
-                        to="/trainee"
-                        className="navButton"
-                    >
-                        Dashboard
-                    </NavLink>
-                ) : (
-                    ''
-                )}
-
-                {props.person.role.name === 'TRAINEE' ? (
-                    <NavLink
-                        to="/feedback"
-                        className="navButton"
-                    >
-                        Feedback
-                    </NavLink>
+                    <>
+                        <NavLink
+                            to="/trainee"
+                            className="navButton"
+                        >
+                            Dashboard
+                        </NavLink>
+                        <NavLink
+                            to="/feedback"
+                            className="navButton"
+                        >
+                            Feedback
+                        </NavLink>
+                    </>
                 ) : (
                     ''
                 )}

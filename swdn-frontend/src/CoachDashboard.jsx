@@ -6,30 +6,10 @@ import NewMeeting from './components/NewMeeting';
 import Meetings from './components/Meetings';
 
 export default function CoachDashboard(props) {
-    const [viewer, setViewer] = useState(-1);
-    const [people, setPeople] = useState([]);
-    const [person, setPerson] = useState(-1);
     const [skills, setSkills] = useState([]);
     const [skill, setSkill] = useState(-1);
     const [viewerMeetings, setViewerMeetings] = useState([]);
     const [traineeMeetings, setTraineeMeetings] = useState([]);
-
-    const fetchViewer = async () => {
-        const result = await fetch(
-            `http://localhost:8082/api/person/${props.person.id}`,
-            {
-                headers: {
-                    Authorization:
-                        'Basic ' + btoa(props.email + ':' + props.password),
-                },
-            }
-        );
-        if (!result.ok) {
-            throw new Error('Data coud not be fetched!');
-        } else {
-            return result.json();
-        }
-    };
 
     const fetchData = async () => {
         const result = await fetch(
@@ -50,7 +30,7 @@ export default function CoachDashboard(props) {
 
     const fetchSkills = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/skill/${person}/all`,
+            `http://localhost:8082/api/skill/${props.trainee}/all`,
             {
                 headers: {
                     Authorization:
@@ -67,7 +47,7 @@ export default function CoachDashboard(props) {
 
     const fetchTraineeMeetings = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/evaluation/trainee/${person}/future`,
+            `http://localhost:8082/api/evaluation/trainee/${props.trainee}/future`,
             {
                 headers: {
                     Authorization:
@@ -84,7 +64,7 @@ export default function CoachDashboard(props) {
 
     const fetchViewerMeetings = async () => {
         const result = await fetch(
-            `http://localhost:8082/api/evaluation/evaluator/${viewer.id}/future`,
+            `http://localhost:8082/api/evaluation/evaluator/${props.person.id}/future`,
             {
                 headers: {
                     Authorization:
@@ -100,19 +80,9 @@ export default function CoachDashboard(props) {
     };
 
     useEffect(() => {
-        fetchViewer()
-            .then((result) => {
-                setViewer(result);
-            })
-            .catch((e) => {
-                console.log(e.message);
-            });
-    }, []);
-
-    useEffect(() => {
         fetchData()
             .then((result) => {
-                setPeople(result);
+                props.setTrainees(result);
             })
             .catch((e) => {
                 console.log(e.message);
@@ -120,7 +90,7 @@ export default function CoachDashboard(props) {
     }, []);
 
     useEffect(() => {
-        if (person > 0) {
+        if (props.trainee > 0) {
             fetchSkills()
                 .then((result) => {
                     setSkills(result);
@@ -129,10 +99,10 @@ export default function CoachDashboard(props) {
                     console.log(e.message);
                 });
         }
-    }, [person]);
+    }, [props.trainee]);
 
     useEffect(() => {
-        if (person > 0) {
+        if (props.trainee > 0) {
             fetchViewerMeetings()
                 .then((result) => {
                     setViewerMeetings(result);
@@ -141,10 +111,10 @@ export default function CoachDashboard(props) {
                     console.log(e.message);
                 });
         }
-    }, [person]);
+    }, [props.trainee]);
 
     useEffect(() => {
-        if (person > 0) {
+        if (props.trainee > 0) {
             fetchTraineeMeetings()
                 .then((result) => {
                     setTraineeMeetings(result);
@@ -153,14 +123,14 @@ export default function CoachDashboard(props) {
                     console.log(e.message);
                 });
         }
-    }, [person]);
+    }, [props.trainee]);
 
     return (
         <div className="dashboard">
             <List
-                content={people}
-                selected={person}
-                select={setPerson}
+                content={props.trainees}
+                selected={props.trainee}
+                select={props.setTrainee}
                 title="Trainees"
             />
             <List
@@ -186,7 +156,7 @@ export default function CoachDashboard(props) {
             />
             <div className="sidebar">
                 <NewSkill
-                    person={person}
+                    person={props.trainee}
                     update={() => {
                         fetchSkills()
                             .then((result) => {
@@ -201,8 +171,8 @@ export default function CoachDashboard(props) {
                     skills={skills}
                 />
                 <NewMeeting
-                    evaluator={viewer.id}
-                    trainee={person}
+                    evaluator={props.person.id}
+                    trainee={props.trainee}
                     evaluatorMeetings={viewerMeetings}
                     traineeMeetings={traineeMeetings}
                     update={() => {
