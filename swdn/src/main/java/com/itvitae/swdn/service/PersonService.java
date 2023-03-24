@@ -31,7 +31,7 @@ public class PersonService {
     //READ
     public PersonGetDto getPersonById(long id) {
         Optional<Person> foundPerson = personRepository.findById(id);
-        if (!foundPerson.isPresent()) {
+        if (!foundPerson.isPresent() || foundPerson.get().isDeleted()) {
             throw new IllegalArgumentException("No such person exists");
         }
         return personMapper.toDto(foundPerson.get());
@@ -40,6 +40,7 @@ public class PersonService {
     public Iterable<PersonGetDto> getAllPeople() {
         return StreamSupport
                 .stream(personRepository.findAll().spliterator(), false)
+                .filter(person -> !person.isDeleted())
                 .map(person -> personMapper.toDto(person))
                 .collect(Collectors.toList());
     }
@@ -50,6 +51,7 @@ public class PersonService {
             throw new IllegalArgumentException("No such person exists");
         }
         return foundPerson.get().getTrainees().stream()
+                .filter(person -> !person.isDeleted())
                 .map(person -> personMapper.toDto(person))
                 .collect(Collectors.toList());
     }
@@ -60,6 +62,7 @@ public class PersonService {
             throw new IllegalArgumentException("No such person exists");
         }
         return foundPerson.get().getSubordinates().stream()
+                .filter(person -> !person.isDeleted())
                 .map(person -> personMapper.toDto(person))
                 .collect(Collectors.toList());
     }

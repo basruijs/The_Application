@@ -160,8 +160,12 @@ public class UserService {
             }
             skillRepository.deleteById(skillThatsGoingToDie.getId());
         }
-        personRepository.deleteById(personId);
-        userRepository.deleteById(id);
+        executeePerson.setName("Deleted User");
+        executeePerson.setAddress("Deleted");
+        executeePerson.setCity("Deleted");
+        executeePerson.setDeleted(true);
+        executeeUser.setEmail("deleted user");
+        executeeUser.setPassword(null);
     }
     public void updateEmail(EmailChange newCredentials){
             Optional<User> foundUser = userRepository.findByEmail(newCredentials.getOldEmail());
