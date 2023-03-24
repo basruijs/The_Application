@@ -122,10 +122,20 @@ export default function HRDashboard(props) {
             <div className="sidebar">
                 <NawData
                     person={people.find((x) => x.id === person)}
+                    viewer={props.person}
                     people={people}
                     email={props.email}
                     password={props.password}
                     changeNAW={changeNAW}
+                    update={() => {
+                        fetchData()
+                            .then((result) => {
+                                setPeople(result);
+                            })
+                            .catch((e) => {
+                                console.log(e.message);
+                            });
+                    }}
                 />
                 <ChangeRequested
                     personid={person}

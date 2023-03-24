@@ -49,4 +49,15 @@ public interface UserApi {
     @ApiResponse(responseCode = "200", description = "Successful operation")
     @PutMapping("/changeemail")
     void updateEmail(@RequestBody EmailChange newCredentials);
+
+
+    //DELETE
+    @Operation(
+            summary = "Deletes a user and the related person",
+            description = "Deletes a user and the related person",
+            tags = {"user"}
+    )
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @DeleteMapping("/delete/{id}")
+    void deleteUserById(@PathVariable(value = "id") long id);
 }

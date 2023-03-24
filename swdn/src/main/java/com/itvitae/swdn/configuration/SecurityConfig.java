@@ -36,11 +36,13 @@ public class SecurityConfig {
                         "/api/changerequest/delete/**",
                         "/api/changerequest/deny/**",
                         "/api/role/coach/all",
-                        "/api/role/manager/all"
+                        "/api/role/manager/all",
+                        "api/user/delete/**"
                 )
                 .hasRole("HR")
 
-                .requestMatchers("/api/invitation/new/**")
+                .requestMatchers("/api/invitation/new/**",
+                        "/api/invitation/requesters/**")
                 .hasRole("TRAINEE")
 
                 .requestMatchers("/api/person/gettrainees/**",
@@ -56,10 +58,13 @@ public class SecurityConfig {
                         "/api/skill/add/certificate/**",
                         "/api/skill/delete/**",
                         "/api/template/assign/**",
-                        "/api/template/all")
+                        "/api/template/all",
+                        "/api/invitation/givers/**")
                 .hasAnyRole("TRAINEE", "COACH")
 
-                .requestMatchers("/api/evaluation/new/**", "/api/evaluation/evaluator/**", "/api/role/trainee/all")
+                .requestMatchers("/api/evaluation/new/**",
+                        "/api/evaluation/evaluator/**",
+                        "/api/role/trainee/all")
                 .hasAnyRole("COACH", "MANAGER")
 
                 //De coach en manager hebben de meetings van de trainee nodig om ervoor te zorgen dat er geen dubbele boekingen zijn.

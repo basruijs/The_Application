@@ -60,6 +60,8 @@ public class Person {
     @OneToMany(mappedBy = "manager")
     private List<Person> subordinates = new ArrayList<>();
 
+    private boolean deleted = false;
+
     public Person(Long id, String name) {
         this.id = id;
         this.name = name;
