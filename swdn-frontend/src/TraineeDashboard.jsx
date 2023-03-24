@@ -69,7 +69,7 @@ export default function TraineeDashboard(props) {
     return (
         <div className="dashboard">
             <List
-                content={skills}
+                content={skills.sort((a, b) => a.completed - b.completed)}
                 selected={skill}
                 select={setSkill}
                 title="Skills"
@@ -103,6 +103,7 @@ export default function TraineeDashboard(props) {
                     }}
                     email={props.email}
                     password={props.password}
+                    skills={skills}
                 />
                 <FeedbackRequest
                     person={props.person.id}

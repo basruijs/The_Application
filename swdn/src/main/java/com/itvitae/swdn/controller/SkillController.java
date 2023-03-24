@@ -40,11 +40,13 @@ public class SkillController implements SkillApi {
     //UPDATE
     @Override
     public void updateSkill(@PathVariable(value = "id") long id, @RequestBody SkillPutDto skill) {
+        System.out.println("update skill");
         skillService.updateSkill(id, skill);
     }
 
     @Override
     public void addCertificate(@PathVariable(value = "id") long id, @RequestParam("file") MultipartFile file) throws IOException {
+        System.out.println("add certificate");
         skillService.addCertificate(id, file);
     }
 

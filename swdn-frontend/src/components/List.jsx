@@ -14,6 +14,7 @@ function List(props) {
                         key={item.id}
                         selected={props.selected}
                         select={props.select}
+                        completed={item.completed}
                     />
                 ))}
             </div>

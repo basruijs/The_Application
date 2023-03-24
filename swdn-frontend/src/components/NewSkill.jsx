@@ -5,6 +5,10 @@ function NewSkill(props) {
     const [hardSkill, setHardSkill] = useState(true);
 
     function addSkill(name, hardness) {
+        if (props.skills.map((skill) => skill.name).includes(name)) {
+            alert('You already have a skill with that name.');
+            return;
+        }
         const newSkill = JSON.stringify({ name: name, hardSkill: hardness });
         if (!name.replace(/\s/g, '').length) {
         } else {
