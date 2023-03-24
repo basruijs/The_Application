@@ -43,13 +43,20 @@ public class SecurityConfig {
                 .requestMatchers("/api/invitation/new/**")
                 .hasRole("TRAINEE")
 
-                .requestMatchers("/api/person/gettrainees/**")
+                .requestMatchers("/api/person/gettrainees/**",
+                        "/api/template/new",
+                        "/api/template/update/**")
                 .hasRole("COACH")
 
                 .requestMatchers("/api/person/getsubordinates/**")
                 .hasRole("MANAGER")
 
-                .requestMatchers("/api/skill/new/**", "/api/skill/update/**", "/api/skill/add/certificate/**", "/api/skill/delete/**")
+                .requestMatchers("/api/skill/new/**",
+                        "/api/skill/update/**",
+                        "/api/skill/add/certificate/**",
+                        "/api/skill/delete/**",
+                        "/api/template/assign/**",
+                        "/api/template/all")
                 .hasAnyRole("TRAINEE", "COACH")
 
                 .requestMatchers("/api/evaluation/new/**", "/api/evaluation/evaluator/**", "/api/role/trainee/all")
