@@ -41,6 +41,16 @@ public interface UserApi {
     @PutMapping("/changepassword")
     void updatePassword(@RequestBody PasswordChange newCredentials);
 
+    @Operation(
+            summary = "Updates the email of a user",
+            description = "Replaces the email address of a user with a new one",
+            tags = {"user"}
+    )
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @PutMapping("/changeemail")
+    void updateEmail(@RequestBody EmailChange newCredentials);
+
+
     //DELETE
     @Operation(
             summary = "Deletes a user and the related person",
@@ -50,13 +60,4 @@ public interface UserApi {
     @ApiResponse(responseCode = "200", description = "Successful operation")
     @DeleteMapping("/delete/{id}")
     void deleteUserById(@PathVariable(value = "id") long id);
-
-    @Operation(
-            summary = "Updates the email of a user",
-            description = "Replaces the email address of a user with a new one",
-            tags = {"user"}
-    )
-    @ApiResponse(responseCode = "200", description = "Successful operation")
-    @PutMapping("/changeemail")
-    void updateEmail(@RequestBody EmailChange newCredentials);
 }
