@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import EmailChanger from './components/EmailChanger';
 import PasswordChanger from './components/PasswordChanger';
 
 export default function AccountPage(props) {
@@ -7,6 +8,7 @@ export default function AccountPage(props) {
     const [name, setName] = useState(props.person.name);
     const [address, setAddress] = useState(props.person.address);
     const [city, setCity] = useState(props.person.city);
+    const [emailChange, setEmailChange] = useState(false);
     const [passwordChange, setPasswordChange] = useState(false);
 
     const fetchData = async () => {
@@ -127,6 +129,18 @@ export default function AccountPage(props) {
                         <br />
                         <p>{props.email}</p>
                         <br />
+                        {emailChange ? (
+                            <EmailChanger
+                                setEmailChange={setEmailChange}
+                                email={props.email}
+                                password={props.password}
+                                setEmail={props.setEmail}
+                            />
+                        ) : (
+                            <button onClick={() => setEmailChange(true)}>
+                                Change Email
+                            </button>
+                        )}
                         {passwordChange ? (
                             <PasswordChanger
                                 setPasswordChange={setPasswordChange}

@@ -19,7 +19,6 @@ export default function PasswordChanger(props) {
             oldPassword: checkPassword,
             newPassword: newPassword,
         };
-        console.log(passwordUpdate);
         fetch(`http://localhost:8082/api/user/changepassword`, {
             method: 'PUT',
             headers: {

@@ -102,10 +102,11 @@ public class UserService {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
+
         user.setPassword(passwordEncoder.encode(newCredentials.getNewPassword()));
         userRepository.save(user);
     }
+
 
     public void newAdmin(UserPostDto userPostDto, long roleid) {
         User newUser = userMapper.toEntity(userPostDto);
@@ -154,7 +155,7 @@ public class UserService {
         for (int i = 0; i < skillCount; i++) {
             Skill skillThatsGoingToDie = skillDeathRow.get(i);
             DBFile fileThatsGoingToDie = skillThatsGoingToDie.getCertificate();
-            if(fileThatsGoingToDie != null) {
+            if (fileThatsGoingToDie != null) {
                 dbFileRepository.deleteById(fileThatsGoingToDie.getId());
             }
             skillRepository.deleteById(skillThatsGoingToDie.getId());
@@ -162,4 +163,23 @@ public class UserService {
         personRepository.deleteById(personId);
         userRepository.deleteById(id);
     }
-}
+    public void updateEmail(EmailChange newCredentials){
+            Optional<User> foundUser = userRepository.findByEmail(newCredentials.getOldEmail());
+            if (!foundUser.isPresent()) {
+                throw new IllegalArgumentException("No such user exists");
+            }
+            User user = foundUser.get();
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getEmail(),
+                            newCredentials.getPassword()
+                    )
+            );
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            user.setEmail(newCredentials.getNewEmail());
+            userRepository.save(user);
+        }
+
+    }
+
