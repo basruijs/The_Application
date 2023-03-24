@@ -28,5 +28,6 @@ public class Evaluation {
     private LocalTime time;
     private LocalTime duration;
 
+    private boolean deleted = false;
 
 }

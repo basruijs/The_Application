@@ -57,7 +57,7 @@ public class EvaluationService {
 
     public EvaluationDto getEvaluationById(long id) {
         Optional<Evaluation> foundEvaluation = evaluationRepository.findById(id);
-        if (!foundEvaluation.isPresent()) {
+        if (!foundEvaluation.isPresent() || foundEvaluation.get().isDeleted()) {
             throw new IllegalArgumentException("No such meeting exists");
         }
         return evaluationMapper.toDto(foundEvaluation.get());
@@ -66,6 +66,7 @@ public class EvaluationService {
     public Iterable<EvaluationDto> getAllEvaluations() {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
+                .filter(evaluation -> !evaluation.isDeleted())
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
                 .collect(Collectors.toList());
     }
@@ -73,6 +74,7 @@ public class EvaluationService {
     public Iterable<EvaluationDto> getAllEvaluationsByTrainee(long traineeid) {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
+                .filter(evaluation -> !evaluation.isDeleted())
                 .filter(evaluation -> Objects.equals(evaluation.getTrainee().getId(), traineeid))
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
                 .collect(Collectors.toList());
@@ -81,6 +83,7 @@ public class EvaluationService {
     public Iterable<EvaluationDto> getAllEvaluationsByEvaluator(long evaluatorid) {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
+                .filter(evaluation -> !evaluation.isDeleted())
                 .filter(evaluation -> Objects.equals(evaluation.getEvaluator().getId(), evaluatorid))
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
                 .collect(Collectors.toList());
@@ -90,6 +93,7 @@ public class EvaluationService {
         LocalDate date = LocalDate.now();
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
+                .filter(evaluation -> !evaluation.isDeleted())
                 .filter(evaluation -> Objects.equals(evaluation.getTrainee().getId(), traineeid))
                 .filter(evaluation -> !evaluation.getDate().isBefore(date))
                 .map(evaluation -> evaluationMapper.toDto(evaluation))
@@ -100,6 +104,7 @@ public class EvaluationService {
         LocalDate date = LocalDate.now();
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)
+                .filter(evaluation -> !evaluation.isDeleted())
                 .filter(evaluation -> Objects.equals(evaluation.getEvaluator().getId(), evaluatorid))
                 .filter(evaluation -> !evaluation.getDate().isBefore(date))
                 .map(evaluation -> evaluationMapper.toDto(evaluation))

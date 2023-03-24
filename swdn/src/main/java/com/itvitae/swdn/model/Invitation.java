@@ -24,4 +24,6 @@ public class Invitation {
     private LocalDate sendDate;
     private String feedback;
 
+    private boolean deleted = false;
+
 }

@@ -27,6 +27,8 @@ public class DBFile {
     @JsonIgnore
     private Skill skill;
 
+    private boolean deleted = false;
+
     public DBFile(String fileName, String fileType, byte[] data) {
         this.fileName = fileName;
         this.fileType = fileType;
