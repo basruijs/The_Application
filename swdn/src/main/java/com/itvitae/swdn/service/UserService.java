@@ -120,7 +120,7 @@ public class UserService {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
+        
         user.setEmail(newCredentials.getNewEmail());
         userRepository.save(user);
     }
