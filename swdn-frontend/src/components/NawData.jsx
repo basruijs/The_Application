@@ -190,8 +190,8 @@ export default function NawData(props) {
                 {props.person != null &&
                 typeof props.person != undefined &&
                 props.viewer != null &&
-                (typeof props.viewer != undefined) &
-                    (props.person.id != props.viewer.id) ? (
+                typeof props.viewer != undefined &&
+                props.person.id != props.viewer.id ? (
                     <button
                         onClick={() => {
                             if (
