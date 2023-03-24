@@ -5,12 +5,16 @@ import com.itvitae.swdn.dto.SkillTemplateGetDto;
 import com.itvitae.swdn.mapper.SkillTemplateMapper;
 import com.itvitae.swdn.model.SkillTemplate;
 import com.itvitae.swdn.repository.SkillTemplateRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+@Service
+@Transactional
 public class SkillTemplateService {
     @Autowired
     SkillTemplateRepository skillTemplateRepository;
