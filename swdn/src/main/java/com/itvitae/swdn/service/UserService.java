@@ -1,9 +1,6 @@
 package com.itvitae.swdn.service;
 
-import com.itvitae.swdn.dto.LoginRequest;
-import com.itvitae.swdn.dto.PasswordChange;
-import com.itvitae.swdn.dto.PersonGetDto;
-import com.itvitae.swdn.dto.UserPostDto;
+import com.itvitae.swdn.dto.*;
 import com.itvitae.swdn.mapper.PersonMapper;
 import com.itvitae.swdn.mapper.UserMapper;
 import com.itvitae.swdn.model.Person;
@@ -92,10 +89,11 @@ public class UserService {
                 )
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        
+
         user.setPassword(passwordEncoder.encode(newCredentials.getNewPassword()));
         userRepository.save(user);
     }
+
 
     public void newAdmin(UserPostDto userPostDto, long roleid) {
         User newUser = userMapper.toEntity(userPostDto);
@@ -107,5 +105,23 @@ public class UserService {
         person.setRole(roleService.getRoleById(roleid));
 
         roleService.addPersonToRole(personRepository.save(person));
+    }
+
+    public void updateEmail(EmailChange newCredentials) {
+        Optional<User> foundUser = userRepository.findByEmail(newCredentials.getOldEmail());
+        if (!foundUser.isPresent()) {
+            throw new IllegalArgumentException("No such user exists");
+        }
+        User user = foundUser.get();
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        user.getEmail(),
+                        newCredentials.getPassword()
+                )
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        
+        user.setEmail(newCredentials.getNewEmail());
+        userRepository.save(user);
     }
 }

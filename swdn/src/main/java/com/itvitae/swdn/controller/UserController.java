@@ -1,14 +1,9 @@
 package com.itvitae.swdn.controller;
 
-import com.itvitae.swdn.dto.LoginRequest;
-import com.itvitae.swdn.dto.PasswordChange;
-import com.itvitae.swdn.dto.PersonGetDto;
-import com.itvitae.swdn.dto.UserPostDto;
+import com.itvitae.swdn.dto.*;
 import com.itvitae.swdn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,18 +14,23 @@ public class UserController implements UserApi {
 
     //CREATE
     @Override
-    public void newUser(@RequestBody UserPostDto userPostDto, @PathVariable(value = "roleid") long roleid) {
+    public void newUser(UserPostDto userPostDto, long roleid) {
         userService.newUser(userPostDto, roleid);
     }
 
     @Override
-    public PersonGetDto authenticateUser(@RequestBody LoginRequest loginRequest) {
+    public PersonGetDto authenticateUser(LoginRequest loginRequest) {
         return userService.login(loginRequest);
     }
 
     //UPDATE
     @Override
-    public void updatePassword(@RequestBody PasswordChange newCredentials) {
+    public void updatePassword(PasswordChange newCredentials) {
         userService.updatePassword(newCredentials);
+    }
+
+    @Override
+    public void updateEmail(EmailChange newCredentials) {
+        userService.updateEmail(newCredentials);
     }
 }
