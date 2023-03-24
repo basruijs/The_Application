@@ -6,9 +6,13 @@ import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.dto.UserPostDto;
 import com.itvitae.swdn.mapper.PersonMapper;
 import com.itvitae.swdn.mapper.UserMapper;
+import com.itvitae.swdn.model.DBFile;
 import com.itvitae.swdn.model.Person;
+import com.itvitae.swdn.model.Skill;
 import com.itvitae.swdn.model.User;
+import com.itvitae.swdn.repository.DBFileRepository;
 import com.itvitae.swdn.repository.PersonRepository;
+import com.itvitae.swdn.repository.SkillRepository;
 import com.itvitae.swdn.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.cert.Certificate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,6 +46,12 @@ public class UserService {
 
     @Autowired
     EmailService emailService;
+
+    @Autowired
+    SkillRepository skillRepository;
+
+    @Autowired
+    DBFileRepository dbFileRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -116,8 +129,19 @@ public class UserService {
 
         User executeeUser = userRepository.findById(id).get();
         Person executeePerson = executeeUser.getPerson();
+        //The skills must be executed for their crimes
+        List<Skill> skillDeathRow = executeePerson.getSkills();
         long personId = executeePerson.getId();
+        int skillCount = skillDeathRow.size();
 
+        for (int i = 0; i < skillCount; i++) {
+            Skill skillThatsGoingToDie = skillDeathRow.get(i);
+            DBFile fileThatsGoingToDie = skillThatsGoingToDie.getCertificate();
+            if(fileThatsGoingToDie != null) {
+                dbFileRepository.deleteById(fileThatsGoingToDie.getId());
+            }
+            skillRepository.deleteById(skillThatsGoingToDie.getId());
+        }
         personRepository.deleteById(personId);
         userRepository.deleteById(id);
     }
