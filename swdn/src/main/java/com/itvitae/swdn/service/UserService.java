@@ -1,19 +1,10 @@
 package com.itvitae.swdn.service;
 
-import com.itvitae.swdn.dto.LoginRequest;
-import com.itvitae.swdn.dto.PasswordChange;
-import com.itvitae.swdn.dto.PersonGetDto;
-import com.itvitae.swdn.dto.UserPostDto;
+import com.itvitae.swdn.dto.*;
 import com.itvitae.swdn.mapper.PersonMapper;
 import com.itvitae.swdn.mapper.UserMapper;
-import com.itvitae.swdn.model.DBFile;
-import com.itvitae.swdn.model.Person;
-import com.itvitae.swdn.model.Skill;
-import com.itvitae.swdn.model.User;
-import com.itvitae.swdn.repository.DBFileRepository;
-import com.itvitae.swdn.repository.PersonRepository;
-import com.itvitae.swdn.repository.SkillRepository;
-import com.itvitae.swdn.repository.UserRepository;
+import com.itvitae.swdn.model.*;
+import com.itvitae.swdn.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -52,6 +43,12 @@ public class UserService {
 
     @Autowired
     DBFileRepository dbFileRepository;
+
+    @Autowired
+    EvaluationRepository evaluationRepository;
+
+    @Autowired
+    InvitationRepository invitationRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -129,10 +126,30 @@ public class UserService {
 
         User executeeUser = userRepository.findById(id).get();
         Person executeePerson = executeeUser.getPerson();
+
         //The skills must be executed for their crimes
         List<Skill> skillDeathRow = executeePerson.getSkills();
+
+        List<Invitation> feedbackDeathRow = executeePerson.getSentInvitations();
+
+        List<Evaluation> evaluationDeathRow = executeePerson.getEvaluatorEvaluations();
+        evaluationDeathRow.addAll(executeePerson.getTraineeEvaluations());
+
         long personId = executeePerson.getId();
         int skillCount = skillDeathRow.size();
+        int feedbackCount = feedbackDeathRow.size();
+        int evaluationCount = evaluationDeathRow.size();
+
+
+        for (int i = 0; i < feedbackCount; i++) {
+            Invitation feedbackThatsGoingToDie = feedbackDeathRow.get(i);
+            invitationRepository.deleteById(feedbackThatsGoingToDie.getId());
+        }
+
+        for (int i = 0; i < evaluationCount; i++) {
+            Evaluation evaluationThatsGoingToDie = evaluationDeathRow.get(i);
+            evaluationRepository.deleteById(evaluationThatsGoingToDie.getId());
+        }
 
         for (int i = 0; i < skillCount; i++) {
             Skill skillThatsGoingToDie = skillDeathRow.get(i);
