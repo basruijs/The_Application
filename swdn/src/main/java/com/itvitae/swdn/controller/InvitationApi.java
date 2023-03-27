@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "feedback", description = "360 feedback invitation api")
 @RequestMapping("/api/invitation")
 public interface InvitationApi {
+
+    //CREATE
     @Operation(
             summary = "Creates a new feedback request",
             description = "Creates a new feedback request from the specified person",
@@ -22,15 +24,7 @@ public interface InvitationApi {
     @PostMapping("/new/{requesterid}")
     void newInvitation(@RequestBody InvitationDto invitationDto, @PathVariable(value = "requesterid") Long requesterid);
 
-    @Operation(
-            summary = "Adds feedback to a request",
-            description = "Adds feedback to the specified request",
-            tags = {"feedback"}
-    )
-    @ApiResponse(responseCode = "200", description = "Successful operation")
-    @PutMapping("/update/{id}")
-    void giveFeedback(@PathVariable(value = "id") long id, @RequestBody InvitationPutDto invitation);
-
+    //READ
     @Operation(
             summary = "Returns feedback requests received",
             description = "Returns all feedback requests sent to the specified trainee",
@@ -48,4 +42,16 @@ public interface InvitationApi {
     @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = InvitationGetDto.class)))
     @GetMapping(value = "/givers/{requesterid}", produces = "application/json")
     Iterable<InvitationGetDto> getGiversByRequester(@PathVariable(value = "requesterid") Long requesterid);
+
+    //UPDATE
+    @Operation(
+            summary = "Adds feedback to a request",
+            description = "Adds feedback to the specified request",
+            tags = {"feedback"}
+    )
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @PutMapping("/update/{id}")
+    void giveFeedback(@PathVariable(value = "id") long id, @RequestBody InvitationPutDto invitation);
+
+
 }

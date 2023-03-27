@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Tag(name = "role", description = "role api")
 @RequestMapping("/api/role")
 public interface RoleApi {
+
+    //READ
     @Operation(
             summary = "Returns all trainees",
             description = "Returns all people with the trainee role",

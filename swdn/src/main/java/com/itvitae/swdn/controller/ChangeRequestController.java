@@ -19,16 +19,21 @@ public class ChangeRequestController implements ChangeRequestApi {
     @Autowired
     EmailService emailService;
 
+    //CREATE
     @Override
     public void newChangeRequest(@RequestBody ChangeRequestDto changeRequestDto, @PathVariable(value = "personid") long personid) {
         changeRequestService.addChangeRequest(changeRequestDto, personid);
     }
 
+
+    //READ
     @Override
     public ChangeRequestGetDto getRequestByPerson(@PathVariable(value = "id") long id) {
         return changeRequestService.getRequestByPerson(id);
     }
 
+
+    //DELETE
     @Override
     public void deleteChangeRequest(@PathVariable(value = "id") long id) {
         changeRequestService.deleteChangeRequest(id);

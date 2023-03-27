@@ -20,7 +20,7 @@ export default function NawData(props) {
                         'Basic ' + btoa(props.email + ':' + props.password),
                 },
             }
-        ).then(() => console.log('manager: ' + manager + ' coach: ' + coach));
+        );
     }
 
     useEffect(() => {

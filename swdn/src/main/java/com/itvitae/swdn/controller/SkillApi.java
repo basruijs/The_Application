@@ -18,6 +18,8 @@ import java.io.IOException;
 @Tag(name = "skill", description = "skill api")
 @RequestMapping("/api/skill")
 public interface SkillApi {
+
+    //CREATE
     @Operation(
             summary = "Creates a new skill",
             description = "Creates a new skill for the specified person",
@@ -46,6 +48,15 @@ public interface SkillApi {
     @GetMapping(value = "/{traineeid}/all", produces = "application/json")
     Iterable<SkillGetDto> getSkillByPerson(@PathVariable(value = "traineeid") long traineeid);
 
+    @Operation(
+            summary = "Download link for certificate",
+            description = "Allows downloading the certificate of the specified skill",
+            tags = {"skill"}
+    )
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @GetMapping("/certificate/{id}")
+    ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id);
+
     //UPDATE
     @Operation(
             summary = "Updates a skill",
@@ -65,15 +76,7 @@ public interface SkillApi {
     @PutMapping("/add/certificate/{id}")
     void addCertificate(@PathVariable(value = "id") long id, @RequestParam("file") MultipartFile file) throws IOException;
 
-    @Operation(
-            summary = "Download link for certificate",
-            description = "Allows downloading the certificate of the specified skill",
-            tags = {"skill"}
-    )
-    @ApiResponse(responseCode = "200", description = "Successful operation")
-    @GetMapping("/certificate/{id}")
-    ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id);
-
+    //DELETE
     @Operation(
             summary = "Deletes a skill",
             description = "Deletes the specified skill",

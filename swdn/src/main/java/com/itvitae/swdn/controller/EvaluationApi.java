@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "evaluation", description = "evaluation meeting api")
 @RequestMapping("/api/evaluation")
 public interface EvaluationApi {
+    //CREATE
     @Operation(
             summary = "Plans a new evaluation meeting",
             description = "Creates a new evaluation meeting between the specified people",
