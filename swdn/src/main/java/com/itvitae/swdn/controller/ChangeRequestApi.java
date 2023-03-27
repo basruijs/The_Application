@@ -44,7 +44,6 @@ public interface ChangeRequestApi {
     @DeleteMapping("/delete/{id}")
     void deleteChangeRequest(@PathVariable(value = "id") long id);
 
-    //DELETE
     @Operation(
             summary = "Denies a change request",
             description = "Denies the change request with the specified id, for the reason specified in the body.",
