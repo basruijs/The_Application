@@ -352,6 +352,11 @@
     background-color: #00a5cf;
 }
 
+.two-lists {
+    display: flex;
+    flex-direction: row;
+}
+
 @media (prefers-color-scheme: light) {
     :root {
         color: #213547;

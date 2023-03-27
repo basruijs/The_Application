@@ -37,7 +37,7 @@ export default function CoachFeedbackPage(props) {
 
     return (
         <div className="feedbackPage">
-            <div>
+            <div className="two-lists">
                 <List
                     content={props.trainees}
                     selected={props.trainee}

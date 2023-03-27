@@ -127,7 +127,7 @@ export default function CoachDashboard(props) {
 
     return (
         <div className="dashboard">
-            <div>
+            <div className="two-lists">
                 <List
                     content={props.trainees}
                     selected={props.trainee}
