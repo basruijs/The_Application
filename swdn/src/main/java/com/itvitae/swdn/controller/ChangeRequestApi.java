@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "changerequest", description = "change request api")
 @RequestMapping("/api/changerequest")
 public interface ChangeRequestApi {
+
+    //CREATE
     @Operation(
             summary = "Creates a new change request",
             description = "Creates a new change request for the specified person",
@@ -21,6 +23,7 @@ public interface ChangeRequestApi {
     @PostMapping("/new/{personid}")
     void newChangeRequest(@RequestBody ChangeRequestDto changeRequestDto, @PathVariable(value = "personid") long personid);
 
+    //READ
     @Operation(
             summary = "Returns a change request",
             description = "Returns the open change request for the specified person",
@@ -30,6 +33,8 @@ public interface ChangeRequestApi {
     @GetMapping(value = "/byperson/{id}", produces = {"application/json"})
     ChangeRequestGetDto getRequestByPerson(@PathVariable(value = "id") long id);
 
+
+    //DELETE
     @Operation(
             summary = "Deletes a change request",
             description = "Deletes the change request with the specified id",

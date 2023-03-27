@@ -37,6 +37,11 @@ public class SkillController implements SkillApi {
         return skillService.getSkillByPerson(traineeid);
     }
 
+    @Override
+    public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
+        return skillService.downloadCertificate(id);
+    }
+
     //UPDATE
     @Override
     public void updateSkill(@PathVariable(value = "id") long id, @RequestBody SkillPutDto skill) {
@@ -50,11 +55,7 @@ public class SkillController implements SkillApi {
         skillService.addCertificate(id, file);
     }
 
-    @Override
-    public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
-        return skillService.downloadCertificate(id);
-    }
-
+    //DELETE
     @Override
     public void deleteSkillById(@PathVariable(value = "id") long id) {
         skillService.deleteSkillById(id);

@@ -16,16 +16,13 @@ public class InvitationController implements InvitationApi {
     @Autowired
     InvitationService invitationService;
 
+    //CREATE
     @Override
     public void newInvitation(@RequestBody InvitationDto invitationDto, @PathVariable(value = "requesterid") Long requesterid) {
         invitationService.newInvitation(invitationDto, requesterid);
     }
 
-    @Override
-    public void giveFeedback(@PathVariable(value = "id") long id, @RequestBody InvitationPutDto invitation) {
-        invitationService.giveFeedback(id, invitation);
-    }
-
+    //READ
     @Override
     public Iterable<InvitationGetDto> getRequestersByGiver(@PathVariable(value = "giverid") Long giverid) {
         return invitationService.getRequestersByGiver(giverid);
@@ -34,6 +31,12 @@ public class InvitationController implements InvitationApi {
     @Override
     public Iterable<InvitationGetDto> getGiversByRequester(@PathVariable(value = "requesterid") Long requesterid) {
         return invitationService.getGiversByRequester(requesterid);
+    }
+
+    //UPDATE
+    @Override
+    public void giveFeedback(@PathVariable(value = "id") long id, @RequestBody InvitationPutDto invitation) {
+        invitationService.giveFeedback(id, invitation);
     }
 
 }

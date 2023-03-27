@@ -15,6 +15,7 @@ public class EvaluationController implements EvaluationApi {
     EvaluationService evaluationService;
 
 
+    //CREATE
     @Override
     public void newEvaluation(@RequestBody EvaluationDto evaluationDto, @PathVariable(value = "coachid") long coachid, @PathVariable(value = "traineeid") long traineeid) {
         evaluationService.newEvaluation(evaluationDto, coachid, traineeid);

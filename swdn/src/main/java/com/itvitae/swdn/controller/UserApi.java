@@ -30,7 +30,6 @@ public interface UserApi {
     @PostMapping(value = "/login", produces = {"application/json"})
     PersonGetDto authenticateUser(@RequestBody LoginRequest loginRequest);
 
-
     //UPDATE
     @Operation(
             summary = "Updates the password of a user",
@@ -49,7 +48,6 @@ public interface UserApi {
     @ApiResponse(responseCode = "200", description = "Successful operation")
     @PutMapping("/changeemail")
     void updateEmail(@RequestBody EmailChange newCredentials);
-
 
     //DELETE
     @Operation(
