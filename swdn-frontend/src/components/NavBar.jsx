@@ -11,7 +11,8 @@ function NavBar(props) {
                         to="/login"
                         className="navButton"
                     >
-                        Login
+                        {/* Door */}
+                        &#128682;&#xFE0E;
                     </NavLink>
                 ) : (
                     <>
@@ -19,13 +20,15 @@ function NavBar(props) {
                             href="/login"
                             className="navButton"
                         >
-                            Log out
+                            {/* Door */}
+                            &#128682;&#xFE0E;
                         </a>
                         <NavLink
                             to="/account"
                             className="navButton"
                         >
-                            Account
+                            {/* Bust */}
+                            &#128100;&#xFE0E;
                         </NavLink>
                     </>
                 )}
@@ -35,7 +38,8 @@ function NavBar(props) {
                         to="/hr"
                         className="navButton"
                     >
-                        Dashboard
+                        {/* Bar graph */}
+                        📊&#xFE0E;
                     </NavLink>
                 ) : (
                     ''
@@ -46,19 +50,22 @@ function NavBar(props) {
                             to="/coach"
                             className="navButton"
                         >
-                            Dashboard
+                            {/* Bar graph */}
+                            📊&#xFE0E;
                         </NavLink>
                         <NavLink
                             to="/coachfeedback"
                             className="navButton"
                         >
-                            Feedback
+                            {/* Mail */}
+                            &#128233;&#xFE0E;
                         </NavLink>
                         <NavLink
                             to="/templates"
                             className="navButton"
                         >
-                            Templates
+                            {/* Clipboard */}
+                            &#128203;&#xFE0E;
                         </NavLink>
                     </>
                 ) : (
@@ -69,7 +76,8 @@ function NavBar(props) {
                         to="/manager"
                         className="navButton"
                     >
-                        Dashboard
+                        {/* Bar graph */}
+                        📊&#xFE0E;
                     </NavLink>
                 ) : (
                     ''
@@ -80,13 +88,15 @@ function NavBar(props) {
                             to="/trainee"
                             className="navButton"
                         >
-                            Dashboard
+                            {/* Bar graph */}
+                            📊&#xFE0E;
                         </NavLink>
                         <NavLink
                             to="/feedback"
                             className="navButton"
                         >
-                            Feedback
+                            {/* Mail */}
+                            &#128233;&#xFE0E;
                         </NavLink>
                     </>
                 ) : (
