@@ -16,7 +16,7 @@ export default function TemplateData(props) {
                     {props.skill.hardSkill ? ' Hard skill' : ' Soft skill'}
                 </i>
             </h2>
-
+            <p className="text">{props.skill.description}</p>
             <button
                 onClick={() => {
                     if (
