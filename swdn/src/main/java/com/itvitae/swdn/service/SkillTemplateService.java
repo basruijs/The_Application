@@ -54,6 +54,9 @@ public class SkillTemplateService {
         if (skill.getHardSkill() != null) {
             template.setHardSkill(skill.getHardSkill());
         }
+        if (skill.getDescription() != null) {
+            template.setDescription(skill.getDescription());
+        }
         skillTemplateRepository.save(template);
     }
 

@@ -17,6 +17,10 @@ public class SkillPutDto {
     @Schema(description = "Whether the skill is a hard skill or a soft skill. (true=hard)",
             example = "true")
     private Boolean hardSkill;
+    @Schema(description = "Description of the skill.",
+            example = "Cutting down trees using axes and chainsaws. Includes getting the National Lumber Association Woodcutting 1 certification.",
+            requiredMode = Schema.RequiredMode.REQUIRED)
+    private String description;
     @Schema(description = "Report on progress/completion of the skill.",
             example = "Can chop down trees with assistance, using an axe. Can't use a chainsaw or chop trees without assistance yet.")
     private String report;

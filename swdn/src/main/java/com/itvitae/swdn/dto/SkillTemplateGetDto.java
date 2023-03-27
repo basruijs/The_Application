@@ -21,4 +21,8 @@ public class SkillTemplateGetDto {
             example = "true",
             requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean hardSkill;
+    @Schema(description = "Description of the skill.",
+            example = "Cutting down trees using axes and chainsaws. Includes getting the National Lumber Association Woodcutting 1 certification.",
+            requiredMode = Schema.RequiredMode.REQUIRED)
+    private String description;
 }
