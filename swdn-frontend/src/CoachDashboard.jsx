@@ -169,6 +169,9 @@ export default function CoachDashboard(props) {
                     email={props.email}
                     password={props.password}
                     skills={skills}
+                    templates={props.templates}
+                    template={props.template}
+                    setTemplate={props.setTemplate}
                 />
                 <NewMeeting
                     evaluator={props.person.id}

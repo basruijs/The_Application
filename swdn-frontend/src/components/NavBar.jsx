@@ -54,6 +54,12 @@ function NavBar(props) {
                         >
                             Feedback
                         </NavLink>
+                        <NavLink
+                            to="/templates"
+                            className="navButton"
+                        >
+                            Templates
+                        </NavLink>
                     </>
                 ) : (
                     ''

@@ -33,7 +33,7 @@ public interface SkillApi {
             description = "Returns the specified skill",
             tags = {"skill"}
     )
-    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = SkillController.class)))
+    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = SkillGetDto.class)))
     @GetMapping(value = "/{id}", produces = {"application/json"})
     SkillGetDto getSkillById(@PathVariable(value = "id") long id);
 
@@ -42,7 +42,7 @@ public interface SkillApi {
             description = "Returns all skills of the specified trainee",
             tags = {"skill"}
     )
-    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = SkillController.class)))
+    @ApiResponse(responseCode = "200", description = "Successful operation", content = @Content(schema = @Schema(implementation = SkillGetDto.class)))
     @GetMapping(value = "/{traineeid}/all", produces = "application/json")
     Iterable<SkillGetDto> getSkillByPerson(@PathVariable(value = "traineeid") long traineeid);
 

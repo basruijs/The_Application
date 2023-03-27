@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import reactLogo from './assets/react.svg';
 import './App.css';
 import CoachDashboard from './CoachDashboard';
@@ -12,6 +12,7 @@ import AccountPage from './AccountPage';
 import FeedbackPage from './FeedbackPage';
 import TraineeDashboard from './TraineeDashboard';
 import CoachFeedbackPage from './CoachFeedbackPage';
+import TemplatesPage from './TemplatesPage';
 
 function App() {
     const [email, setEmail] = useState('');
@@ -23,6 +24,33 @@ function App() {
     });
     const [trainees, setTrainees] = useState([]);
     const [trainee, setTrainee] = useState(-1);
+    const [templates, setTemplates] = useState([]);
+    const [template, setTemplate] = useState(-1);
+
+    const fetchTemplates = async () => {
+        const result = await fetch(`http://localhost:8082/api/template/all`, {
+            headers: {
+                Authorization: 'Basic ' + btoa(email + ':' + password),
+            },
+        });
+        if (!result.ok) {
+            throw new Error('Data coud not be fetched!');
+        } else {
+            return result.json();
+        }
+    };
+
+    useEffect(() => {
+        if (email) {
+            fetchTemplates()
+                .then((result) => {
+                    setTemplates(result);
+                })
+                .catch((e) => {
+                    console.log(e.message);
+                });
+        }
+    }, [person]);
 
     return (
         <div className="App">
@@ -39,6 +67,9 @@ function App() {
                             setTrainees={setTrainees}
                             trainee={trainee}
                             setTrainee={setTrainee}
+                            templates={templates}
+                            template={template}
+                            setTemplate={setTemplate}
                         />
                     }
                 />
@@ -59,6 +90,9 @@ function App() {
                             email={email}
                             password={password}
                             person={person}
+                            templates={templates}
+                            template={template}
+                            setTemplate={setTemplate}
                         />
                     }
                 />
@@ -114,6 +148,27 @@ function App() {
                             trainees={trainees}
                             trainee={trainee}
                             setTrainee={setTrainee}
+                        />
+                    }
+                />
+                <Route
+                    path="/templates"
+                    element={
+                        <TemplatesPage
+                            email={email}
+                            password={password}
+                            templates={templates}
+                            update={() => {
+                                fetchTemplates()
+                                    .then((result) => {
+                                        setTemplates(result);
+                                    })
+                                    .catch((e) => {
+                                        console.log(e.message);
+                                    });
+                            }}
+                            template={template}
+                            setTemplate={setTemplate}
                         />
                     }
                 />
