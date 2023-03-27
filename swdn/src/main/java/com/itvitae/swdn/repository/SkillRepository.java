@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SkillRepository extends CrudRepository<Skill, Long> {
-    boolean existsByNameAndTrainee(String name, Person trainee);
+    boolean existsByNameAndTraineeAndDeleted(String name, Person trainee, boolean deleted);
 }

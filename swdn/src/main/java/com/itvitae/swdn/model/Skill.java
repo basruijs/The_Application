@@ -28,4 +28,7 @@ public class Skill {
     @ManyToOne
     @JoinColumn(name = "trainee_id")
     private Person trainee;
+
+    private boolean deleted = false;
+
 }

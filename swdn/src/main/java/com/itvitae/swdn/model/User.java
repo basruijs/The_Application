@@ -21,6 +21,8 @@ public class User {
     @JoinColumn(name = "person_id")
     private Person person;
 
+    private boolean deleted = false;
+
     public User(String email, String password, String roles) {
         this.email = email;
         this.password = password;

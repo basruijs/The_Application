@@ -81,10 +81,12 @@ public class UserService {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        Optional<User> foundUser = userRepository.findByEmail(loginRequest.getEmail());
+        Optional<User> foundUser = userRepository.findByEmailAndDeleted(loginRequest.getEmail(), false);
+
         if (!foundUser.isPresent()) {
             throw new IllegalStateException("Logged in as nonexistent user");
         }
+
         Person person = foundUser.get().getPerson();
         return personMapper.toDto(person);
     }
@@ -136,7 +138,6 @@ public class UserService {
         List<Evaluation> evaluationDeathRow = executeePerson.getEvaluatorEvaluations();
         evaluationDeathRow.addAll(executeePerson.getTraineeEvaluations());
 
-        long personId = executeePerson.getId();
         int skillCount = skillDeathRow.size();
         int feedbackCount = feedbackDeathRow.size();
         int evaluationCount = evaluationDeathRow.size();
@@ -144,28 +145,26 @@ public class UserService {
 
         for (int i = 0; i < feedbackCount; i++) {
             Invitation feedbackThatsGoingToDie = feedbackDeathRow.get(i);
-            invitationRepository.deleteById(feedbackThatsGoingToDie.getId());
+            feedbackThatsGoingToDie.setDeleted(true);
         }
 
         for (int i = 0; i < evaluationCount; i++) {
             Evaluation evaluationThatsGoingToDie = evaluationDeathRow.get(i);
-            evaluationRepository.deleteById(evaluationThatsGoingToDie.getId());
+            evaluationThatsGoingToDie.setDeleted(true);
         }
 
         for (int i = 0; i < skillCount; i++) {
             Skill skillThatsGoingToDie = skillDeathRow.get(i);
             DBFile fileThatsGoingToDie = skillThatsGoingToDie.getCertificate();
             if (fileThatsGoingToDie != null) {
-                dbFileRepository.deleteById(fileThatsGoingToDie.getId());
+                fileThatsGoingToDie.setDeleted(true);
             }
-            skillRepository.deleteById(skillThatsGoingToDie.getId());
+            skillThatsGoingToDie.setDeleted(true);
         }
-        executeePerson.setName("Deleted User");
-        executeePerson.setAddress("Deleted");
-        executeePerson.setCity("Deleted");
+
         executeePerson.setDeleted(true);
-        executeeUser.setEmail("deleted user");
-        executeeUser.setPassword(null);
+        executeeUser.setDeleted(true);
+        executeeUser.setEmail("[Deleted] " + executeeUser.getEmail());
     }
     public void updateEmail(EmailChange newCredentials){
             Optional<User> foundUser = userRepository.findByEmail(newCredentials.getOldEmail());

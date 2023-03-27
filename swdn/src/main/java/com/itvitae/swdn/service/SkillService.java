@@ -48,6 +48,7 @@ public class SkillService {
     public Iterable<SkillGetDto> getAllSkills() {
         return StreamSupport
                 .stream(skillRepository.findAll().spliterator(), false)
+                .filter(skill -> !skill.isDeleted())
                 .map(skill -> skillMapper.toDto(skill))
                 .collect(Collectors.toList());
     }
@@ -56,13 +57,14 @@ public class SkillService {
         return StreamSupport
                 .stream(skillRepository.findAll().spliterator(), false)
                 .filter(skill -> Objects.equals(skill.getTrainee().getId(), traineeid))
+                .filter(skill -> !skill.isDeleted())
                 .map(skill -> skillMapper.toDto(skill))
                 .collect(Collectors.toList());
     }
 
     public SkillGetDto getSkillById(long id) {
         Optional<Skill> foundSkill = skillRepository.findById(id);
-        if (!foundSkill.isPresent()) {
+        if (!foundSkill.isPresent() || foundSkill.get().isDeleted()) {
             throw new IllegalArgumentException("No such skill exists");
         }
         return skillMapper.toDto(foundSkill.get());
@@ -75,7 +77,7 @@ public class SkillService {
             throw new IllegalArgumentException("Person does not exist");
         }
         Person person = foundPerson.get();
-        if (skillRepository.existsByNameAndTrainee(newSkill.getName(), person)) {
+        if (skillRepository.existsByNameAndTraineeAndDeleted(newSkill.getName(), person, false)) {
             throw new IllegalArgumentException("Duplicate skill name");
         }
         person.getSkills().add(newSkill);
@@ -140,6 +142,7 @@ public class SkillService {
         if (!skillRepository.existsById(id)) {
             throw new IllegalArgumentException("No such skill exists");
         }
-        skillRepository.deleteById(id);
+        Skill skill = skillRepository.findById(id).get();
+        skill.setDeleted(true);
     }
 }
