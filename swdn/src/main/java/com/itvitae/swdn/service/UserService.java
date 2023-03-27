@@ -56,10 +56,6 @@ public class UserService {
     public void newUser(UserPostDto userPostDto, long roleid) {
         User newUser = userMapper.toEntity(userPostDto);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        Optional<User> oldUser = userRepository.findByEmail(newUser.getEmail());
-
-        oldUser.ifPresent(user -> user.setEmail("[Deleted]" + user.getEmail()));
-                
         Person person = personRepository.save(newUser.getPerson());
         newUser.setPerson(person);
         User newerUser = userRepository.save(newUser);
@@ -168,7 +164,7 @@ public class UserService {
 
         executeePerson.setDeleted(true);
         executeeUser.setDeleted(true);
-//        executeeUser.setEmail("[[Deleted]] " + executeeUser.getEmail());
+        executeeUser.setEmail("[Deleted] " + executeeUser.getEmail());
     }
     public void updateEmail(EmailChange newCredentials){
             Optional<User> foundUser = userRepository.findByEmail(newCredentials.getOldEmail());
