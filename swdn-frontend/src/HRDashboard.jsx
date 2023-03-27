@@ -92,18 +92,20 @@ export default function HRDashboard(props) {
     }, [person]);
     return (
         <div className="dashboard">
-            <List
-                content={people}
-                selected={person}
-                select={setPerson}
-                title="People"
-            />
-            <List
-                content={skills.sort((a, b) => a.completed - b.completed)}
-                selected={skill}
-                select={setSkill}
-                title="Skills"
-            />
+            <div>
+                <List
+                    content={people}
+                    selected={person}
+                    select={setPerson}
+                    title="People"
+                />
+                <List
+                    content={skills.sort((a, b) => a.completed - b.completed)}
+                    selected={skill}
+                    select={setSkill}
+                    title="Skills"
+                />
+            </div>
             <SkillOverview
                 skill={skills.find((x) => x.id === skill)}
                 update={() => {

@@ -67,7 +67,7 @@ export default function TraineeDashboard(props) {
     }, [props.person]);
 
     return (
-        <div className="dashboard">
+        <div className="dashboard one-list">
             <List
                 content={skills.sort((a, b) => a.completed - b.completed)}
                 selected={skill}

@@ -28,7 +28,7 @@ function SkillOverview(props) {
             );
         }
     } else {
-        return <div className="skillOverview bordered">None selected</div>;
+        return <div className="skillOverview bordered">No skill selected</div>;
     }
 }
 export default SkillOverview;
