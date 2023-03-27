@@ -49,6 +49,15 @@ public interface UserApi {
     @PutMapping("/changeemail")
     void updateEmail(@RequestBody EmailChange newCredentials);
 
+    @Operation(
+            summary = "Restores an archived account",
+            description = "Restores the user and all related archived information",
+            tags = {"user"}
+    )
+    @ApiResponse(responseCode = "200", description = "Successful operation")
+    @PutMapping("/restore")
+    void reactivateAccount(@RequestBody String email);
+
     //DELETE
     @Operation(
             summary = "Deletes a user and the related person",

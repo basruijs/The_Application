@@ -1,21 +1,19 @@
+import React, { useState } from 'react';
+
 export default function RestoreAccount(props) {
     const [email, setEmail] = useState('');
 
     function restorePerson() {
-        const restoredUser = JSON.stringify({
-            email: email,
-        });
-        setEmail('');
-
-        fetch(`http://localhost:8082/api/user/restore/${id}`, {
-            method: 'POST',
+        fetch(`http://localhost:8082/api/user/restore`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 Authorization:
                     'Basic ' + btoa(props.email + ':' + props.password),
             },
-            body: restoredUser,
+            body: email,
         }).then(() => props.update());
+        setEmail('');
     }
 
     return (
