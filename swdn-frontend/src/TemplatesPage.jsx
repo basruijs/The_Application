@@ -6,7 +6,7 @@ import NewTemplate from './components/NewTemplate';
 
 export default function TemplatesPage(props) {
     return (
-        <div className="dashboard">
+        <div className="dashboard one-list">
             <List
                 content={props.templates}
                 selected={props.template}

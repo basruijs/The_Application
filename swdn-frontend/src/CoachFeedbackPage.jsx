@@ -37,18 +37,20 @@ export default function CoachFeedbackPage(props) {
 
     return (
         <div className="feedbackPage">
-            <List
-                content={props.trainees}
-                selected={props.trainee}
-                select={props.setTrainee}
-                title="Trainees"
-            />
-            <List
-                content={allGiven}
-                selected={given}
-                select={setGiven}
-                title="Received feedback"
-            />
+            <div>
+                <List
+                    content={props.trainees}
+                    selected={props.trainee}
+                    select={props.setTrainee}
+                    title="Trainees"
+                />
+                <List
+                    content={allGiven}
+                    selected={given}
+                    select={setGiven}
+                    title="Received feedback"
+                />
+            </div>
             <FeedbackOverview
                 feedback={allGiven.find((x) => x.id === given)}
                 update={() => {

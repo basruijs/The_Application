@@ -67,7 +67,7 @@ export default function FeedbackPage(props) {
     }, []);
 
     return (
-        <div className="feedbackPage">
+        <div className="feedbackPage one-list">
             <List
                 content={allRequested}
                 selected={requested}
