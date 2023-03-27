@@ -16,4 +16,7 @@ public class SkillPostDto {
             example = "true",
             requiredMode = Schema.RequiredMode.REQUIRED)
     private Boolean hardSkill;
+    @Schema(description = "Description of the skill. Not required.",
+            example = "Cutting down trees using axes and chainsaws. Includes getting the National Lumber Association Woodcutting 1 certification.")
+    private String description;
 }

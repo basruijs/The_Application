@@ -105,6 +105,9 @@ public class SkillService {
             if (skill.getLearningGoals() != null) {
                 oldSkill.setLearningGoals(skill.getLearningGoals());
             }
+            if (skill.getDescription() != null) {
+                oldSkill.setDescription(skill.getDescription());
+            }
 
 
             skillRepository.save(oldSkill);

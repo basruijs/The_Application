@@ -16,5 +16,7 @@ public class SkillTemplate {
     @Column(length = 100)
     private String name;
     private Boolean hardSkill;
+    @Column(length = 600)
+    private String description;
 
 }

@@ -18,6 +18,8 @@ public class Skill {
     private Boolean completed;
     private Boolean hardSkill;
     @Column(length = 600)
+    private String description;
+    @Column(length = 600)
     private String report;
 
     private String learningGoals;

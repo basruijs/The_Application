@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 export default function TemplateEditor(props) {
     const [name, setName] = useState(props.skill.name);
     const [hardSkill, setHardSkill] = useState(props.skill.hardSkill);
+    const [description, setDescription] = useState(props.skill.description);
 
     async function sendChanges() {
         const newTemplate = JSON.stringify({
             name: name,
             hardSkill: hardSkill,
+            description: description,
         });
         await fetch(
             `http://localhost:8082/api/template/update/${props.skill.id}`,
@@ -27,6 +29,7 @@ export default function TemplateEditor(props) {
     useEffect(() => {
         setName(props.skill.name);
         setHardSkill(props.skill.hardSkill);
+        setDescription(props.skill.description);
     }, [props.skill]);
     return (
         <form
@@ -82,6 +85,15 @@ export default function TemplateEditor(props) {
                     </label>
                 </div>
             </h2>
+            <textarea
+                name="description"
+                id="description"
+                cols="60"
+                rows="10"
+                value={description || ''}
+                onChange={(e) => setDescription(e.target.value)}
+                maxLength={600}
+            ></textarea>
         </form>
     );
 }
