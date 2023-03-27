@@ -180,7 +180,7 @@
     padding: 1rem;
     color: white;
     width: 25vw;
-    height: 30vh;
+    height: 28vh;
     background-color: black;
 }
 
@@ -189,7 +189,7 @@
     padding: 1rem;
     color: white;
     width: 25vw;
-    height: 35vh;
+    height: 32vh;
     background-color: black;
 }
 
@@ -310,6 +310,15 @@
     text-decoration: none;
     border-radius: 10px;
     background-color: #747bff;
+}
+
+.restoreAccount {
+    margin: 0;
+    padding: 0.1rem;
+    color: white;
+    width: 25vw;
+    height: 5vh;
+    background-color: black;
 }
 
 .importantImage {
