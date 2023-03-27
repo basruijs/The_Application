@@ -157,7 +157,7 @@ export default function ManagerDashboard(props) {
 
     return (
         <div className="dashboard">
-            <div>
+            <div className="two-lists">
                 <List
                     content={people}
                     selected={person}

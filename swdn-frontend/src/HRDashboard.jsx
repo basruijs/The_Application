@@ -92,7 +92,7 @@ export default function HRDashboard(props) {
     }, [person]);
     return (
         <div className="dashboard">
-            <div>
+            <div className="two-lists">
                 <List
                     content={people}
                     selected={person}
