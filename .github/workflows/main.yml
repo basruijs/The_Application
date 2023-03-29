@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults: 
       run: 
-        working-directory: swdn-frontend
+        working-directory: ./swdn-frontend
 
     steps:
       - name: Checkout repo
