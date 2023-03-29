@@ -13,6 +13,7 @@ function NavBar(props) {
                     >
                         {/* Door */}
                         &#128682;&#xFE0E;
+                        <span className="navBarIconText"> Login</span>
                     </NavLink>
                 ) : (
                     <>
@@ -22,6 +23,7 @@ function NavBar(props) {
                         >
                             {/* Door */}
                             &#128682;&#xFE0E;
+                            <span className="navBarIconText"> Log out</span>
                         </NavLink>
                         <NavLink
                             to="/account"
@@ -29,6 +31,7 @@ function NavBar(props) {
                         >
                             {/* Bust */}
                             &#128100;&#xFE0E;
+                            <span className="navBarIconText"> Account</span>
                         </NavLink>
                     </>
                 )}
@@ -40,6 +43,7 @@ function NavBar(props) {
                     >
                         {/* Bar graph */}
                         📊&#xFE0E;
+                        <span className="navBarIconText"> Dashboard</span>
                     </NavLink>
                 ) : (
                     ''
@@ -52,6 +56,7 @@ function NavBar(props) {
                         >
                             {/* Bar graph */}
                             📊&#xFE0E;
+                            <span className="navBarIconText"> Dashboard</span>
                         </NavLink>
                         <NavLink
                             to="/coachfeedback"
@@ -59,6 +64,7 @@ function NavBar(props) {
                         >
                             {/* Mail */}
                             &#128233;&#xFE0E;
+                            <span className="navBarIconText"> Feedback</span>
                         </NavLink>
                         <NavLink
                             to="/templates"
@@ -66,6 +72,9 @@ function NavBar(props) {
                         >
                             {/* Clipboard */}
                             &#128203;&#xFE0E;
+                            <span className="navBarIconText">
+                                Skill templates
+                            </span>
                         </NavLink>
                     </>
                 ) : (
@@ -78,6 +87,7 @@ function NavBar(props) {
                     >
                         {/* Bar graph */}
                         📊&#xFE0E;
+                        <span className="navBarIconText"> Dashboard</span>
                     </NavLink>
                 ) : (
                     ''
@@ -90,6 +100,7 @@ function NavBar(props) {
                         >
                             {/* Bar graph */}
                             📊&#xFE0E;
+                            <span className="navBarIconText"> Dashboard</span>
                         </NavLink>
                         <NavLink
                             to="/feedback"
@@ -97,6 +108,7 @@ function NavBar(props) {
                         >
                             {/* Mail */}
                             &#128233;&#xFE0E;
+                            <span className="navBarIconText"> Feedback</span>
                         </NavLink>
                     </>
                 ) : (

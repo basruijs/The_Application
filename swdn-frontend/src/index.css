@@ -380,6 +380,9 @@
 }
 
 @media screen and (max-width: 600px) {
+    .navBarIconText {
+        display: none;
+    }
     .dashboard,
     .feedbackPage {
         flex-direction: column;
