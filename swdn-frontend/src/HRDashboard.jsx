@@ -12,7 +12,7 @@ export default function HRDashboard(props) {
     const [skill, setSkill] = useState(-1);
 
     const fetchData = async () => {
-        const result = await fetch('${props.url}/api/person/all', {
+        const result = await fetch(`${props.url}/api/person/all`, {
             headers: {
                 Authorization:
                     'Basic ' + btoa(props.email + ':' + props.password),
