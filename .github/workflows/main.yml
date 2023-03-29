@@ -1,5 +1,10 @@
 name: Deploy
 
+    defaults:
+      run:
+        shell: bash
+        working-directory: swdn-frontend
+
 on:
   push:
     branches: ["main"]
@@ -10,9 +15,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ../swdn-frontend
+
 
     steps:
       - name: Checkout repo
@@ -25,6 +28,8 @@ jobs:
 
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
+        with:
+          working-directory: swdn-frontend
 
       - name: Build project
         run: npm run build
@@ -33,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: production-files
-          path: ./dist # CRA ./build
+          path: ./swdn-frontend/dist # CRA ./build
 
   deploy:
     name: Deploy
@@ -46,10 +51,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: production-files
-          path: ./dist # CRA ./build
+          path: ./swdn-frontend/dist # CRA ./build
 
       - name: Deploy to gh pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./swdn-frontend/dist
