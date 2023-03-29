@@ -1,5 +1,6 @@
 {
     "name": "swdn-frontend",
+    "homepage": "/The_Application/#",
     "private": true,
     "version": "0.0.0",
     "type": "module",
