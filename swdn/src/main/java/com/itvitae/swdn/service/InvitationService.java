@@ -57,6 +57,8 @@ public class InvitationService {
             } else {
                 throw new RuntimeException("email not found");
             }
+        } else {
+            throw new RuntimeException("giver and requester are the same person");
         }
     }
 
