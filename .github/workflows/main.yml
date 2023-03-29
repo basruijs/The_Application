@@ -2,18 +2,16 @@ name: Deploy
 
 on:
   push:
-    branches: [ "main" ]
-    
+    branches: ["main"]
+
   workflow_dispatch:
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    defaults: 
-    - name: Install composer dependencies
-      run: 
-              composer install --no-scripts
+    defaults:
+      run:
         working-directory: ../swdn-frontend
 
     steps:
