@@ -27,9 +27,9 @@ function App() {
     const [template, setTemplate] = useState(-1);
 
     const url =
-        process.env.STATUS === 'production'
-            ? process.env.PROD_URL
-            : process.env.DEV_URL;
+        import.meta.env.VITE_REACT_STATUS === 'production'
+            ? import.meta.env.VITE_REACT_PROD_URL
+            : import.meta.env.VITE_REACT_DEV_URL;
 
     const fetchTemplates = async () => {
         const result = await fetch(`${url}/api/template/all`, {
@@ -45,7 +45,10 @@ function App() {
     };
 
     useEffect(() => {
-        if (email) {
+        if (
+            email &&
+            (person.role.name === 'COACH' || person.role.name === 'TRAINEE')
+        ) {
             fetchTemplates()
                 .then((result) => {
                     setTemplates(result);

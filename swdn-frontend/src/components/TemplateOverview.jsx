@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import SkillData from './SkillData';
-import SkillEditor from './SkillEditor';
 import TemplateData from './TemplateData';
 import TemplateEditor from './TemplateEditor';
 function TemplateOverview(props) {
