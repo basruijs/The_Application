@@ -11,6 +11,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     defaults: 
+    - name: Install composer dependencies
       run: |
               composer install --no-scripts
         working-directory: swdn-frontend
