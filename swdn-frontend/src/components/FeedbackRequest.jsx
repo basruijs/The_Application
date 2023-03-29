@@ -10,7 +10,7 @@ function FeedbackRequest(props) {
             sendDate: currentDate,
         });
         setEmail('');
-        fetch(`http://localhost:8082/api/invitation/new/${props.person}`, {
+        fetch(`${props.url}/api/invitation/new/${props.person}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

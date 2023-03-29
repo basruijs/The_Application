@@ -13,7 +13,7 @@ export default function LoginPage(props) {
             password: password,
         });
 
-        fetch(`http://localhost:8082/api/user/login`, {
+        fetch(`${props.url}/api/user/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

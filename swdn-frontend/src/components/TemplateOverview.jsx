@@ -14,6 +14,7 @@ function TemplateOverview(props) {
                     setEdit={setEdit}
                     email={props.email}
                     password={props.password}
+                    url={props.url}
                     update={props.update}
                 />
             );
@@ -24,6 +25,7 @@ function TemplateOverview(props) {
                     setEdit={setEdit}
                     email={props.email}
                     password={props.password}
+                    url={props.url}
                     update={props.update}
                 />
             );
