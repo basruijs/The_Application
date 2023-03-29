@@ -42,7 +42,8 @@ public class SecurityConfig {
                 .hasRole("HR")
 
                 .requestMatchers("/api/invitation/new/**",
-                        "/api/invitation/requesters/**")
+                        "/api/invitation/requesters/**",
+                        "/api/role/trainee/all")
                 .hasRole("TRAINEE")
 
                 .requestMatchers("/api/person/gettrainees/**",
