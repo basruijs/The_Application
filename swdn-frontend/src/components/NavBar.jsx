@@ -17,14 +17,14 @@ function NavBar(props) {
                     </NavLink>
                 ) : (
                     <>
-                        <a
-                            href="/login"
+                        <NavLink
+                            to="/login"
                             className="navButton"
                         >
                             {/* Door */}
                             &#128682;&#xFE0E;
                             <span className="navBarIconText"> Log out</span>
-                        </a>
+                        </NavLink>
                         <NavLink
                             to="/account"
                             className="navButton"
