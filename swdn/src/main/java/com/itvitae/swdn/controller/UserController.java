@@ -30,6 +30,11 @@ public class UserController implements UserApi {
         userService.updatePassword(newCredentials);
     }
 
+    @Override
+    public void reactivateAccount(String email){
+        userService.reactivateAccount(email);
+    }
+
     //DELETE
     @Override
     public void deleteUserById(@PathVariable(value = "id") long id) {

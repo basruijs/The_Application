@@ -184,5 +184,56 @@ public class UserService {
             userRepository.save(user);
         }
 
+    public void reactivateAccount(String email) {
+
+        System.out.println(email);
+        Optional<User> schrodingersUser = userRepository.findByEmail("[Deleted] " + email);
+        System.out.println(schrodingersUser);
+
+        if (schrodingersUser.isPresent() && schrodingersUser.get().isDeleted()) {
+
+            User reanimatedUser = schrodingersUser.get();
+            Person reanimatedPerson = reanimatedUser.getPerson();
+
+            //Luke 24:6-7
+            //He is not here; he has risen!
+            List<Skill> reanimatedSkills = reanimatedPerson.getSkills();
+
+            List<Invitation> reanimatedFeedback = reanimatedPerson.getSentInvitations();
+
+            List<Evaluation> reanimatedEvaluations = reanimatedPerson.getEvaluatorEvaluations();
+            reanimatedEvaluations.addAll(reanimatedPerson.getTraineeEvaluations());
+
+            int skillCount = reanimatedSkills.size();
+            int feedbackCount = reanimatedFeedback.size();
+            int evaluationCount = reanimatedEvaluations.size();
+
+
+            for (int i = 0; i < feedbackCount; i++) {
+                Invitation aliveFeedback = reanimatedFeedback.get(i);
+                aliveFeedback.setDeleted(false);
+            }
+
+            for (int i = 0; i < evaluationCount; i++) {
+                Evaluation aliveEvaluation = reanimatedEvaluations.get(i);
+                aliveEvaluation.setDeleted(false);
+            }
+
+            for (int i = 0; i < skillCount; i++) {
+                Skill aliveSkill = reanimatedSkills.get(i);
+                DBFile aliveFile = aliveSkill.getCertificate();
+                if (aliveFile != null) {
+                    aliveFile.setDeleted(false);
+                }
+                aliveSkill.setDeleted(false);
+            }
+
+            reanimatedUser.setEmail(email);
+            reanimatedPerson.setDeleted(false);
+            reanimatedUser.setDeleted(false);
+        } else {
+            throw new IllegalArgumentException("No such user has existed, or the user has not been deleted");
+        }
     }
+}
 

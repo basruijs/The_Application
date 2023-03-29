@@ -4,6 +4,7 @@ import SkillOverview from './components/SkillOverview';
 import NawData from './components/NawData';
 import ChangeRequested from './components/ChangeRequested';
 import NewPerson from './components/NewPerson';
+import RestoreAccount from './components/RestoreAccount';
 
 export default function HRDashboard(props) {
     const [people, setPeople] = useState([]);
@@ -158,6 +159,20 @@ export default function HRDashboard(props) {
                     email={props.email}
                     password={props.password}
                     url={props.url}
+                />
+                <RestoreAccount
+                    update={() => {
+                        fetchData()
+                            .then((result) => {
+                                setPeople(result);
+                            })
+                            .catch((e) => {
+                                console.log(e.message);
+                            });
+                    }}
+                    people={people}
+                    email={props.email}
+                    password={props.password}
                 />
             </div>
         </div>
