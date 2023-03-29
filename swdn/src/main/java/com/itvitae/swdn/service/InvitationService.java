@@ -33,27 +33,30 @@ public class InvitationService {
         Invitation invitation = invitationMapper.toEntity(invitationDto);
         Person requester = personRepository.findById(requesterid).get();
 
-        Person giver = StreamSupport
-                .stream(personRepository.findAll().spliterator(), false)
-                .filter(person -> Objects.equals(person.getUser().getEmail(), invitationDto.getEmail()))
-                .filter(person -> Objects.equals(person.getRole().getName(), "TRAINEE"))
-                .findFirst()
-                .orElse(null);
+        if(!invitation.getFeedbackGiver().getUser().getEmail().equals(requester.getUser().getEmail())) {
+
+            Person giver = StreamSupport
+                    .stream(personRepository.findAll().spliterator(), false)
+                    .filter(person -> Objects.equals(person.getUser().getEmail(), invitationDto.getEmail()))
+                    .filter(person -> Objects.equals(person.getRole().getName(), "TRAINEE"))
+                    .findFirst()
+                    .orElse(null);
 
 
-        if (giver != null) {
-            String emailText = "Hello " + giver.getName() + ", \n\n"
-                    + "You have received an invitation from " + requester.getName() + " to give them 360 feedback.";
+            if (giver != null) {
+                String emailText = "Hello " + giver.getName() + ", \n\n"
+                        + "You have received an invitation from " + requester.getName() + " to give them 360 feedback.";
 
-            emailService.sendEmail(giver.getUser().getEmail(), "Feedback Request", emailText);
+                emailService.sendEmail(giver.getUser().getEmail(), "Feedback Request", emailText);
 
-            giver.getReceivedInvitations().add(invitation);
-            requester.getSentInvitations().add(invitation);
-            invitation.setFeedbackAsker(requester);
-            invitation.setFeedbackGiver(giver);
-            invitationRepository.save(invitation);
-        } else {
-            throw new RuntimeException("email not found");
+                giver.getReceivedInvitations().add(invitation);
+                requester.getSentInvitations().add(invitation);
+                invitation.setFeedbackAsker(requester);
+                invitation.setFeedbackGiver(giver);
+                invitationRepository.save(invitation);
+            } else {
+                throw new RuntimeException("email not found");
+            }
         }
     }
 
