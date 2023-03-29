@@ -14,7 +14,7 @@ jobs:
     - name: Install composer dependencies
       run: 
               composer install --no-scripts
-        working-directory: ./swdn-frontend
+        working-directory: ../swdn-frontend
 
     steps:
       - name: Checkout repo
