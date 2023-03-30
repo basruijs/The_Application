@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
-import reactLogo from './assets/react.svg';
 import './App.css';
 import CoachDashboard from './CoachDashboard';
 import ManagerDashboard from './ManagerDashboard';
 
 import NavBar from './components/NavBar';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import HRDashboard from './HRDashboard';
 import LoginPage from './LoginPage';
 import AccountPage from './AccountPage';
@@ -27,8 +26,15 @@ function App() {
     const [templates, setTemplates] = useState([]);
     const [template, setTemplate] = useState(-1);
 
+    const navigate = useNavigate();
+
+    const url =
+        import.meta.env.VITE_REACT_STATUS === 'production'
+            ? import.meta.env.VITE_REACT_PROD_URL
+            : import.meta.env.VITE_REACT_DEV_URL;
+
     const fetchTemplates = async () => {
-        const result = await fetch(`http://localhost:8082/api/template/all`, {
+        const result = await fetch(`${url}/api/template/all`, {
             headers: {
                 Authorization: 'Basic ' + btoa(email + ':' + password),
             },
@@ -41,7 +47,10 @@ function App() {
     };
 
     useEffect(() => {
-        if (email) {
+        if (
+            email &&
+            (person.role.name === 'COACH' || person.role.name === 'TRAINEE')
+        ) {
             fetchTemplates()
                 .then((result) => {
                     setTemplates(result);
@@ -51,6 +60,12 @@ function App() {
                 });
         }
     }, [person]);
+
+    useEffect(() => {
+        if (person.role.name === 'Not Logged In') {
+            navigate('/login');
+        }
+    }, []);
 
     return (
         <div className="App">
@@ -62,6 +77,7 @@ function App() {
                         <CoachDashboard
                             email={email}
                             password={password}
+                            url={url}
                             person={person}
                             trainees={trainees}
                             setTrainees={setTrainees}
@@ -79,6 +95,7 @@ function App() {
                         <ManagerDashboard
                             email={email}
                             password={password}
+                            url={url}
                             person={person}
                         />
                     }
@@ -89,6 +106,7 @@ function App() {
                         <TraineeDashboard
                             email={email}
                             password={password}
+                            url={url}
                             person={person}
                             templates={templates}
                             template={template}
@@ -102,6 +120,7 @@ function App() {
                         <HRDashboard
                             email={email}
                             password={password}
+                            url={url}
                             person={person}
                         />
                     }
@@ -112,6 +131,7 @@ function App() {
                         <LoginPage
                             setEmail={setEmail}
                             setPassword={setPassword}
+                            url={url}
                             setPerson={setPerson}
                         />
                     }
@@ -122,6 +142,7 @@ function App() {
                         <AccountPage
                             email={email}
                             password={password}
+                            url={url}
                             person={person}
                             setEmail={setEmail}
                             setPassword={setPassword}
@@ -134,6 +155,7 @@ function App() {
                         <FeedbackPage
                             email={email}
                             password={password}
+                            url={url}
                             person={person}
                         />
                     }
@@ -144,6 +166,7 @@ function App() {
                         <CoachFeedbackPage
                             email={email}
                             password={password}
+                            url={url}
                             person={person}
                             trainees={trainees}
                             trainee={trainee}
@@ -157,6 +180,7 @@ function App() {
                         <TemplatesPage
                             email={email}
                             password={password}
+                            url={url}
                             templates={templates}
                             update={() => {
                                 fetchTemplates()

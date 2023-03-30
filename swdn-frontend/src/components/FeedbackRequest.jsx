@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 
 function FeedbackRequest(props) {
     const [email, setEmail] = useState('');
+<<<<<<< Updated upstream
+=======
+    const [query, setQuery] = useState('');
+    const [people, setPeople] = useState([]);
+>>>>>>> Stashed changes
 
     function addInvitation(email) {
         const currentDate = new Date();
