@@ -115,7 +115,6 @@ public class SkillService {
     }
 
     public void addCertificate(long id, MultipartFile file) throws IOException {
-        System.out.println("Adding certificate");
         Optional<Skill> foundSkill = skillRepository.findById(id);
         if (!foundSkill.isPresent()) {
             throw new IllegalArgumentException("No such skill exists");

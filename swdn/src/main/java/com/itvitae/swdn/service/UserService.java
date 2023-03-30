@@ -39,18 +39,6 @@ public class UserService {
     EmailService emailService;
 
     @Autowired
-    SkillRepository skillRepository;
-
-    @Autowired
-    DBFileRepository dbFileRepository;
-
-    @Autowired
-    EvaluationRepository evaluationRepository;
-
-    @Autowired
-    InvitationRepository invitationRepository;
-
-    @Autowired
     private AuthenticationManager authenticationManager;
 
     public void newUser(UserPostDto userPostDto, long roleid) {
@@ -185,10 +173,7 @@ public class UserService {
         }
 
     public void reactivateAccount(String email) {
-
-        System.out.println(email);
         Optional<User> schrodingersUser = userRepository.findByEmail("[Deleted] " + email);
-        System.out.println(schrodingersUser);
 
         if (schrodingersUser.isPresent() && schrodingersUser.get().isDeleted()) {
 

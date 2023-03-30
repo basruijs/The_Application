@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function ChangeRequested(props) {
-    const [request, setRequest] = useState({
-        name: 'Dummy Name',
-        address: 'Dummy Address',
-        city: 'Dummy City',
-    });
+    const [request, setRequest] = useState({});
 
     useEffect(() => {
         getRequest();
