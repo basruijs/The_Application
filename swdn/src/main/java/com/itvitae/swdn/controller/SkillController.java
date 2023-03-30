@@ -8,7 +8,8 @@ import com.itvitae.swdn.service.SkillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,43 +22,43 @@ public class SkillController implements SkillApi {
     SkillService skillService;
 
     @Override
-    public void newSkill(@RequestBody SkillPostDto skillDto, @PathVariable(value = "personid") long personid) {
+    public void newSkill(SkillPostDto skillDto, long personid) {
         skillService.newSkill(skillDto, personid);
     }
 
     //READ
     @Override
-    public SkillGetDto getSkillById(@PathVariable(value = "id") long id) {
+    public SkillGetDto getSkillById(long id) {
         return skillService.getSkillById(id);
     }
 
 
     @Override
-    public Iterable<SkillGetDto> getSkillByPerson(@PathVariable(value = "traineeid") long traineeid) {
+    public Iterable<SkillGetDto> getSkillByPerson(long traineeid) {
         return skillService.getSkillByPerson(traineeid);
     }
 
     @Override
-    public ResponseEntity<Resource> downloadCertificate(@PathVariable(value = "id") long id) {
+    public ResponseEntity<Resource> downloadCertificate(long id) {
         return skillService.downloadCertificate(id);
     }
 
     //UPDATE
     @Override
-    public void updateSkill(@PathVariable(value = "id") long id, @RequestBody SkillPutDto skill) {
+    public void updateSkill(long id, SkillPutDto skill) {
         System.out.println("update skill");
         skillService.updateSkill(id, skill);
     }
 
     @Override
-    public void addCertificate(@PathVariable(value = "id") long id, @RequestParam("file") MultipartFile file) throws IOException {
+    public void addCertificate(long id, MultipartFile file) throws IOException {
         System.out.println("add certificate");
         skillService.addCertificate(id, file);
     }
 
     //DELETE
     @Override
-    public void deleteSkillById(@PathVariable(value = "id") long id) {
+    public void deleteSkillById(long id) {
         skillService.deleteSkillById(id);
     }
 

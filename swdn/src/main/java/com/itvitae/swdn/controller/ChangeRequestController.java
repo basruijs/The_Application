@@ -21,26 +21,26 @@ public class ChangeRequestController implements ChangeRequestApi {
 
     //CREATE
     @Override
-    public void newChangeRequest(@RequestBody ChangeRequestDto changeRequestDto, @PathVariable(value = "personid") long personid) {
+    public void newChangeRequest(ChangeRequestDto changeRequestDto, long personid) {
         changeRequestService.addChangeRequest(changeRequestDto, personid);
     }
 
 
     //READ
     @Override
-    public ChangeRequestGetDto getRequestByPerson(@PathVariable(value = "id") long id) {
+    public ChangeRequestGetDto getRequestByPerson(long id) {
         return changeRequestService.getRequestByPerson(id);
     }
 
 
     //DELETE
     @Override
-    public void deleteChangeRequest(@PathVariable(value = "id") long id) {
+    public void deleteChangeRequest(long id) {
         changeRequestService.deleteChangeRequest(id);
     }
 
     @Override
-    public void denyChangeRequest(@PathVariable(value = "id") long id, @RequestBody String message) {
+    public void denyChangeRequest(long id, String message) {
         changeRequestService.denyChangeRequest(id, message);
     }
 }

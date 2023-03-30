@@ -70,10 +70,13 @@ public class SecurityConfig {
                 .hasAnyRole("COACH", "MANAGER")
 
                 //De coach en manager hebben de meetings van de trainee nodig om ervoor te zorgen dat er geen dubbele boekingen zijn.
-                .requestMatchers("/api/evaluation/get/**", "/api/evaluation/trainee/**")
+                .requestMatchers("/api/evaluation/get/**",
+                        "/api/evaluation/trainee/**")
                 .hasAnyRole("TRAINEE", "COACH", "MANAGER")
 
-                .requestMatchers("/api/user/login", "/swagger-ui/**", "/v3/api-docs/**", "basruijs/The_Application.git")
+                .requestMatchers("/api/user/login",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**")
                 .permitAll()
 
                 .requestMatchers("/**")

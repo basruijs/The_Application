@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface InvitationMapper {
-    Invitation toEntity(InvitationDto invitation);
-
     InvitationGetDto toDto(Invitation skill);
+
+    Invitation toEntity(InvitationDto invitation);
 }
