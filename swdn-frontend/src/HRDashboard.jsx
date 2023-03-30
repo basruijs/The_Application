@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import List from './components/List';
 import SkillOverview from './components/SkillOverview';
-import NewSkill from './components/NewSkill';
 import NawData from './components/NawData';
 import ChangeRequested from './components/ChangeRequested';
 import NewPerson from './components/NewPerson';
+import RestoreAccount from './components/RestoreAccount';
 
 export default function HRDashboard(props) {
     const [people, setPeople] = useState([]);
@@ -13,7 +13,7 @@ export default function HRDashboard(props) {
     const [skill, setSkill] = useState(-1);
 
     const fetchData = async () => {
-        const result = await fetch('http://localhost:8082/api/person/all', {
+        const result = await fetch(`${props.url}/api/person/all`, {
             headers: {
                 Authorization:
                     'Basic ' + btoa(props.email + ':' + props.password),
@@ -27,15 +27,12 @@ export default function HRDashboard(props) {
     };
 
     const fetchSkills = async () => {
-        const result = await fetch(
-            `http://localhost:8082/api/skill/${person}/all`,
-            {
-                headers: {
-                    Authorization:
-                        'Basic ' + btoa(props.email + ':' + props.password),
-                },
-            }
-        );
+        const result = await fetch(`${props.url}/api/skill/${person}/all`, {
+            headers: {
+                Authorization:
+                    'Basic ' + btoa(props.email + ':' + props.password),
+            },
+        });
         if (!result.ok) {
             throw new Error('Data coud not be fetched!');
         } else {
@@ -50,7 +47,7 @@ export default function HRDashboard(props) {
             city: city,
         });
 
-        fetch(`http://localhost:8082/api/person/update/${person}`, {
+        fetch(`${props.url}/api/person/update/${person}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -120,6 +117,7 @@ export default function HRDashboard(props) {
                 editable={false}
                 email={props.email}
                 password={props.password}
+                url={props.url}
             />
             <div className="sidebar">
                 <NawData
@@ -128,6 +126,7 @@ export default function HRDashboard(props) {
                     people={people}
                     email={props.email}
                     password={props.password}
+                    url={props.url}
                     changeNAW={changeNAW}
                     update={() => {
                         fetchData()
@@ -143,9 +142,25 @@ export default function HRDashboard(props) {
                     personid={person}
                     email={props.email}
                     password={props.password}
+                    url={props.url}
                     changeNAW={changeNAW}
                 />
                 <NewPerson
+                    update={() => {
+                        fetchData()
+                            .then((result) => {
+                                setPeople(result);
+                            })
+                            .catch((e) => {
+                                console.log(e.message);
+                            });
+                    }}
+                    people={people}
+                    email={props.email}
+                    password={props.password}
+                    url={props.url}
+                />
+                <RestoreAccount
                     update={() => {
                         fetchData()
                             .then((result) => {

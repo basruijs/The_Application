@@ -27,7 +27,6 @@ function App() {
     const [template, setTemplate] = useState(-1);
 
     const navigate = useNavigate();
-
     const url =
         import.meta.env.VITE_REACT_STATUS === 'production'
             ? import.meta.env.VITE_REACT_PROD_URL

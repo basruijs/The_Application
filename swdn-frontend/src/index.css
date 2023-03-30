@@ -180,7 +180,7 @@
     padding: 1rem;
     color: white;
     width: 25vw;
-    height: 30vh;
+    height: 28vh;
     background-color: black;
 }
 
@@ -189,7 +189,7 @@
     padding: 1rem;
     color: white;
     width: 25vw;
-    height: 35vh;
+    height: 32vh;
     background-color: black;
 }
 
@@ -264,7 +264,7 @@
     padding: 1rem;
     color: white;
     width: 25vw;
-    height: 12vh;
+    height: 20vh;
     background-color: black;
 }
 
@@ -312,6 +312,15 @@
     background-color: #747bff;
 }
 
+.restoreAccount {
+    margin: 0;
+    padding: 0.1rem;
+    color: white;
+    width: 25vw;
+    height: 5vh;
+    background-color: black;
+}
+
 .importantImage {
     width: 25vw;
     height: 25vh;
@@ -344,7 +353,7 @@
     margin: 0;
     color: white;
     width: 25vw;
-    height: 53vh;
+    height: 45vh;
     background-color: black;
 }
 
@@ -371,6 +380,9 @@
 }
 
 @media screen and (max-width: 600px) {
+    .navBarIconText {
+        display: none;
+    }
     .dashboard,
     .feedbackPage {
         flex-direction: column;
