@@ -4,7 +4,7 @@ export default function RestoreAccount(props) {
     const [email, setEmail] = useState('');
 
     function restorePerson() {
-        fetch(`http://localhost:8082/api/user/restore`, {
+        fetch(`${props.url}/api/user/restore`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
