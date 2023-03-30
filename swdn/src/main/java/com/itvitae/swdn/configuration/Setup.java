@@ -38,18 +38,21 @@ public class Setup {
         Role hr = new Role("HR");
         roleRepository.save(hr);
 
-        PersonPostDto adminPerson = new PersonPostDto();
-        adminPerson.setName("Admin");
-        adminPerson.setCity("Admin city");
-        adminPerson.setAddress("Admin address");
+
+        if(!userRepository.findByEmail("admin@admin.nl").isPresent()) {
+            PersonPostDto adminPerson = new PersonPostDto();
+            adminPerson.setName("Admin");
+            adminPerson.setCity("Admin city");
+            adminPerson.setAddress("Admin address");
 
 
-        UserPostDto admin = new UserPostDto();
-        admin.setEmail("admin@admin.nl");
-        admin.setPassword("admin");
-        admin.setRoles("ROLE_HR");
-        admin.setPerson(adminPerson);
+            UserPostDto admin = new UserPostDto();
+            admin.setEmail("admin@admin.nl");
+            admin.setPassword("admin");
+            admin.setRoles("ROLE_HR");
+            admin.setPerson(adminPerson);
 
-        userService.newAdmin(admin, 4);
+            userService.newAdmin(admin, 4);
+        }
     }
 }
