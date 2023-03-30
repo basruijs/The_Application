@@ -43,7 +43,7 @@ public class Setup {
             Role manager = new Role("MANAGER");
             roleRepository.save(manager);
         }
-        
+
         if(!roleRepository.findByName("HR").isPresent()) {
             Role hr = new Role("HR");
             roleRepository.save(hr);
