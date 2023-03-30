@@ -17,34 +17,34 @@ public class EvaluationController implements EvaluationApi {
 
     //CREATE
     @Override
-    public void newEvaluation(@RequestBody EvaluationDto evaluationDto, @PathVariable(value = "coachid") long coachid, @PathVariable(value = "traineeid") long traineeid) {
+    public void newEvaluation(EvaluationDto evaluationDto, long coachid, long traineeid) {
         evaluationService.newEvaluation(evaluationDto, coachid, traineeid);
     }
 
     //READ
     @Override
-    public EvaluationDto getEvaluationById(@PathVariable(value = "id") long id) {
+    public EvaluationDto getEvaluationById(long id) {
         return evaluationService.getEvaluationById(id);
     }
 
 
     @Override
-    public Iterable<EvaluationDto> getAllEvaluationsByTrainee(@PathVariable(value = "traineeid") long traineeid) {
+    public Iterable<EvaluationDto> getAllEvaluationsByTrainee(long traineeid) {
         return evaluationService.getAllEvaluationsByTrainee(traineeid);
     }
 
     @Override
-    public Iterable<EvaluationDto> getAllEvaluationsByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
+    public Iterable<EvaluationDto> getAllEvaluationsByEvaluator(long evaluatorid) {
         return evaluationService.getAllEvaluationsByEvaluator(evaluatorid);
     }
 
     @Override
-    public Iterable<EvaluationDto> getFutureEvaluationsByTrainee(@PathVariable(value = "traineeid") long traineeid) {
+    public Iterable<EvaluationDto> getFutureEvaluationsByTrainee(long traineeid) {
         return evaluationService.getFutureEvaluationsByTrainee(traineeid);
     }
 
     @Override
-    public Iterable<EvaluationDto> getFutureEvaluationsByEvaluator(@PathVariable(value = "evaluatorid") long evaluatorid) {
+    public Iterable<EvaluationDto> getFutureEvaluationsByEvaluator(long evaluatorid) {
         return evaluationService.getFutureEvaluationsByEvaluator(evaluatorid);
     }
 }

@@ -5,8 +5,6 @@ import com.itvitae.swdn.dto.PersonGetDto;
 import com.itvitae.swdn.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,7 +16,7 @@ public class PersonController implements PersonApi {
 
     //READ
     @Override
-    public PersonGetDto getPersonById(@PathVariable(value = "id") long id) {
+    public PersonGetDto getPersonById(long id) {
         return personService.getPersonById(id);
     }
 
@@ -28,23 +26,23 @@ public class PersonController implements PersonApi {
     }
 
     @Override
-    public Iterable<PersonGetDto> getTrainees(@PathVariable(value = "id") long id) {
+    public Iterable<PersonGetDto> getTrainees(long id) {
         return personService.getTrainees(id);
     }
 
     @Override
-    public Iterable<PersonGetDto> getSubordinates(@PathVariable(value = "id") long id) {
+    public Iterable<PersonGetDto> getSubordinates(long id) {
         return personService.getSubordinates(id);
     }
 
     //UPDATE
     @Override
-    public void updatePersonById(@PathVariable(value = "id") long id, @RequestBody NawDto nawDto) {
+    public void updatePersonById(long id, NawDto nawDto) {
         personService.updatePersonById(id, nawDto);
     }
 
     @Override
-    public void setPeople(@PathVariable(value = "id") long id, @PathVariable(value = "coachid") long coachid, @PathVariable(value = "managerid") long managerid) {
+    public void setPeople(long id, long coachid, long managerid) {
         personService.setPeople(id, coachid, managerid);
     }
 }

@@ -19,5 +19,4 @@ public class ChangeRequest {
     @OneToOne
     @JoinColumn(name = "requester_id")
     private Person requester;
-
 }

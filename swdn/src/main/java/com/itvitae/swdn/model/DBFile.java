@@ -15,18 +15,14 @@ public class DBFile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
-
     private String fileName;
     private String fileType;
-
     @Lob
     @Column(columnDefinition = "MEDIUMBLOB")
     private byte[] data;
-
     @OneToOne(mappedBy = "certificate")
     @JsonIgnore
     private Skill skill;
-
     private boolean deleted = false;
 
     public DBFile(String fileName, String fileType, byte[] data) {
