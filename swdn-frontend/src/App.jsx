@@ -4,7 +4,7 @@ import CoachDashboard from './CoachDashboard';
 import ManagerDashboard from './ManagerDashboard';
 
 import NavBar from './components/NavBar';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import HRDashboard from './HRDashboard';
 import LoginPage from './LoginPage';
 import AccountPage from './AccountPage';
@@ -26,6 +26,7 @@ function App() {
     const [templates, setTemplates] = useState([]);
     const [template, setTemplate] = useState(-1);
 
+    const navigate = useNavigate();
     const url =
         import.meta.env.VITE_REACT_STATUS === 'production'
             ? import.meta.env.VITE_REACT_PROD_URL
@@ -58,6 +59,12 @@ function App() {
                 });
         }
     }, [person]);
+
+    useEffect(() => {
+        if (person.role.name === 'Not Logged In') {
+            navigate('/login');
+        }
+    }, []);
 
     return (
         <div className="App">

@@ -4,10 +4,7 @@ import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 function FeedbackRequest(props) {
     const [email, setEmail] = useState('');
     const [query, setQuery] = useState('');
-    const [people, setPeople] = useState([
-        { id: 1, name: 'Harry', user: { email: 'harry@example.com' } },
-        { id: 2, name: 'Peter Bot', user: { email: 'peter@example.com' } },
-    ]);
+    const [people, setPeople] = useState([]);
 
     function addInvitation(email) {
         const currentDate = new Date();
