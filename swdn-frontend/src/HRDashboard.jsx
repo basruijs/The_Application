@@ -173,6 +173,7 @@ export default function HRDashboard(props) {
                     people={people}
                     email={props.email}
                     password={props.password}
+                    url={props.url}
                 />
             </div>
         </div>
