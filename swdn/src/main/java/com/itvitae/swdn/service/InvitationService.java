@@ -33,7 +33,7 @@ public class InvitationService {
         Invitation invitation = invitationMapper.toEntity(invitationDto);
         Person requester = personRepository.findById(requesterid).get();
 
-        if(!invitation.getFeedbackGiver().getUser().getEmail().equals(requester.getUser().getEmail())) {
+        if(!invitationDto.getEmail().equals(requester.getUser().getEmail())) {
 
             Person giver = StreamSupport
                     .stream(personRepository.findAll().spliterator(), false)
