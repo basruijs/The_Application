@@ -29,14 +29,25 @@ public class Setup {
     @EventListener
     @Transactional
     public void onApplicationEvent(ApplicationReadyEvent event) {
-        Role trainee = new Role("TRAINEE");
-        roleRepository.save(trainee);
-        Role coach = new Role("COACH");
-        roleRepository.save(coach);
-        Role manager = new Role("MANAGER");
-        roleRepository.save(manager);
-        Role hr = new Role("HR");
-        roleRepository.save(hr);
+        if(!roleRepository.findByName("TRAINEE").isPresent()) {
+            Role trainee = new Role("TRAINEE");
+            roleRepository.save(trainee);
+        }
+
+        if(!roleRepository.findByName("COACH").isPresent()) {
+            Role coach = new Role("COACH");
+            roleRepository.save(coach);
+        }
+
+        if(!roleRepository.findByName("MANAGER").isPresent()) {
+            Role manager = new Role("MANAGER");
+            roleRepository.save(manager);
+        }
+        
+        if(!roleRepository.findByName("HR").isPresent()) {
+            Role hr = new Role("HR");
+            roleRepository.save(hr);
+        }
 
 
         if(!userRepository.findByEmail("admin@admin.nl").isPresent()) {
