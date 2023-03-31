@@ -3,6 +3,7 @@ package com.itvitae.swdn.configuration;
 import com.itvitae.swdn.dto.PersonPostDto;
 import com.itvitae.swdn.dto.UserPostDto;
 import com.itvitae.swdn.model.Role;
+import com.itvitae.swdn.repository.PersonRepository;
 import com.itvitae.swdn.repository.RoleRepository;
 import com.itvitae.swdn.repository.UserRepository;
 import com.itvitae.swdn.service.UserService;
@@ -22,9 +23,13 @@ public class Setup {
     UserRepository userRepository;
 
     @Autowired
+    PersonRepository personRepository;
+
+    @Autowired
     RoleRepository roleRepository;
     @Autowired
     UserService userService;
+
 
     @EventListener
     @Transactional
@@ -49,8 +54,7 @@ public class Setup {
             roleRepository.save(hr);
         }
 
-
-        if(!userRepository.findByEmail("admin@admin.nl").isPresent()) {
+        if(personRepository.existsByRole(roleRepository.findByName("HR").get())) {
             PersonPostDto adminPerson = new PersonPostDto();
             adminPerson.setName("Admin");
             adminPerson.setCity("Admin city");
