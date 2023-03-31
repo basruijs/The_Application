@@ -22,11 +22,6 @@ public class PersonService {
     @Autowired
     PersonMapper personMapper;
 
-    //CREATE
-    public void addPerson(PersonPostDto personDto) {
-        Person newPerson = personMapper.toEntity(personDto);
-        personRepository.save(newPerson);
-    }
 
     //READ
     public PersonGetDto getPersonById(long id) {

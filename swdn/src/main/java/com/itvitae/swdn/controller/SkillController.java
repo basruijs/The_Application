@@ -52,7 +52,6 @@ public class SkillController implements SkillApi {
 
     @Override
     public void addCertificate(long id, MultipartFile file) throws IOException {
-        System.out.println("add certificate");
         skillService.addCertificate(id, file);
     }
 
