@@ -45,14 +45,6 @@ public class SkillService {
     @Autowired
     DBFileRepository dbFileRepository;
 
-    public Iterable<SkillGetDto> getAllSkills() {
-        return StreamSupport
-                .stream(skillRepository.findAll().spliterator(), false)
-                .filter(skill -> !skill.isDeleted())
-                .map(skill -> skillMapper.toDto(skill))
-                .collect(Collectors.toList());
-    }
-
     public Iterable<SkillGetDto> getSkillByPerson(long traineeid) {
         return StreamSupport
                 .stream(skillRepository.findAll().spliterator(), false)

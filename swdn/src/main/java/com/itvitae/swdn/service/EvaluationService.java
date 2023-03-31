@@ -63,14 +63,6 @@ public class EvaluationService {
         return evaluationMapper.toDto(foundEvaluation.get());
     }
 
-    public Iterable<EvaluationDto> getAllEvaluations() {
-        return StreamSupport
-                .stream(evaluationRepository.findAll().spliterator(), false)
-                .filter(evaluation -> !evaluation.isDeleted())
-                .map(evaluation -> evaluationMapper.toDto(evaluation))
-                .collect(Collectors.toList());
-    }
-
     public Iterable<EvaluationDto> getAllEvaluationsByTrainee(long traineeid) {
         return StreamSupport
                 .stream(evaluationRepository.findAll().spliterator(), false)

@@ -26,9 +26,4 @@ public class DBFileStorageService {
 
         return dbFileRepository.save(dbFile);
     }
-
-    public DBFile getFile(Long fileId) {
-        return dbFileRepository.findById(fileId)
-                .orElseThrow(() -> new IllegalArgumentException("File not found with id " + fileId));
-    }
 }
