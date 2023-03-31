@@ -55,7 +55,7 @@ export default function LoginPage(props) {
     return (
         <div>
             <div className="title">
-                <h1>XXXX Coaching App</h1>
+                <h1>Polarized Potential Coaching</h1>
             </div>
             <form
                 className="login-wrapper"
