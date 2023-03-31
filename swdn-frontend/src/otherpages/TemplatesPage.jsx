@@ -1,6 +1,6 @@
 import React from 'react';
 import List from '../components/list/List';
-import cat from './img/cat-long.avif';
+import cat from '../img/cat-long.avif';
 import TemplateOverview from '../components/skilltemplate/TemplateOverview';
 import NewTemplate from '../components/skilltemplate/NewTemplate';
 
