@@ -6,7 +6,7 @@ import ManagerDashboard from './dashboards/ManagerDashboard';
 import NavBar from './components/NavBar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import HRDashboard from './dashboards/HRDashboard';
-import LoginPage from './LoginPage';
+import LoginPage from './otherpages/LoginPage';
 import AccountPage from './otherpages/AccountPage';
 import FeedbackPage from './otherpages/FeedbackPage';
 import TraineeDashboard from './dashboards/TraineeDashboard';
