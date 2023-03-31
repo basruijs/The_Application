@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import EmailChanger from './components/EmailChanger';
-import PasswordChanger from './components/PasswordChanger';
+import EmailChanger from '../components/people/EmailChanger';
+import PasswordChanger from '../components/people/PasswordChanger';
 
 export default function AccountPage(props) {
     const [edit, setEdit] = useState(false);
@@ -33,7 +33,6 @@ export default function AccountPage(props) {
             name: name,
             address: address,
             city: city,
-            // email: email,
         });
         setName('');
         fetch(`${props.url}/api/changerequest/new/${person.id}`, {

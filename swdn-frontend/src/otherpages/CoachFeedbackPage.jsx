@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import FeedbackOverview from './components/FeedbackOverview';
-import List from './components/List';
+import FeedbackOverview from '../components/feedback/FeedbackOverview';
+import List from '../components/list/List';
 
 export default function CoachFeedbackPage(props) {
     const [allGiven, setAllGiven] = useState([]);

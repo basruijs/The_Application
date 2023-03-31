@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import List from './components/List';
-import SkillOverview from './components/SkillOverview';
-import NewMeeting from './components/NewMeeting';
-import Meetings from './components/Meetings';
+import List from '../components/list/List';
+import SkillOverview from '../components/skill/SkillOverview';
+import NewMeeting from '../components/meeting/NewMeeting';
+import Meetings from '../components/meeting/Meetings';
 import cat from './img/cat.jpg';
 
 export default function ManagerDashboard(props) {

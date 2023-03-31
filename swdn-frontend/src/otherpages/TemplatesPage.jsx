@@ -1,8 +1,8 @@
 import React from 'react';
-import List from './components/List';
+import List from '../components/list/List';
 import cat from './img/cat-long.avif';
-import TemplateOverview from './components/TemplateOverview';
-import NewTemplate from './components/NewTemplate';
+import TemplateOverview from '../components/skilltemplate/TemplateOverview';
+import NewTemplate from '../components/skilltemplate/NewTemplate';
 
 export default function TemplatesPage(props) {
     return (
