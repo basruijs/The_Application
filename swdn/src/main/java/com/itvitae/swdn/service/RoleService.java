@@ -49,6 +49,7 @@ public class RoleService {
         }
         return foundRole.get()
                 .getPeople().stream()
+                .filter(person -> !person.isDeleted())
                 .map(person -> personMapper.toDto(person))
                 .collect(Collectors.toList());
     }
