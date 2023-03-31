@@ -3,7 +3,7 @@ import List from '../components/list/List';
 import SkillOverview from '../components/skill/SkillOverview';
 import NewMeeting from '../components/meeting/NewMeeting';
 import Meetings from '../components/meeting/Meetings';
-import cat from './img/cat.jpg';
+import cat from '../img/cat.jpg';
 
 export default function ManagerDashboard(props) {
     const [viewer, setViewer] = useState(-1);
