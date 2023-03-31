@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import CoachDashboard from './CoachDashboard';
-import ManagerDashboard from './ManagerDashboard';
+import CoachDashboard from './dashboards/CoachDashboard';
+import ManagerDashboard from './dashboards/ManagerDashboard';
 
 import NavBar from './components/NavBar';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import HRDashboard from './HRDashboard';
-import LoginPage from './LoginPage';
-import AccountPage from './AccountPage';
-import FeedbackPage from './FeedbackPage';
-import TraineeDashboard from './TraineeDashboard';
-import CoachFeedbackPage from './CoachFeedbackPage';
-import TemplatesPage from './TemplatesPage';
+import HRDashboard from './dashboards/HRDashboard';
+import LoginPage from './otherpages/LoginPage';
+import AccountPage from './otherpages/AccountPage';
+import FeedbackPage from './otherpages/FeedbackPage';
+import TraineeDashboard from './dashboards/TraineeDashboard';
+import CoachFeedbackPage from './otherpages/CoachFeedbackPage';
+import TemplatesPage from './otherpages/TemplatesPage';
 
 function App() {
     const [email, setEmail] = useState('');

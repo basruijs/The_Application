@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import List from './components/List';
-import SkillOverview from './components/SkillOverview';
-import NewSkill from './components/NewSkill';
-import Meetings from './components/Meetings';
-import FeedbackRequest from './components/FeedbackRequest';
+import List from '../components/list/List';
+import SkillOverview from '../components/skill/SkillOverview';
+import NewSkill from '../components/skill/NewSkill';
+import Meetings from '../components/meeting/Meetings';
+import FeedbackRequest from '../components/feedback/FeedbackRequest';
 import cat from './img/cat-long.avif';
 
 export default function TraineeDashboard(props) {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import List from './components/List';
-import SkillOverview from './components/SkillOverview';
-import NawData from './components/NawData';
-import ChangeRequested from './components/ChangeRequested';
-import NewPerson from './components/NewPerson';
-import RestoreAccount from './components/RestoreAccount';
+import List from '../components/list/List';
+import SkillOverview from '../components/skill/SkillOverview';
+import NawData from '../components/people/NawData';
+import ChangeRequested from '../components/people/ChangeRequested';
+import NewPerson from '../components/people/NewPerson';
+import RestoreAccount from '../components/people/RestoreAccount';
 
 export default function HRDashboard(props) {
     const [people, setPeople] = useState([]);
