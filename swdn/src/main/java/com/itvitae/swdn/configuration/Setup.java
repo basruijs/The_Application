@@ -54,7 +54,7 @@ public class Setup {
             roleRepository.save(hr);
         }
 
-        if(personRepository.existsByRole(roleRepository.findByName("HR").get())) {
+        if(!personRepository.existsByRole(roleRepository.findByName("HR").get())) {
             PersonPostDto adminPerson = new PersonPostDto();
             adminPerson.setName("Admin");
             adminPerson.setCity("Admin city");
