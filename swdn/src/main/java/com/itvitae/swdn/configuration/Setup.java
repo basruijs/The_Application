@@ -60,7 +60,6 @@ public class Setup {
             adminPerson.setCity("Admin city");
             adminPerson.setAddress("Admin address");
 
-
             UserPostDto admin = new UserPostDto();
             admin.setEmail("admin@admin.nl");
             admin.setPassword("admin");
